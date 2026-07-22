@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dvwua2wbj43yh"]
+
+[ext_resource type="PackedScene" uid="uid://bvln38xbur2mi" path="res://scenes/prefabs/player.tscn" id="1_gnr22"]
+[ext_resource type="PackedScene" uid="uid://basvai4ymr7f0" path="res://scenes/prefabs/entity.tscn" id="2_kaiv3"]
+[ext_resource type="Script" path="res://scripts/pickup.gd" id="3_0dxfe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_67y6s"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_gnr22")]
+
+[node name="Entity" parent="." instance=ExtResource("2_kaiv3")]
+drop = "wood"
+
+[node name="Pickup" type="Area2D" parent="."]
+script = ExtResource("3_0dxfe")
+item = "wood"
+metadata/type = "interact"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pickup"]
+position = Vector2(222, 331)
+shape = SubResource("RectangleShape2D_67y6s")
