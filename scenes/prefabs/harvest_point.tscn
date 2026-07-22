@@ -5,7 +5,7 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wqjon"]
 
-[node name="Entity" type="CharacterBody2D"]
+[node name="HarvestPoint" type="CharacterBody2D"]
 script = ExtResource("1_mjc6o")
 
 [node name="Hitbox" parent="." instance=ExtResource("2_qr66p")]
