@@ -131,5 +131,23 @@ offset_right = 475.0
 offset_bottom = 46.0
 max_value = 10.0
 
+[node name="Checklist" type="Panel" parent="UI"]
+offset_left = 10.0
+offset_top = 64.0
+offset_right = 229.0
+offset_bottom = 368.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Checklist"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="UI/Checklist/VBoxContainer"]
+layout_mode = 2
+text = "I should be getting..."
+
 [node name="Hitbox" parent="." instance=ExtResource("3_c8q2h")]
 position = Vector2(0, -2)

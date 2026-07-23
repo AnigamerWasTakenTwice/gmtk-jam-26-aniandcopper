@@ -16,6 +16,7 @@ var tools = [
 var selected_tool = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
 	pass # Replace with function body.
 
 
@@ -50,7 +51,23 @@ func _physics_process(delta: float) -> void:
 	if health <= 0:
 		get_tree().change_scene_to_file("res://scenes/test.tscn")
 	$UI/HealthBar.value = health
-	pass
+	
+	
+	# Checklist
+	if Input.is_action_just_pressed("checklist"): 
+		$UI/Checklist.visible = !$UI/Checklist.visibile
+	
+	
+	if "quota" in get_parent():
+		var i = 1
+		for req in get_parent().quota.keys():
+			if i > $UI/Checklist/VBoxContainer.get_child_count() - 1:
+				var txt = Label.new()
+				txt.text = req + ": " + var_to_str(Global.inventory[req]) + "/" + var_to_str(get_parent().quota[req])
+				$UI/Checklist/VBoxContainer.add_child(txt)
+			else:
+				$UI/Checklist/VBoxContainer.get_child(i).text = req + ": " + var_to_str(Global.inventory[req]) + "/" + var_to_str(get_parent().quota[req])
+			i += 1
 
 # For every area in the interaction area, if the type of interaction matches 
 # what we're doing right now, run the interaction script on the area.
