@@ -64,8 +64,7 @@ func move_player(delta: float):
 
 func handle_interaction_area():
 	# Moves the interaction area to point to where the player is looking.
-	if movement_direction != Vector2.ZERO: 
-		interaction_area.position = movement_direction * 96
+	interaction_area.position = position.direction_to(get_global_mouse_position()) * 128
 	# All of the interaction buttons in the game.
 	if Input.is_action_just_pressed("attack"): interact("attack")
 	if Input.is_action_just_pressed("interact"): interact("interact")
@@ -92,18 +91,20 @@ func handle_checklist():
 		for req in get_parent().quota.keys():
 			if i > $UI/Checklist/VBoxContainer.get_child_count() - 1:
 				var txt = Label.new()
+				txt.label_settings = LabelSettings.new()
+				txt.label_settings.font = load("res://assets/fonts/alagard.ttf")
 				txt.text = req + ": " + var_to_str(Global.inventory[req]) + "/" + var_to_str(get_parent().quota[req])
 				$UI/Checklist/VBoxContainer.add_child(txt)
 				if Global.inventory[req] >= get_parent().quota[req]: 
-					txt.modulate = Color.GREEN
+					txt.modulate = Color.DARK_GREEN
 				else:
-					txt.modulate = Color.RED
+					txt.modulate = Color.DARK_RED
 			else:
 				$UI/Checklist/VBoxContainer.get_child(i).text = req + ": " + var_to_str(Global.inventory[req]) + "/" + var_to_str(get_parent().quota[req])
 				if Global.inventory[req] >= get_parent().quota[req]: 
-					$UI/Checklist/VBoxContainer.get_child(i).modulate = Color.GREEN
+					$UI/Checklist/VBoxContainer.get_child(i).modulate = Color.DARK_GREEN
 				else:
-					$UI/Checklist/VBoxContainer.get_child(i).modulate = Color.RED
+					$UI/Checklist/VBoxContainer.get_child(i).modulate = Color.DARK_RED
 			i += 1
 
 # For every area in the interaction area, if the type of interaction matches 
