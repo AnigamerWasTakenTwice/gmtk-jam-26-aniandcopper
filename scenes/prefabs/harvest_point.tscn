@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://basvai4ymr7f0"]
 
-[ext_resource type="Script" path="res://scripts/entity.gd" id="1_mjc6o"]
+[ext_resource type="Script" path="res://scripts/harvest_point.gd" id="1_mjc6o"]
 [ext_resource type="PackedScene" uid="uid://xicjh6l1ep0c" path="res://scenes/prefabs/hitbox.tscn" id="2_qr66p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wqjon"]

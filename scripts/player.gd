@@ -6,6 +6,7 @@ extends CharacterBody2D
 @export var run_max_speed_multiplier: float
 var movement_direction: Vector2
 @onready var interaction_area: Area2D = $InteractionArea
+@export var health = 10
 
 var tools = [
 	"axe",
@@ -31,7 +32,7 @@ func _physics_process(delta: float) -> void:
 	velocity = lerp(velocity, Vector2.ZERO, 0.2)
 	move_and_slide()
 	if movement_direction != Vector2.ZERO: 
-		interaction_area.position = Vector2(0, -64) + (movement_direction * 96)
+		interaction_area.position = movement_direction * 96
 	if Input.is_action_just_pressed("attack"): interact("attack")
 	if Input.is_action_just_pressed("interact"): interact("interact")
 	if Input.is_action_just_pressed("tool"): interact(tools[selected_tool])
@@ -39,9 +40,11 @@ func _physics_process(delta: float) -> void:
 		if selected_tool < tools.size() - 1: selected_tool += 1
 		else: selected_tool = 0
 		$UI/ToolSelected.text = tools[selected_tool]
+	if health <= 0:
+		get_tree().change_scene_to_file("res://scenes/test.tscn")
 	pass
 
 func interact(type: String):
 	for area in interaction_area.get_overlapping_areas():
-		if area.get_meta("type") == type:
+		if area.get_meta("type") == type and area != $Hitbox:
 			area.call("interaction")

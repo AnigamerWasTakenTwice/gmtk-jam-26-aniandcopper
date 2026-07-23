@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dvwua2wbj43yh"]
+[gd_scene load_steps=6 format=3 uid="uid://dvwua2wbj43yh"]
 
 [ext_resource type="PackedScene" uid="uid://bvln38xbur2mi" path="res://scenes/prefabs/player.tscn" id="1_gnr22"]
 [ext_resource type="PackedScene" uid="uid://basvai4ymr7f0" path="res://scenes/prefabs/harvest_point.tscn" id="2_kaiv3"]
 [ext_resource type="Script" path="res://scripts/pickup.gd" id="3_0dxfe"]
+[ext_resource type="PackedScene" uid="uid://jb42wjtdh6m" path="res://scenes/prefabs/enemy.tscn" id="4_t4uas"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_67y6s"]
 
@@ -22,3 +23,12 @@ metadata/type = "interact"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pickup"]
 position = Vector2(222, 331)
 shape = SubResource("RectangleShape2D_67y6s")
+
+[node name="Enemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_t4uas")]
+position = Vector2(981, 482)
+drop = "wood"
+type = "attack"
+player = NodePath("../Player")
+movement_speed = 200.0
+detection_range = 300.0
+chase_range = 1000.0
