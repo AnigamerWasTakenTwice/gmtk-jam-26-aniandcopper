@@ -44,6 +44,9 @@ func _physics_process(delta: float) -> void:
 		get_tree().change_scene_to_file("res://scenes/test.tscn")
 	pass
 
+
+
+
 func interact(type: String):
 	for area in interaction_area.get_overlapping_areas():
 		if area.get_meta("type") == type and area != $Hitbox:
