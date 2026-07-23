@@ -1,9 +1,33 @@
-[gd_scene load_steps=5 format=3 uid="uid://jb42wjtdh6m"]
+[gd_scene load_steps=9 format=3 uid="uid://jb42wjtdh6m"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_v48k1"]
+[ext_resource type="Texture2D" uid="uid://cwya2dahmrbk7" path="res://assets/sprites/slime.png" id="2_e7s1b"]
 [ext_resource type="PackedScene" uid="uid://xicjh6l1ep0c" path="res://scenes/prefabs/hitbox.tscn" id="2_r4rc7"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_o5e7p"]
+atlas = ExtResource("2_e7s1b")
+region = Rect2(7, 0, 7, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6b8ek"]
+atlas = ExtResource("2_e7s1b")
+region = Rect2(14, 0, 7, 4)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mkuuy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o5e7p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6b8ek")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wqjon"]
+size = Vector2(95, 59)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6v5s6"]
 size = Vector2(96, 96)
@@ -15,9 +39,16 @@ movement_speed = 300.0
 detection_range = 1000.0
 chase_range = 1000.0
 
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(19, 19)
+sprite_frames = SubResource("SpriteFrames_mkuuy")
+autoplay = "default"
+frame_progress = 0.415974
+
 [node name="Hitbox" parent="." instance=ExtResource("2_r4rc7")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 8.5)
 shape = SubResource("RectangleShape2D_wqjon")
 
 [node name="WanderTimer" type="Timer" parent="."]
