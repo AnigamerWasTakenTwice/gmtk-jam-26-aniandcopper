@@ -62,7 +62,7 @@ position = Vector2(0, -64)
 shape = SubResource("RectangleShape2D_6v5s6")
 
 [node name="AttackTimer" type="Timer" parent="."]
-wait_time = 0.25
+wait_time = 0.75
 autostart = true
 
 [connection signal="timeout" from="WanderTimer" to="." method="_on_wander_timer_timeout"]

@@ -11,6 +11,7 @@ extends CharacterBody2D
 
 var start_spot: Vector2
 var wander_spot: Vector2
+var attacking: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -37,8 +38,10 @@ func move_enemy():
 	if player:
 		# If the player is in range, chase after them.
 		if player.position.distance_to(position) < detection_range and position.distance_to(start_spot) < chase_range:
-			velocity = position.direction_to(player.position) * movement_speed
-			$InteractionArea.position = position.direction_to(player.position) * 128
+			if !attacking: 
+				velocity = position.direction_to(player.position) * movement_speed
+				$InteractionArea.position = position.direction_to(player.position) * 128
+			else: velocity = Vector2.ZERO
 		else:
 			# Else, go to a random wander spot and stop.
 			if position.distance_to(wander_spot) > 3:
@@ -67,5 +70,8 @@ func _on_attack_timer_timeout() -> void:
 		if player.position.distance_to(position) < 150:
 			for area in $InteractionArea.get_overlapping_areas():
 				if area.get_meta("type") == "attack":
+					attacking = true
+					await get_tree().create_timer(0.5).timeout
 					area.call("interaction")
+					attacking = false
 	pass # Replace with function body.

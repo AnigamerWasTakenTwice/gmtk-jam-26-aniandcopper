@@ -4,7 +4,10 @@ extends CharacterBody2D
 @export var movement_max_speed: float
 @export var run_accel_multiplier: float
 @export var run_max_speed_multiplier: float
-@export var health = 10
+@export var health = 10:
+	set(new_hp):
+		if health > new_hp: $SFX/damage.play()
+		health = new_hp
 
 @onready var interaction_area: Area2D = $InteractionArea
 @onready var player_sprite: AnimatedSprite2D = $Sprite2D
@@ -112,4 +115,23 @@ func handle_checklist():
 func interact(type: String):
 	for area in interaction_area.get_overlapping_areas():
 		if area.get_meta("type") == type and area != $Hitbox:
-			if area.has_method("interaction"): area.call("interaction")
+			if area.has_method("interaction"): 
+				area.call("interaction")
+				if type == "attack": $SFX/attack.play()
+				if type == "axe": $SFX/attack.play()
+				if type == "pickaxe": $SFX/attack.play()
+				if type == "interact": $SFX/pickup.play()
+
+
+func _on_step_timer_timeout() -> void:
+	if velocity.length() > 0.2 and !Input.is_action_pressed("run"):
+		$SFX/step.pitch_scale = randf_range(0.8, 1.2)
+		$SFX/step.play()
+	pass # Replace with function body.
+
+
+func _on_run_timer_timeout() -> void:
+	if velocity.length() > 0.2 and Input.is_action_pressed("run"):
+		$SFX/step.pitch_scale = randf_range(0.7, 1.3)
+		$SFX/step.play()
+	pass # Replace with function body.
