@@ -55,7 +55,7 @@ func _physics_process(delta: float) -> void:
 	
 	# Checklist
 	if Input.is_action_just_pressed("checklist"): 
-		$UI/Checklist.visible = !$UI/Checklist.visibile
+		$UI/Checklist.visible = !$UI/Checklist.visible
 	
 	
 	if "quota" in get_parent():
