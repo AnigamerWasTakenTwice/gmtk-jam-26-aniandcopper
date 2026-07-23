@@ -86,7 +86,6 @@ func handle_checklist():
 	# Checklist
 	if Input.is_action_just_pressed("checklist"): 
 		$UI/Checklist.visible = !$UI/Checklist.visible
-	
 	if "quota" in get_parent():
 		var i = 1
 		for req in get_parent().quota.keys():
@@ -94,8 +93,16 @@ func handle_checklist():
 				var txt = Label.new()
 				txt.text = req + ": " + var_to_str(Global.inventory[req]) + "/" + var_to_str(get_parent().quota[req])
 				$UI/Checklist/VBoxContainer.add_child(txt)
+				if Global.inventory[req] >= get_parent().quota[req]: 
+					txt.modulate = Color.GREEN
+				else:
+					txt.modulate = Color.RED
 			else:
 				$UI/Checklist/VBoxContainer.get_child(i).text = req + ": " + var_to_str(Global.inventory[req]) + "/" + var_to_str(get_parent().quota[req])
+				if Global.inventory[req] >= get_parent().quota[req]: 
+					$UI/Checklist/VBoxContainer.get_child(i).modulate = Color.GREEN
+				else:
+					$UI/Checklist/VBoxContainer.get_child(i).modulate = Color.RED
 			i += 1
 
 # For every area in the interaction area, if the type of interaction matches 
