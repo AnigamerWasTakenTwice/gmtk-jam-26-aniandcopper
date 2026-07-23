@@ -33,6 +33,14 @@ position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 
+[node name="ColorRect" type="ColorRect" parent="Camera2D"]
+z_index = -999
+offset_left = -1384.0
+offset_top = -735.0
+offset_right = 1424.0
+offset_bottom = 775.0
+color = Color(0, 0, 0, 1)
+
 [node name="InteractionArea" type="Area2D" parent="."]
 position = Vector2(0, -64)
 

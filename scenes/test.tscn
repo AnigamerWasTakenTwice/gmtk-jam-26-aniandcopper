@@ -9,6 +9,12 @@
 
 [node name="Node2D" type="Node2D"]
 
+[node name="Visual" type="Node2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Visual"]
+offset_right = 40.0
+offset_bottom = 40.0
+
 [node name="Player" parent="." instance=ExtResource("1_gnr22")]
 
 [node name="HarvestPoint" parent="." instance=ExtResource("2_kaiv3")]
