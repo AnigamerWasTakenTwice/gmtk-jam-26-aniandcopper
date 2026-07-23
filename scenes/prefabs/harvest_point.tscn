@@ -1,12 +1,42 @@
-[gd_scene load_steps=4 format=3 uid="uid://basvai4ymr7f0"]
+[gd_scene load_steps=9 format=3 uid="uid://basvai4ymr7f0"]
 
 [ext_resource type="Script" path="res://scripts/harvest_point.gd" id="1_mjc6o"]
+[ext_resource type="Texture2D" uid="uid://8f0uskhevjkh" path="res://assets/sprites/grass_tiles.png" id="2_1sqii"]
 [ext_resource type="PackedScene" uid="uid://xicjh6l1ep0c" path="res://scenes/prefabs/hitbox.tscn" id="2_qr66p"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7fbjb"]
+load_path = "res://.godot/imported/grass_tiles.png-1e4a5984e54c5dff350b85446408c8e1.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m0cur"]
+atlas = SubResource("CompressedTexture2D_7fbjb")
+region = Rect2(36, 16, 8, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ry65h"]
+atlas = ExtResource("2_1sqii")
+region = Rect2(52, 16, 8, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_175d5"]
+atlas = ExtResource("2_1sqii")
+region = Rect2(1, 33, 14, 15)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wqjon"]
 
 [node name="HarvestPoint" type="CharacterBody2D"]
 script = ExtResource("1_mjc6o")
+
+[node name="Sprites" type="Node2D" parent="."]
+scale = Vector2(19, 19)
+
+[node name="Log" type="Sprite2D" parent="Sprites"]
+texture = SubResource("AtlasTexture_m0cur")
+
+[node name="Log2" type="Sprite2D" parent="Sprites"]
+position = Vector2(0, -16)
+texture = SubResource("AtlasTexture_ry65h")
+
+[node name="Leaves" type="Sprite2D" parent="Sprites"]
+position = Vector2(0, -31)
+texture = SubResource("AtlasTexture_175d5")
 
 [node name="Hitbox" parent="." instance=ExtResource("2_qr66p")]
 
