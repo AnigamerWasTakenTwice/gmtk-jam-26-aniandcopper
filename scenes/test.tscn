@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dvwua2wbj43yh"]
+[gd_scene load_steps=9 format=3 uid="uid://dvwua2wbj43yh"]
 
 [ext_resource type="PackedScene" uid="uid://bvln38xbur2mi" path="res://scenes/prefabs/player.tscn" id="1_gnr22"]
 [ext_resource type="Script" path="res://scripts/countdown.gd" id="1_pwi64"]
 [ext_resource type="PackedScene" uid="uid://basvai4ymr7f0" path="res://scenes/prefabs/harvest_point.tscn" id="2_kaiv3"]
 [ext_resource type="Script" path="res://scripts/pickup.gd" id="3_0dxfe"]
 [ext_resource type="PackedScene" uid="uid://jb42wjtdh6m" path="res://scenes/prefabs/enemy.tscn" id="4_t4uas"]
+[ext_resource type="PackedScene" uid="uid://bj1fdt5b11er3" path="res://scenes/prefabs/tutorial_screen.tscn" id="6_ss5cc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_67y6s"]
 
@@ -58,3 +59,5 @@ position = Vector2(-188, 432)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea"]
 shape = SubResource("RectangleShape2D_h7rd6")
+
+[node name="TutorialScreen" parent="." instance=ExtResource("6_ss5cc")]

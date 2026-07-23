@@ -108,7 +108,6 @@ position = Vector2(0, -86)
 shape = SubResource("RectangleShape2D_bbo88")
 
 [node name="UI" type="CanvasLayer" parent="."]
-layer = 3
 
 [node name="ToolSelected" type="Label" parent="UI"]
 anchors_preset = 2

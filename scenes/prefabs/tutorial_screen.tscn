@@ -1,0 +1,165 @@
+[gd_scene load_steps=9 format=3 uid="uid://bj1fdt5b11er3"]
+
+[ext_resource type="Script" path="res://scripts/tutorial_screen.gd" id="1_t3p7u"]
+[ext_resource type="Texture2D" uid="uid://cx4qf6rabhxf7" path="res://assets/sprites/ui/notepad.png" id="2_vy78p"]
+[ext_resource type="FontFile" uid="uid://j7b5iyyuwn6u" path="res://assets/fonts/alagard.ttf" id="3_tktox"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_d5tmj"]
+font = ExtResource("3_tktox")
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_j1hfw"]
+resource_name = "spawn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(586, 322), Vector2(406, 108)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(3, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_hdw21"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(406, 108)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3, 3)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_bewga"]
+resource_name = "exit"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(406, 108), Vector2(586, 322)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(3, 3), Vector2(1e-05, 1e-05)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bunjt"]
+_data = {
+"RESET": SubResource("Animation_hdw21"),
+"exit": SubResource("Animation_bewga"),
+"spawn": SubResource("Animation_j1hfw")
+}
+
+[node name="TutorialScreen" type="CanvasLayer"]
+process_mode = 3
+layer = 2
+script = ExtResource("1_t3p7u")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 586.0
+offset_top = 322.0
+offset_right = 694.0
+offset_bottom = 450.0
+scale = Vector2(3, 3)
+texture = ExtResource("2_vy78p")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="TextureRect"]
+layout_mode = 0
+offset_left = 14.3333
+offset_top = 10.0
+offset_right = 195.333
+offset_bottom = 61.0
+scale = Vector2(0.5, 0.5)
+text = "Bad Things Will
+Happen TO YOU!!!!
+YOU ARE GOING TO DIE!!!
+aaaaaaaaaaa
+aaaaaaaaaaaa
+aaaaaaaaaaa
+aaaaaaaaaaa"
+label_settings = SubResource("LabelSettings_d5tmj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bunjt")
+}
+autoplay = "spawn"
