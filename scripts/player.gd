@@ -8,6 +8,7 @@ extends CharacterBody2D
 
 @onready var interaction_area: Area2D = $InteractionArea
 @onready var player_sprite: AnimatedSprite2D = $Sprite2D
+@onready var camera: Camera2D = %Camera2D
 
 
 var movement_direction: Vector2

@@ -22,6 +22,9 @@ func _process(delta: float) -> void:
 func add_trauma(amount: float):
 	trauma = min(trauma + amount, 1.0)
 
+func set_trauma(amount: float):
+	trauma = amount
+
 func shake():
 	var amount = pow(trauma, trauma_power)
 	rotation = max_roll * amount * randf_range(-1, 1)

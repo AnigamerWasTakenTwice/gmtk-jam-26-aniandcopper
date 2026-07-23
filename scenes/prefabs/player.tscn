@@ -84,6 +84,7 @@ frame_progress = 0.698259
 shape = SubResource("RectangleShape2D_u0ay4")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+unique_name_in_owner = true
 zoom = Vector2(0.335, 0.335)
 position_smoothing_enabled = true
 drag_horizontal_enabled = true

@@ -28,6 +28,7 @@ metadata/_edit_horizontal_guides_ = [513.0]
 [node name="Visual" type="Node2D" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("1_gnr22")]
+unique_name_in_owner = true
 
 [node name="HarvestPoint" parent="." instance=ExtResource("2_kaiv3")]
 drop = "wood"
