@@ -6,8 +6,12 @@ extends CharacterBody2D
 @export var movement_speed: float
 @export var detection_range: float
 @export var chase_range: float
+
+@onready var enemy_sprite: AnimatedSprite2D = $Sprite2D
+
 var start_spot: Vector2
 var wander_spot: Vector2
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	start_spot = position
@@ -16,11 +20,20 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	handle_health()
+	move_enemy()
+	flip_sprite()
+
+	pass
+
+func handle_health():
 	# If the enemy's health runs out, give the drop and delete the enemy.
+
 	if health <= 0:
 		Global.inventory[drop] += 1 
 		queue_free()
-	
+
+func move_enemy():
 	if player:
 		# If the player is in range, chase after them.
 		if player.position.distance_to(position) < detection_range and position.distance_to(start_spot) < chase_range:
@@ -32,7 +45,17 @@ func _process(delta: float) -> void:
 				velocity = position.direction_to(wander_spot) * movement_speed
 			else: velocity = Vector2.ZERO
 	move_and_slide()
-	pass
+
+func flip_sprite():
+	var old_pos = position
+	await get_tree().process_frame
+	await get_tree().process_frame
+	var direction = position - old_pos
+	
+	if direction.x > 0:
+		enemy_sprite.flip_h = false
+	elif direction.x < 0:
+		enemy_sprite.flip_h = true
 
 
 func _on_wander_timer_timeout() -> void:
