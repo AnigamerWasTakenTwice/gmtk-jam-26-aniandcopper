@@ -31,6 +31,7 @@ func _physics_process(delta: float) -> void:
 	move_player(delta)
 	handle_interaction_area()
 	handle_health()
+	handle_checklist()
 
 
 func move_player(delta: float):
@@ -81,11 +82,10 @@ func handle_health():
 		get_tree().change_scene_to_file("res://scenes/test.tscn")
 	$UI/HealthBar.value = health
 	
-	
+func handle_checklist():
 	# Checklist
 	if Input.is_action_just_pressed("checklist"): 
 		$UI/Checklist.visible = !$UI/Checklist.visible
-	
 	
 	if "quota" in get_parent():
 		var i = 1

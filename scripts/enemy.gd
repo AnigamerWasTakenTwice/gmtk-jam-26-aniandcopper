@@ -47,10 +47,7 @@ func move_enemy():
 	move_and_slide()
 
 func flip_sprite():
-	var old_pos = position
-	await get_tree().process_frame
-	await get_tree().process_frame
-	var direction = position - old_pos
+	var direction = velocity.normalized()
 	
 	if direction.x > 0:
 		enemy_sprite.flip_h = false
