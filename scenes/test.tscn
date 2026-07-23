@@ -1,13 +1,29 @@
-[gd_scene load_steps=6 format=3 uid="uid://dvwua2wbj43yh"]
+[gd_scene load_steps=8 format=3 uid="uid://dvwua2wbj43yh"]
 
 [ext_resource type="PackedScene" uid="uid://bvln38xbur2mi" path="res://scenes/prefabs/player.tscn" id="1_gnr22"]
+[ext_resource type="Script" path="res://scripts/countdown.gd" id="1_pwi64"]
 [ext_resource type="PackedScene" uid="uid://basvai4ymr7f0" path="res://scenes/prefabs/harvest_point.tscn" id="2_kaiv3"]
 [ext_resource type="Script" path="res://scripts/pickup.gd" id="3_0dxfe"]
 [ext_resource type="PackedScene" uid="uid://jb42wjtdh6m" path="res://scenes/prefabs/enemy.tscn" id="4_t4uas"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_67y6s"]
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h7rd6"]
+size = Vector2(250, 500)
+
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("timer", "timer_label", "exit_area")]
+script = ExtResource("1_pwi64")
+timer = NodePath("GameTimer")
+timer_label = NodePath("Player/UI/Countdown")
+quota = {
+"wood": 1
+}
+exit_area = NodePath("ExitArea")
+monster = "res://scenes/prefabs/enemy.tscn"
+monster_spawn_pos = Vector2(500, 500)
+exit_to = "res://scenes/test.tscn"
+metadata/_edit_vertical_guides_ = [496.0]
+metadata/_edit_horizontal_guides_ = [513.0]
 
 [node name="Visual" type="Node2D" parent="."]
 
@@ -28,9 +44,17 @@ shape = SubResource("RectangleShape2D_67y6s")
 
 [node name="Enemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_t4uas")]
 position = Vector2(981, 482)
-drop = "wood"
-type = "attack"
 player = NodePath("../Player")
 movement_speed = 200.0
 detection_range = 300.0
-chase_range = 1000.0
+
+[node name="GameTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="ExitArea" type="Area2D" parent="."]
+position = Vector2(-188, 432)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea"]
+shape = SubResource("RectangleShape2D_h7rd6")

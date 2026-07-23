@@ -10,6 +10,10 @@ size = Vector2(96, 96)
 
 [node name="Enemy" type="CharacterBody2D"]
 script = ExtResource("1_v48k1")
+drop = "wood"
+movement_speed = 300.0
+detection_range = 1000.0
+chase_range = 1000.0
 
 [node name="Hitbox" parent="." instance=ExtResource("2_r4rc7")]
 
@@ -22,6 +26,7 @@ autostart = true
 
 [node name="InteractionArea" type="Area2D" parent="."]
 position = Vector2(0, -64)
+metadata/type = "attack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
 shape = SubResource("RectangleShape2D_6v5s6")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bvln38xbur2mi"]
+[gd_scene load_steps=14 format=3 uid="uid://bvln38xbur2mi"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ov4t6"]
 [ext_resource type="PackedScene" uid="uid://xicjh6l1ep0c" path="res://scenes/prefabs/hitbox.tscn" id="3_c8q2h"]
@@ -61,6 +61,9 @@ size = Vector2(64, 64)
 [sub_resource type="LabelSettings" id="LabelSettings_4xgyp"]
 font_size = 32
 
+[sub_resource type="LabelSettings" id="LabelSettings_j7gj8"]
+font_size = 24
+
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(388, 245)
 script = ExtResource("1_ov4t6")
@@ -110,6 +113,17 @@ grow_vertical = 0
 pivot_offset = Vector2(648, -200)
 text = "axe"
 label_settings = SubResource("LabelSettings_4xgyp")
+
+[node name="Countdown" type="Label" parent="UI"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "10000000"
+label_settings = SubResource("LabelSettings_j7gj8")
 
 [node name="Hitbox" parent="." instance=ExtResource("3_c8q2h")]
 position = Vector2(0, -2)

@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 @export var health = 10
 @export var drop: String
-@export var type: String
 @export var player: CharacterBody2D
 @export var movement_speed: float
 @export var detection_range: float
@@ -11,7 +10,6 @@ var start_spot: Vector2
 var wander_spot: Vector2
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$Hitbox.set_meta("type", type)
 	start_spot = position
 	pass # Replace with function body.
 
