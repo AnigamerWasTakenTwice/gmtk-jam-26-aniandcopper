@@ -41,6 +41,7 @@ position = Vector2(0, -31)
 texture = SubResource("AtlasTexture_175d5")
 
 [node name="Hitbox" parent="." instance=ExtResource("2_qr66p")]
+position = Vector2(-1, 182)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -147)

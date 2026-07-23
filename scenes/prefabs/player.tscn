@@ -126,5 +126,10 @@ grow_horizontal = 2
 text = "10000000"
 label_settings = SubResource("LabelSettings_j7gj8")
 
+[node name="HealthBar" type="ProgressBar" parent="UI"]
+offset_right = 475.0
+offset_bottom = 46.0
+max_value = 10.0
+
 [node name="Hitbox" parent="." instance=ExtResource("3_c8q2h")]
 position = Vector2(0, -2)

@@ -10,6 +10,8 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	#Loops through each requirement in the quota to see if the player can leave.
+	#If they can, move them to the next area.
 	exit_area.connect("body_entered", func(body):
 		if body.name == "Player":
 			var requirements_met = true
@@ -19,6 +21,8 @@ func _ready() -> void:
 			if requirements_met: get_tree().change_scene_to_file(exit_to)
 			else: print("OUTTA HERE")
 		)
+	
+	# Spawns the monster when the timer runs out.
 	timer.connect("timeout", func():
 		timer_label.text = "RUNRUNRUNRUNRUNRUNRUNRUNRUNRURNRUNRUNRUNRUNRUNRUN"
 		var monster_inst = load(monster).instantiate()
@@ -31,5 +35,6 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	# If the timer hasn't ran out, the timer label shows how much time is left.
 	if timer.time_left > 0: timer_label.text = var_to_str(int(timer.time_left))
 	pass

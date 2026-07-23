@@ -57,7 +57,6 @@ autostart = true
 
 [node name="InteractionArea" type="Area2D" parent="."]
 position = Vector2(0, -64)
-metadata/type = "attack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
 shape = SubResource("RectangleShape2D_6v5s6")
