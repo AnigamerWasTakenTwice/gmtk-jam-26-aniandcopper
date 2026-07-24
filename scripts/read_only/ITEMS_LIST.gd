@@ -6,3 +6,5 @@
 # Glass
 # Ice
 # Battery
+# Ruby
+# Lubricant

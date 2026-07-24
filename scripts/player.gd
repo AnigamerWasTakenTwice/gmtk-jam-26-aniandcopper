@@ -1,5 +1,10 @@
 extends CharacterBody2D
 
+@export var camera_bottom_threshhold: = 10000000
+@export var camera_top_threshhold: = -10000000
+@export var camera_left_threshhold: = -10000000
+@export var camera_right_threshhold: = 10000000
+
 @export var movement_speed: float
 @export var movement_max_speed: float
 @export var run_accel_multiplier: float
@@ -9,9 +14,11 @@ extends CharacterBody2D
 		if health > new_hp: $SFX/damage.play()
 		health = new_hp
 
+
 @onready var interaction_area: Area2D = $InteractionArea
 @onready var player_sprite: AnimatedSprite2D = $Sprite2D
 @onready var camera: Camera2D = %Camera2D
+@onready var animation_player: AnimationPlayer = $UI/AnimationPlayer
 
 
 var movement_direction: Vector2
@@ -26,6 +33,10 @@ var selected_tool = 0
 var checklist_visible = true
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	camera.limit_bottom = camera_bottom_threshhold
+	camera.limit_left = camera_left_threshhold
+	camera.limit_right = camera_right_threshhold
+	camera.limit_top = camera_top_threshhold
 	
 	pass # Replace with function body.
 
