@@ -3,7 +3,7 @@
 [ext_resource type="Shader" path="res://assets/shaders/galaxyoverlay.gdshader" id="1_3mehv"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_picf6"]
 [ext_resource type="Texture2D" uid="uid://dmabv7pmsloc2" path="res://assets/sprites/south_star/south_star_shape.png" id="2_y7ily"]
-[ext_resource type="Texture2D" uid="uid://db0lf2xp1qip8" path="res://assets/sprites/south_star/supernova1.png" id="3_ad3hb"]
+[ext_resource type="Texture2D" uid="uid://il7fqv3262dw" path="res://assets/sprites/south_star/supernova2.png" id="3_8e54p"]
 [ext_resource type="Texture2D" uid="uid://v5nudshrdig2" path="res://assets/sprites/south_star/south_star_eye.png" id="3_v8kjp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6u0j0"]
@@ -12,7 +12,7 @@ shader_parameter/clear_color = Color(0, 1, 0.701961, 1)
 shader_parameter/tolerance = 0.1
 shader_parameter/direction = Vector2(-1, 1)
 shader_parameter/speed = 1.0
-shader_parameter/override_texture = ExtResource("3_ad3hb")
+shader_parameter/override_texture = ExtResource("3_8e54p")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l1g6v"]
 
