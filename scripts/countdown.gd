@@ -31,7 +31,10 @@ func _ready() -> void:
 			for req in quota.keys():
 				if Global.inventory[req] < quota[req]:
 					requirements_met = false
-			if requirements_met: get_tree().change_scene_to_file(exit_to)
+			if requirements_met:
+				for item in Global.inventory.keys():
+					Global.inventory[item] = 0
+				get_tree().change_scene_to_file(exit_to)
 			else: 
 				print("OUTTA HERE")
 				player.animation_player.play("jiggle_checklist")
@@ -41,7 +44,7 @@ func _ready() -> void:
 	# Spawns the monster when the timer runs out.
 	timer.connect("timeout", func():
 		music.stop()
-		await get_tree().create_timer(5).timeout
+		await get_tree().create_timer(0.5).timeout
 		music_panic.play()
 		timer_label.text = "RUNRUNRUNRUNRUNRUNRUNRUNRUNRURNRUNRUNRUNRUNRUNRUN"
 		is_monster_present = true
