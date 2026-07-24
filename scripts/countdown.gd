@@ -8,10 +8,12 @@ extends Node2D
 @export var monster_spawn_pos: Vector2
 @export_file("*.tscn") var exit_to: String
 
+
 @onready var player: CharacterBody2D = $Player
+
 var monster_inst: CharacterBody2D
 
-var is_it_present: bool = false
+var is_monster_present: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -24,13 +26,15 @@ func _ready() -> void:
 				if Global.inventory[req] < quota[req]:
 					requirements_met = false
 			if requirements_met: get_tree().change_scene_to_file(exit_to)
-			else: print("OUTTA HERE")
+			else: 
+				print("OUTTA HERE")
+				player.animation_player.play("jiggle_checklist")
 		)
 	
 	# Spawns the monster when the timer runs out.
 	timer.connect("timeout", func():
 		timer_label.text = "RUNRUNRUNRUNRUNRUNRUNRUNRUNRURNRUNRUNRUNRUNRUNRUN"
-		is_it_present = true
+		is_monster_present = true
 		monster_inst = load(monster).instantiate()
 		monster_inst.position = monster_spawn_pos
 		monster_inst.player = $Player
@@ -46,7 +50,7 @@ func _process(delta: float) -> void:
 	# If the timer hasn't ran out, the timer label shows how much time is left.
 	if timer.time_left > 0: timer_label.text = var_to_str(int(timer.time_left))
 	
-	if is_it_present:
+	if is_monster_present:
 		const TRAUMA_AMOUNT = 0.5
 		
 		player.camera.set_trauma(TRAUMA_AMOUNT)

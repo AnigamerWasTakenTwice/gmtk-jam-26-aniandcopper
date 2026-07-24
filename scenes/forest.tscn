@@ -76,6 +76,7 @@ exit_to = "res://scenes/forest.tscn"
 metadata/_edit_horizontal_guides_ = [-797.0]
 
 [node name="Player" parent="." instance=ExtResource("2_n0nag")]
+camera_bottom_threshhold = 711
 
 [node name="TutorialScreen" parent="." instance=ExtResource("3_g106x")]
 

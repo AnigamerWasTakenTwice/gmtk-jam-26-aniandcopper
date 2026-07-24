@@ -10,7 +10,7 @@
 shader = ExtResource("1_3mehv")
 shader_parameter/clear_color = Color(0, 1, 0.701961, 1)
 shader_parameter/tolerance = 0.1
-shader_parameter/direction = Vector2(-1, -1)
+shader_parameter/direction = Vector2(-1, 1)
 shader_parameter/speed = 1.0
 shader_parameter/override_texture = ExtResource("3_0yc65")
 
@@ -52,6 +52,7 @@ wait_time = 0.1
 autostart = true
 
 [node name="InteractionArea" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
 shape = SubResource("RectangleShape2D_u2e18")
