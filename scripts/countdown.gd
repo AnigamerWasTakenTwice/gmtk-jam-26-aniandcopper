@@ -9,6 +9,7 @@ extends Node2D
 @export_file("*.tscn") var exit_to: String
 
 @onready var player: CharacterBody2D = %Player
+var monster_inst: CharacterBody2D
 
 var is_it_present: bool = false
 
@@ -30,10 +31,11 @@ func _ready() -> void:
 	timer.connect("timeout", func():
 		timer_label.text = "RUNRUNRUNRUNRUNRUNRUNRUNRUNRURNRUNRUNRUNRUNRUNRUN"
 		is_it_present = true
-		var monster_inst = load(monster).instantiate()
+		monster_inst = load(monster).instantiate()
 		monster_inst.position = monster_spawn_pos
 		monster_inst.player = $Player
 		add_child(monster_inst)
+		player.get_node("SFX/static").play()
 		)
 	pass # Replace with function body.
 
@@ -48,4 +50,6 @@ func _process(delta: float) -> void:
 		const TRAUMA_AMOUNT = 0.5
 		
 		player.camera.set_trauma(TRAUMA_AMOUNT)
+		player.get_node("UI/Noise").modulate = Color(1, 1, 1, remap(player.position.distance_to(monster_inst.position), 0, 1000, 1, 0))
+		player.get_node("SFX/static").volume_db = remap(player.position.distance_to(monster_inst.position), 0, 1000, 0, -80)
 	pass

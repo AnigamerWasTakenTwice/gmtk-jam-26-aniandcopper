@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsurl7keocwk3"]
+
+[ext_resource type="Script" path="res://scripts/pickup.gd" id="1_oifwi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_67y6s"]
+size = Vector2(48, 48)
+
+[node name="Pickup" type="Area2D"]
+position = Vector2(204, 440)
+script = ExtResource("1_oifwi")
+item = "wood"
+metadata/type = "interact"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_67y6s")

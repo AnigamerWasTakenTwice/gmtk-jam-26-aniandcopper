@@ -23,6 +23,7 @@ var tools = [
 ]
 
 var selected_tool = 0
+var checklist_visible = true
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
@@ -36,6 +37,7 @@ func _physics_process(delta: float) -> void:
 	handle_interaction_area()
 	handle_health()
 	handle_checklist()
+	handle_static()
 
 
 func move_player(delta: float):
@@ -88,7 +90,9 @@ func handle_health():
 func handle_checklist():
 	# Checklist
 	if Input.is_action_just_pressed("checklist"): 
-		$UI/Checklist.visible = !$UI/Checklist.visible
+		if checklist_visible: $UI/AnimationPlayer.play("slide_checklist")
+		else: $UI/AnimationPlayer.play_backwards("slide_checklist")
+		checklist_visible = !checklist_visible
 	if "quota" in get_parent():
 		var i = 1
 		for req in get_parent().quota.keys():
@@ -109,6 +113,10 @@ func handle_checklist():
 				else:
 					$UI/Checklist/VBoxContainer.get_child(i).modulate = Color.DARK_RED
 			i += 1
+
+func handle_static():
+	if $UI/Noise.modulate.a > 0.2:
+		$UI/Noise.texture.noise.seed += 1
 
 # For every area in the interaction area, if the type of interaction matches 
 # what we're doing right now, run the interaction script on the area.

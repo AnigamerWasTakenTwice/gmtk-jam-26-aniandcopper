@@ -1,15 +1,17 @@
-[gd_scene load_steps=22 format=3 uid="uid://bvln38xbur2mi"]
+[gd_scene load_steps=29 format=3 uid="uid://bvln38xbur2mi"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ov4t6"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="3_3nseo"]
 [ext_resource type="PackedScene" uid="uid://xicjh6l1ep0c" path="res://scenes/prefabs/hitbox.tscn" id="3_c8q2h"]
 [ext_resource type="Texture2D" uid="uid://c3hnhfuh6frwy" path="res://assets/sprites/player.png" id="3_m1rey"]
 [ext_resource type="Texture2D" uid="uid://cx4qf6rabhxf7" path="res://assets/sprites/ui/notepad.png" id="4_g5i0q"]
+[ext_resource type="FontFile" uid="uid://smn1abrf2jg3" path="res://assets/fonts/PressStart2P.ttf" id="4_hddma"]
 [ext_resource type="FontFile" uid="uid://j7b5iyyuwn6u" path="res://assets/fonts/alagard.ttf" id="5_b7oaq"]
 [ext_resource type="AudioStream" uid="uid://ckbxss7fnwlym" path="res://assets/sfx/pickup.wav" id="7_nj0yy"]
 [ext_resource type="AudioStream" uid="uid://g2schsvnqego" path="res://assets/sfx/enemyHit.wav" id="8_a6n3s"]
 [ext_resource type="AudioStream" uid="uid://bh5yntog6e2s4" path="res://assets/sfx/playerHit.wav" id="9_ve3ls"]
 [ext_resource type="AudioStream" uid="uid://74aucduw27c1" path="res://assets/sfx/step.wav" id="10_jye7n"]
+[ext_resource type="AudioStream" uid="uid://d06767xp73gje" path="res://assets/sfx/static.wav" id="12_xbmpe"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fyyco"]
 atlas = ExtResource("3_m1rey")
@@ -69,11 +71,56 @@ size = Vector2(64, 64)
 font_size = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_j7gj8"]
+font = ExtResource("4_hddma")
 font_size = 24
 
 [sub_resource type="LabelSettings" id="LabelSettings_0xwkp"]
 font = ExtResource("5_b7oaq")
 font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_7uprf"]
+resource_name = "slide_checklist"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Checklist:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.5, 2),
+"update": 0,
+"values": [Vector2(10, 64), Vector2(-222, 64)]
+}
+
+[sub_resource type="Animation" id="Animation_cin0f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Checklist:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(10, 64)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jkben"]
+_data = {
+"RESET": SubResource("Animation_cin0f"),
+"slide_checklist": SubResource("Animation_7uprf")
+}
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_71mit"]
+noise_type = 0
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2n7um"]
+noise = SubResource("FastNoiseLite_71mit")
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 3
@@ -132,9 +179,10 @@ label_settings = SubResource("LabelSettings_4xgyp")
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 23.0
+offset_left = -96.0
+offset_top = 10.0
+offset_right = 96.0
+offset_bottom = 34.0
 grow_horizontal = 2
 text = "10000000"
 label_settings = SubResource("LabelSettings_j7gj8")
@@ -166,6 +214,21 @@ layout_mode = 2
 text = "I should be getting..."
 label_settings = SubResource("LabelSettings_0xwkp")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI"]
+libraries = {
+"": SubResource("AnimationLibrary_jkben")
+}
+
+[node name="Noise" type="TextureRect" parent="UI"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_2n7um")
+expand_mode = 1
+
 [node name="Hitbox" parent="." instance=ExtResource("3_c8q2h")]
 position = Vector2(0, -2)
 
@@ -194,6 +257,9 @@ autostart = true
 [node name="run_timer" type="Timer" parent="SFX"]
 wait_time = 0.15
 autostart = true
+
+[node name="static" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("12_xbmpe")
 
 [connection signal="timeout" from="SFX/step_timer" to="." method="_on_step_timer_timeout"]
 [connection signal="timeout" from="SFX/run_timer" to="." method="_on_run_timer_timeout"]
