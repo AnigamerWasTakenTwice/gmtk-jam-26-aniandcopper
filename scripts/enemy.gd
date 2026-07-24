@@ -1,11 +1,14 @@
 extends CharacterBody2D
 
+@onready var eye: Node2D = $Eye
+
 @export var health = 10
 @export var drop: String
 @export var player: CharacterBody2D
 @export var movement_speed: float
 @export var detection_range: float
 @export var chase_range: float
+@export var move_eye: bool = false
 
 @export var enemy_sprite: Node2D
 
@@ -24,6 +27,11 @@ func _process(delta: float) -> void:
 	handle_health()
 	move_enemy()
 	flip_sprite()
+
+	if move_eye and player:
+		const EYE_OFFSET = -90
+		eye.look_at(player.global_position)
+		eye.global_rotation_degrees += EYE_OFFSET
 
 	pass
 

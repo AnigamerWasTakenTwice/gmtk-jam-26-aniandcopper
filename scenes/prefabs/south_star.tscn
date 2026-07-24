@@ -25,6 +25,7 @@ health = 999
 movement_speed = 2240.0
 detection_range = 99999.0
 chase_range = 1e+07
+move_eye = true
 enemy_sprite = NodePath("SouthStarShape")
 
 [node name="SouthStarShape" type="Sprite2D" parent="."]

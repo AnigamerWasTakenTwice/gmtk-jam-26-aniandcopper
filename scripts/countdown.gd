@@ -1,5 +1,6 @@
 extends Node2D
 
+
 @export var timer: Timer
 @export var timer_label: Label
 @export var quota: Dictionary
@@ -7,7 +8,7 @@ extends Node2D
 @export_file("*.tscn") var monster: String
 @export var monster_spawn_pos: Vector2
 @export_file("*.tscn") var exit_to: String
-
+@export var max_static: = 0.25
 
 @onready var player: CharacterBody2D = $Player
 
@@ -54,6 +55,6 @@ func _process(delta: float) -> void:
 		const TRAUMA_AMOUNT = 0.5
 		
 		player.camera.set_trauma(TRAUMA_AMOUNT)
-		player.get_node("UI/Noise").modulate = Color(1, 1, 1, remap(player.position.distance_to(monster_inst.position), 0, 1000, 1, 0))
+		player.get_node("UI/Noise").modulate = Color(1, 1, 1, clamp(remap(player.position.distance_to(monster_inst.position), 0, 1000, 1, 0), 0.0, max_static))
 		player.get_node("SFX/static").volume_db = remap(player.position.distance_to(monster_inst.position), 0, 1000, 0, -80)
 	pass
