@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+
+
+
 @export var camera_bottom_threshhold: = 10000000
 @export var camera_top_threshhold: = -10000000
 @export var camera_left_threshhold: = -10000000
@@ -87,14 +90,25 @@ func handle_interaction_area():
 	# All of the interaction buttons in the game.
 	if Input.is_action_just_pressed("attack"): interact("attack")
 	if Input.is_action_just_pressed("interact"): interact("interact")
-	if Input.is_action_just_pressed("tool"): interact(tools[selected_tool])
+	if Input.is_action_just_pressed("tool"): 
+		interact(tools[selected_tool])
+		$InteractionArea/SwingAnimation.play("swing_right")
 	
 	# Cycles through tools to use for harvesting in the above line
 	if Input.is_action_just_pressed("cycle"):
 		if selected_tool < tools.size() - 1: selected_tool += 1
 		else: selected_tool = 0
-		$UI/ToolSelected.text = tools[selected_tool]
+
+		const ICON_PIXEL_SIZE = 7
+
+		if selected_tool == 0: $UI/ToolSelected.texture.region = Rect2(0, 0, ICON_PIXEL_SIZE, ICON_PIXEL_SIZE)
+		elif selected_tool == 1: $UI/ToolSelected.texture.region = Rect2(ICON_PIXEL_SIZE, 0, ICON_PIXEL_SIZE, ICON_PIXEL_SIZE)
 		
+		
+	if interaction_area.global_position.x > global_position.x:
+		interaction_area.global_scale.x = 1
+	else:
+		interaction_area.global_scale.x = -1
 
 func handle_health():
 		#HP and Death
