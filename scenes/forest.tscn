@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bpmfwekcpy1fv" path="res://assets/sprites/tiles/forestbackgroundtiles.png" id="4_so8hv"]
 [ext_resource type="Texture2D" uid="uid://8f0uskhevjkh" path="res://assets/sprites/tiles/grass_tiles.png" id="5_poksu"]
 [ext_resource type="PackedScene" uid="uid://basvai4ymr7f0" path="res://scenes/prefabs/harvest_point.tscn" id="6_1ha2x"]
-[ext_resource type="PackedScene" path="res://scenes/prefabs/pickup.tscn" id="7_u2r5q"]
+[ext_resource type="PackedScene" uid="uid://dsurl7keocwk3" path="res://scenes/prefabs/pickup.tscn" id="7_u2r5q"]
 [ext_resource type="PackedScene" uid="uid://jb42wjtdh6m" path="res://scenes/prefabs/enemy.tscn" id="8_1vgp4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k8uyb"]
@@ -96,7 +96,7 @@ position = Vector2(-176, -62)
 shape = SubResource("RectangleShape2D_k8uyb")
 
 [node name="GameTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 180.0
 one_shot = true
 autostart = true
 

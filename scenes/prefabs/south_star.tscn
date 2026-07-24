@@ -17,7 +17,7 @@ shader_parameter/override_texture = ExtResource("2_d01f2")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l1g6v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u2e18"]
-size = Vector2(128, 128)
+size = Vector2(320, 320)
 
 [node name="SouthStar" type="CharacterBody2D" node_paths=PackedStringArray("enemy_sprite")]
 script = ExtResource("1_picf6")
@@ -43,11 +43,17 @@ texture = ExtResource("3_v8kjp")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_l1g6v")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="WanderTimer" type="Timer" parent="."]
+autostart = true
 
-[node name="Timer2" type="Timer" parent="."]
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
 
 [node name="InteractionArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
 shape = SubResource("RectangleShape2D_u2e18")
+
+[connection signal="timeout" from="WanderTimer" to="." method="_on_wander_timer_timeout"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

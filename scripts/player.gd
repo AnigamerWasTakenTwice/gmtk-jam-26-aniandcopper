@@ -84,7 +84,7 @@ func handle_interaction_area():
 func handle_health():
 		#HP and Death
 	if health <= 0:
-		get_tree().change_scene_to_file("res://scenes/test.tscn")
+		get_tree().change_scene_to_file(get_tree().current_scene.scene_file_path)
 	$UI/HealthBar.value = health
 	
 func handle_checklist():
