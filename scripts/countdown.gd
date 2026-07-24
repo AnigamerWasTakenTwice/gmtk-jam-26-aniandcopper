@@ -7,6 +7,7 @@ extends Node2D
 @export_file("*.tscn") var monster: String
 @export var monster_spawn_pos: Vector2
 @export_file("*.tscn") var exit_to: String
+@export var tilemap: TileMapLayer
 
 
 @onready var player: CharacterBody2D = $Player
@@ -38,6 +39,7 @@ func _ready() -> void:
 		monster_inst = load(monster).instantiate()
 		monster_inst.position = monster_spawn_pos
 		monster_inst.player = $Player
+		if tilemap: monster_inst.tilemap = tilemap
 		add_child(monster_inst)
 		player.get_node("SFX/static").play()
 		)
@@ -54,6 +56,7 @@ func _process(delta: float) -> void:
 		const TRAUMA_AMOUNT = 0.5
 		
 		player.camera.set_trauma(TRAUMA_AMOUNT)
+		player.get_node("Hitbox").parent_has_take_damage_function = false
 		player.get_node("UI/Noise").modulate = Color(1, 1, 1, remap(player.position.distance_to(monster_inst.position), 0, 1000, 1, 0))
 		player.get_node("SFX/static").volume_db = remap(player.position.distance_to(monster_inst.position), 0, 1000, 0, -80)
 	pass

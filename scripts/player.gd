@@ -36,17 +36,16 @@ var selected_tool = 0
 var checklist_visible = true
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	camera.limit_bottom = camera_bottom_threshhold
-	camera.limit_left = camera_left_threshhold
-	camera.limit_right = camera_right_threshhold
-	camera.limit_top = camera_top_threshhold
 	
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-
+	camera.limit_bottom = camera_bottom_threshhold
+	camera.limit_left = camera_left_threshhold
+	camera.limit_right = camera_right_threshhold
+	camera.limit_top = camera_top_threshhold
 	move_player(delta)
 	handle_interaction_area()
 	handle_health()
@@ -84,6 +83,7 @@ func move_player(delta: float):
 func handle_interaction_area():
 	# Moves the interaction area to point to where the player is looking.
 	interaction_area.position = position.direction_to(get_global_mouse_position()) * 128
+	$InteractionArea/SwordSprite.look_at(get_global_mouse_position())
 	# All of the interaction buttons in the game.
 	if Input.is_action_just_pressed("attack"): interact("attack")
 	if Input.is_action_just_pressed("interact"): interact("interact")
@@ -94,6 +94,7 @@ func handle_interaction_area():
 		if selected_tool < tools.size() - 1: selected_tool += 1
 		else: selected_tool = 0
 		$UI/ToolSelected.text = tools[selected_tool]
+		
 
 func handle_health():
 		#HP and Death

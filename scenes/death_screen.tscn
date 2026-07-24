@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://pp64t6tukp3k"]
 
-[ext_resource type="Script" path="res://scenes/death_screen.gd" id="1_5kee4"]
+[ext_resource type="Script" path="res://scripts/death_screen.gd" id="1_5kee4"]
 [ext_resource type="Texture2D" uid="uid://cgfkcs42kdwng" path="res://assets/sprites/ui/shatter.png" id="1_q2517"]
 [ext_resource type="FontFile" uid="uid://smn1abrf2jg3" path="res://assets/fonts/PressStart2P.ttf" id="2_maky7"]
 [ext_resource type="AudioStream" uid="uid://b7s2i0a3pvd6e" path="res://assets/sfx/death.wav" id="4_1q7ot"]

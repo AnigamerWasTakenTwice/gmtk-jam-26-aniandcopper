@@ -1,7 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://buv1ywh8gu6dy"]
+[gd_scene load_steps=10 format=3 uid="uid://buv1ywh8gu6dy"]
 
 [ext_resource type="Shader" path="res://assets/shaders/galaxyoverlay.gdshader" id="1_3mehv"]
-[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_picf6"]
+[ext_resource type="Script" path="res://scripts/south_star.gd" id="1_hmu8y"]
 [ext_resource type="Texture2D" uid="uid://dmabv7pmsloc2" path="res://assets/sprites/south_star/south_star_shape.png" id="2_y7ily"]
 [ext_resource type="Texture2D" uid="uid://il7fqv3262dw" path="res://assets/sprites/south_star/supernova2.png" id="3_0yc65"]
 [ext_resource type="Texture2D" uid="uid://v5nudshrdig2" path="res://assets/sprites/south_star/south_star_eye.png" id="3_v8kjp"]
@@ -19,8 +19,11 @@ shader_parameter/override_texture = ExtResource("3_0yc65")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u2e18"]
 size = Vector2(320, 320)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_8l5q1"]
+radius = 505.776
+
 [node name="SouthStar" type="CharacterBody2D" node_paths=PackedStringArray("enemy_sprite")]
-script = ExtResource("1_picf6")
+script = ExtResource("1_hmu8y")
 health = 999
 movement_speed = 2240.0
 detection_range = 99999.0
@@ -52,10 +55,15 @@ wait_time = 0.1
 autostart = true
 
 [node name="InteractionArea" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
 shape = SubResource("RectangleShape2D_u2e18")
 
+[node name="DestructionRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DestructionRange"]
+shape = SubResource("CircleShape2D_8l5q1")
+
 [connection signal="timeout" from="WanderTimer" to="." method="_on_wander_timer_timeout"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="body_entered" from="DestructionRange" to="." method="_on_destruction_range_body_entered"]

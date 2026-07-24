@@ -99,22 +99,6 @@ tracks/0/keys = {
 "values": [Vector2(10, 64)]
 }
 
-[sub_resource type="Animation" id="Animation_7uprf"]
-resource_name = "slide_checklist"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Checklist:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(0.5, 2),
-"update": 0,
-"values": [Vector2(10, 64), Vector2(-222, 64)]
-}
-
 [sub_resource type="Animation" id="Animation_xlsy3"]
 resource_name = "jiggle_checklist"
 length = 0.31
@@ -131,6 +115,22 @@ tracks/0/keys = {
 "values": [Vector2(10, 64), Vector2(2, 64), Vector2(10, 64), Vector2(2, 64)]
 }
 
+[sub_resource type="Animation" id="Animation_7uprf"]
+resource_name = "slide_checklist"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Checklist:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.5, 2),
+"update": 0,
+"values": [Vector2(10, 64), Vector2(-222, 64)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jkben"]
 _data = {
 "RESET": SubResource("Animation_cin0f"),
@@ -144,6 +144,33 @@ frequency = 1.0
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2n7um"]
 noise = SubResource("FastNoiseLite_71mit")
+
+[sub_resource type="Animation" id="Animation_fij8v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/is_hurt")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:can_take_damage")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_g6rka"]
 resource_name = "take_damage"
@@ -168,33 +195,6 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(2),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_fij8v"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:material:shader_parameter/is_hurt")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:can_take_damage")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
@@ -248,10 +248,12 @@ position = Vector2(0, -86)
 shape = SubResource("RectangleShape2D_bbo88")
 
 [node name="SwordSprite" type="Sprite2D" parent="InteractionArea"]
-position = Vector2(-16, -48)
+position = Vector2(1, 0)
 rotation = -1.57079
 scale = Vector2(0.236422, 0.236422)
 texture = ExtResource("5_c6tk7")
+centered = false
+offset = Vector2(0, -256)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -360,6 +362,7 @@ autostart = true
 
 [node name="static" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("12_xbmpe")
+volume_db = -45.0
 
 [connection signal="timeout" from="SFX/step_timer" to="." method="_on_step_timer_timeout"]
 [connection signal="timeout" from="SFX/run_timer" to="." method="_on_run_timer_timeout"]
