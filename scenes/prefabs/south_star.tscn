@@ -9,6 +9,8 @@
 shader = ExtResource("1_3mehv")
 shader_parameter/clear_color = Color(0, 1, 0.701961, 1)
 shader_parameter/tolerance = 0.1
+shader_parameter/direction = null
+shader_parameter/speed = null
 shader_parameter/override_texture = ExtResource("2_d01f2")
 
 [node name="SouthStar" type="CharacterBody2D"]
