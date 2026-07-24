@@ -25,7 +25,7 @@ size = Vector2(116, 600)
 
 [node name="HarvestPointTree" type="StaticBody2D"]
 script = ExtResource("1_mjc6o")
-health = 5
+health = 3
 drop = "wood"
 type = "axe"
 

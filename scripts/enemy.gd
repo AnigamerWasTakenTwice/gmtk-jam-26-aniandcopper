@@ -33,8 +33,8 @@ func handle_health():
 	if health <= 0:
 		var randitem = randi_range(0, 2)
 		if randitem == 0: Global.inventory["wood"] += 1
-		if randitem == 1: Global.inventory["stone"] += 1
-		if randitem == 2: Global.inventory["iron"] += 1 
+		if randitem == 1: Global.inventory["iron"] += 1
+		if randitem == 2: Global.inventory["copper"] += 1 
 		queue_free()
 
 func move_enemy():
@@ -72,9 +72,10 @@ func _on_attack_timer_timeout() -> void:
 	if player:
 		if player.position.distance_to(position) < 150:
 			for area in $InteractionArea.get_overlapping_areas():
-				if area.get_meta("type") == "attack":
-					attacking = true
-					area.call("interaction")
-					await get_tree().create_timer(0.5).timeout
-					attacking = false
+				if is_instance_valid(area):
+					if area.get_meta("type") == "attack":
+						attacking = true
+						area.call("interaction")
+						await get_tree().create_timer(0.5).timeout
+						attacking = false
 	pass # Replace with function body.

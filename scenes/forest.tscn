@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://dkfsxpoabeu63"]
+[gd_scene load_steps=20 format=4 uid="uid://dkfsxpoabeu63"]
 
 [ext_resource type="Script" path="res://scripts/countdown.gd" id="1_dquwi"]
 [ext_resource type="PackedScene" uid="uid://bvln38xbur2mi" path="res://scenes/prefabs/player.tscn" id="2_n0nag"]
@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://btkrmd2yy1hov" path="res://scenes/prefabs/harvest_points/harvest_point_rock.tscn" id="9_nw2u8"]
 [ext_resource type="Texture2D" uid="uid://c7u3sixoapfwi" path="res://assets/sprites/harvest_points/ruby_pedestal.png" id="10_wvf33"]
 [ext_resource type="Script" path="res://scripts/camera_limiter.gd" id="11_ukeqe"]
+[ext_resource type="AudioStream" uid="uid://cp6oou3lqkcgu" path="res://assets/music/forest-wanderer-final.mp3" id="12_xquum"]
+[ext_resource type="AudioStream" uid="uid://bfyk7fcio8k5m" path="res://assets/music/ohfuck.mp3" id="13_0ntcd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k8uyb"]
 size = Vector2(1624, 104)
@@ -64,7 +66,7 @@ size = Vector2(1631, 1279)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cgamp"]
 size = Vector2(2311, 281)
 
-[node name="Forest" type="Node2D" node_paths=PackedStringArray("timer", "timer_label", "exit_area", "tilemap")]
+[node name="Forest" type="Node2D" node_paths=PackedStringArray("timer", "timer_label", "exit_area", "tilemap", "music", "music_panic")]
 position = Vector2(-40, 161)
 script = ExtResource("1_dquwi")
 timer = NodePath("GameTimer")
@@ -82,6 +84,8 @@ monster = "res://scenes/prefabs/south_star.tscn"
 exit_to = "res://scenes/forest.tscn"
 tilemap = NodePath("TileMapLayer")
 max_static = 0.5
+music = NodePath("music")
+music_panic = NodePath("music_panic")
 metadata/_edit_horizontal_guides_ = [-797.0, -2231.0, 929.0]
 metadata/_edit_vertical_guides_ = [6180.0]
 
@@ -113,7 +117,7 @@ position = Vector2(-176, -62)
 shape = SubResource("RectangleShape2D_k8uyb")
 
 [node name="GameTimer" type="Timer" parent="."]
-wait_time = 180.0
+wait_time = 210.0
 one_shot = true
 autostart = true
 
@@ -479,17 +483,30 @@ texture = ExtResource("5_poksu")
 region_enabled = true
 region_rect = Rect2(48.2633, 48.0711, 15.7367, 16.2337)
 
-[node name="Enemy2" parent="." instance=ExtResource("8_1vgp4")]
+[node name="Enemy2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("8_1vgp4")]
 position = Vector2(-7664, -1446)
+player = NodePath("../Player")
 
-[node name="Enemy3" parent="." instance=ExtResource("8_1vgp4")]
+[node name="Enemy3" parent="." node_paths=PackedStringArray("player") instance=ExtResource("8_1vgp4")]
 position = Vector2(-7912, -1259)
+player = NodePath("../Player")
 
-[node name="Enemy4" parent="." instance=ExtResource("8_1vgp4")]
+[node name="Enemy4" parent="." node_paths=PackedStringArray("player") instance=ExtResource("8_1vgp4")]
 position = Vector2(-7709, -1937)
+player = NodePath("../Player")
 
-[node name="Enemy5" parent="." instance=ExtResource("8_1vgp4")]
+[node name="Enemy5" parent="." node_paths=PackedStringArray("player") instance=ExtResource("8_1vgp4")]
 position = Vector2(-8412, -1873)
+player = NodePath("../Player")
+
+[node name="music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_xquum")
+volume_db = -15.0
+autoplay = true
+
+[node name="music_panic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_0ntcd")
+volume_db = -15.0
 
 [connection signal="body_entered" from="CameraLimiter" to="CameraLimiter" method="_on_body_entered"]
 [connection signal="body_entered" from="CameraLimiter2" to="CameraLimiter2" method="_on_body_entered"]

@@ -9,6 +9,7 @@ size = Vector2(80, 67)
 
 [node name="HarvestPointRock" type="StaticBody2D"]
 script = ExtResource("1_p2yor")
+health = 5
 drop = "iron"
 type = "pickaxe"
 

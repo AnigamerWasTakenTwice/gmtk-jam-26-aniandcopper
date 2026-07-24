@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://bvln38xbur2mi"]
+[gd_scene load_steps=43 format=3 uid="uid://bvln38xbur2mi"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ov4t6"]
 [ext_resource type="Shader" path="res://assets/shaders/player.gdshader" id="2_afkim"]
@@ -9,6 +9,7 @@
 [ext_resource type="FontFile" uid="uid://smn1abrf2jg3" path="res://assets/fonts/PressStart2P.ttf" id="4_hddma"]
 [ext_resource type="Texture2D" uid="uid://cxr6sxtr1xjbi" path="res://assets/sprites/weapons/weapon_sprites.png" id="5_0va8p"]
 [ext_resource type="FontFile" uid="uid://j7b5iyyuwn6u" path="res://assets/fonts/alagard.ttf" id="5_b7oaq"]
+[ext_resource type="Texture2D" uid="uid://th8ytao5ks57" path="res://assets/sprites/weapons/target_reticle.png" id="6_k1no8"]
 [ext_resource type="AudioStream" uid="uid://ckbxss7fnwlym" path="res://assets/sfx/pickup.wav" id="7_nj0yy"]
 [ext_resource type="Texture2D" uid="uid://dcvisoutdw6yi" path="res://assets/sprites/weapons/weapon_icons.png" id="8_360i7"]
 [ext_resource type="AudioStream" uid="uid://g2schsvnqego" path="res://assets/sfx/enemyHit.wav" id="8_a6n3s"]
@@ -146,7 +147,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.266667),
 "transitions": PackedFloat32Array(-2, 1),
 "update": 0,
-"values": [0.0, 1.5708]
+"values": [0.0, -1.5708]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -353,6 +354,10 @@ offset = Vector2(-0.157896, -3.05263)
 libraries = {
 "": SubResource("AnimationLibrary_c3cqm")
 }
+
+[node name="TargetReticle" type="Sprite2D" parent="InteractionArea"]
+scale = Vector2(8, 8)
+texture = ExtResource("6_k1no8")
 
 [node name="UI" type="CanvasLayer" parent="."]
 

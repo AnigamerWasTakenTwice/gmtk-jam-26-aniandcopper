@@ -18,6 +18,9 @@ var monster_inst: CharacterBody2D
 
 var is_monster_present: bool = false
 
+@export var music: AudioStreamPlayer
+@export var music_panic: AudioStreamPlayer
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#Loops through each requirement in the quota to see if the player can leave.
@@ -32,10 +35,14 @@ func _ready() -> void:
 			else: 
 				print("OUTTA HERE")
 				player.animation_player.play("jiggle_checklist")
+				player.checklist_visible = true
 		)
 	
 	# Spawns the monster when the timer runs out.
 	timer.connect("timeout", func():
+		music.stop()
+		await get_tree().create_timer(5).timeout
+		music_panic.play()
 		timer_label.text = "RUNRUNRUNRUNRUNRUNRUNRUNRUNRURNRUNRUNRUNRUNRUNRUN"
 		is_monster_present = true
 		monster_inst = load(monster).instantiate()
