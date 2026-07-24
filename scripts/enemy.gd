@@ -71,7 +71,7 @@ func _on_attack_timer_timeout() -> void:
 			for area in $InteractionArea.get_overlapping_areas():
 				if area.get_meta("type") == "attack":
 					attacking = true
-					await get_tree().create_timer(0.5).timeout
 					area.call("interaction")
+					await get_tree().create_timer(0.5).timeout
 					attacking = false
 	pass # Replace with function body.

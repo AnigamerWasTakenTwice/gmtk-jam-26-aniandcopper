@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bvln38xbur2mi" path="res://scenes/prefabs/player.tscn" id="1_gnr22"]
 [ext_resource type="Script" path="res://scripts/countdown.gd" id="1_pwi64"]
-[ext_resource type="PackedScene" uid="uid://basvai4ymr7f0" path="res://scenes/prefabs/harvest_point.tscn" id="2_kaiv3"]
+[ext_resource type="PackedScene" uid="uid://basvai4ymr7f0" path="res://scenes/prefabs/harvest_points/harvest_point_tree.tscn" id="2_kaiv3"]
 [ext_resource type="PackedScene" uid="uid://dsurl7keocwk3" path="res://scenes/prefabs/pickup.tscn" id="4_1dsyo"]
 [ext_resource type="PackedScene" uid="uid://jb42wjtdh6m" path="res://scenes/prefabs/enemy.tscn" id="4_t4uas"]
 [ext_resource type="PackedScene" uid="uid://bj1fdt5b11er3" path="res://scenes/prefabs/tutorial_screen.tscn" id="6_ss5cc"]
@@ -18,7 +18,7 @@ quota = {
 "wood": 1
 }
 exit_area = NodePath("ExitArea")
-monster = "res://scenes/prefabs/enemy.tscn"
+monster = "res://scenes/prefabs/south_star.tscn"
 monster_spawn_pos = Vector2(500, 500)
 exit_to = "res://scenes/test.tscn"
 metadata/_edit_vertical_guides_ = [496.0]
@@ -29,8 +29,6 @@ metadata/_edit_horizontal_guides_ = [513.0]
 [node name="Player" parent="." instance=ExtResource("1_gnr22")]
 
 [node name="HarvestPoint" parent="." instance=ExtResource("2_kaiv3")]
-drop = "wood"
-type = "axe"
 
 [node name="Pickup" parent="." instance=ExtResource("4_1dsyo")]
 

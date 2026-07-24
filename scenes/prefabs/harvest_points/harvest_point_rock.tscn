@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://btkrmd2yy1hov"]
+
+[ext_resource type="Script" path="res://scripts/harvest_point.gd" id="1_p2yor"]
+[ext_resource type="PackedScene" uid="uid://xicjh6l1ep0c" path="res://scenes/prefabs/hitbox.tscn" id="2_vq6eu"]
+[ext_resource type="Texture2D" uid="uid://cievcqgj6qfvt" path="res://assets/sprites/harvest_points/rock.png" id="3_u5j6s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2dybb"]
+size = Vector2(80, 67)
+
+[node name="HarvestPointRock" type="StaticBody2D"]
+script = ExtResource("1_p2yor")
+drop = "iron"
+type = "pickaxe"
+
+[node name="Hitbox" parent="." instance=ExtResource("2_vq6eu")]
+
+[node name="Rock" type="Sprite2D" parent="."]
+position = Vector2(2.84217e-14, -60)
+scale = Vector2(10, 10)
+texture = ExtResource("3_u5j6s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -33.5)
+shape = SubResource("RectangleShape2D_2dybb")

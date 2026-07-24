@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://basvai4ymr7f0"]
+[gd_scene load_steps=10 format=3 uid="uid://basvai4ymr7f0"]
 
 [ext_resource type="Script" path="res://scripts/harvest_point.gd" id="1_mjc6o"]
 [ext_resource type="Texture2D" uid="uid://8f0uskhevjkh" path="res://assets/sprites/tiles/grass_tiles.png" id="2_1sqii"]
 [ext_resource type="PackedScene" uid="uid://xicjh6l1ep0c" path="res://scenes/prefabs/hitbox.tscn" id="2_qr66p"]
+[ext_resource type="Texture2D" uid="uid://0xdnpeq7ewcj" path="res://assets/sprites/harvest_points/tree.png" id="4_kn8j5"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7fbjb"]
 load_path = "res://.godot/imported/grass_tiles.png-1e4a5984e54c5dff350b85446408c8e1.ctex"
@@ -22,10 +23,14 @@ region = Rect2(1, 33, 14, 15)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wqjon"]
 size = Vector2(116, 600)
 
-[node name="HarvestPoint" type="CharacterBody2D"]
+[node name="HarvestPointTree" type="StaticBody2D"]
 script = ExtResource("1_mjc6o")
+health = 5
+drop = "wood"
+type = "axe"
 
 [node name="Sprites" type="Node2D" parent="."]
+visible = false
 z_index = 5
 scale = Vector2(19, 19)
 
@@ -46,3 +51,8 @@ position = Vector2(-1, 182)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -147)
 shape = SubResource("RectangleShape2D_wqjon")
+
+[node name="Tree" type="Sprite2D" parent="."]
+position = Vector2(16, -152)
+scale = Vector2(15, 15)
+texture = ExtResource("4_kn8j5")
