@@ -96,7 +96,11 @@ func handle_interaction_area():
 	if Input.is_action_just_pressed("cycle"):
 		if selected_tool < tools.size() - 1: selected_tool += 1
 		else: selected_tool = 0
-		$UI/ToolSelected.text = tools[selected_tool]
+
+		const ICON_PIXEL_SIZE = 7
+
+		if selected_tool == 0: $UI/ToolSelected.texture.region = Rect2(0, 0, ICON_PIXEL_SIZE, ICON_PIXEL_SIZE)
+		elif selected_tool == 1: $UI/ToolSelected.texture.region = Rect2(ICON_PIXEL_SIZE, 0, ICON_PIXEL_SIZE, ICON_PIXEL_SIZE)
 
 func handle_health():
 		#HP and Death
