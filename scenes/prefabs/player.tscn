@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://bvln38xbur2mi"]
+[gd_scene load_steps=42 format=3 uid="uid://bvln38xbur2mi"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ov4t6"]
 [ext_resource type="Shader" path="res://assets/shaders/player.gdshader" id="2_afkim"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c3hnhfuh6frwy" path="res://assets/sprites/player.png" id="3_m1rey"]
 [ext_resource type="Texture2D" uid="uid://cx4qf6rabhxf7" path="res://assets/sprites/ui/notepad.png" id="4_g5i0q"]
 [ext_resource type="FontFile" uid="uid://smn1abrf2jg3" path="res://assets/fonts/PressStart2P.ttf" id="4_hddma"]
+[ext_resource type="Texture2D" uid="uid://cxr6sxtr1xjbi" path="res://assets/sprites/weapons/weapon_sprites.png" id="5_0va8p"]
 [ext_resource type="FontFile" uid="uid://j7b5iyyuwn6u" path="res://assets/fonts/alagard.ttf" id="5_b7oaq"]
 [ext_resource type="AudioStream" uid="uid://ckbxss7fnwlym" path="res://assets/sfx/pickup.wav" id="7_nj0yy"]
 [ext_resource type="Texture2D" uid="uid://dcvisoutdw6yi" path="res://assets/sprites/weapons/weapon_icons.png" id="8_360i7"]
@@ -73,8 +74,63 @@ size = Vector2(64, 132)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bbo88"]
 size = Vector2(64, 64)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0vbfy"]
-load_path = "res://.godot/imported/sword.png-9fe72a6540b112bac151909dc332ed1e.ctex"
+[sub_resource type="AtlasTexture" id="AtlasTexture_pumnp"]
+atlas = ExtResource("5_0va8p")
+region = Rect2(0, 0, 7, 9)
+
+[sub_resource type="Animation" id="Animation_hqggk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ToolSprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_vypkt"]
+resource_name = "swing_right"
+length = 0.2667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ToolSprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.266667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.5708]
+}
+
+[sub_resource type="Animation" id="Animation_eh5tn"]
+resource_name = "swing_left"
+length = 0.2667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ToolSprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.266667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.5708]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c3cqm"]
+_data = {
+"RESET": SubResource("Animation_hqggk"),
+"swing_left": SubResource("Animation_eh5tn"),
+"swing_right": SubResource("Animation_vypkt")
+}
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8bkma"]
 atlas = ExtResource("8_360i7")
@@ -250,11 +306,16 @@ position = Vector2(0, -86)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
 shape = SubResource("RectangleShape2D_bbo88")
 
-[node name="SwordSprite" type="Sprite2D" parent="InteractionArea"]
-position = Vector2(-16, -48)
-rotation = -1.57079
-scale = Vector2(0.236422, 0.236422)
-texture = SubResource("CompressedTexture2D_0vbfy")
+[node name="ToolSprite" type="Sprite2D" parent="InteractionArea"]
+position = Vector2(-0.999975, 3.8147e-06)
+scale = Vector2(19, 19)
+texture = SubResource("AtlasTexture_pumnp")
+offset = Vector2(-0.157896, -3.05263)
+
+[node name="SwingAnimation" type="AnimationPlayer" parent="InteractionArea"]
+libraries = {
+"": SubResource("AnimationLibrary_c3cqm")
+}
 
 [node name="UI" type="CanvasLayer" parent="."]
 
