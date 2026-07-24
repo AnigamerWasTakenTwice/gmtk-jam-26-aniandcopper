@@ -19,10 +19,12 @@ void fragment() {
 
 	if (is_near_black) {
 		vec4 new_color = texture(override_texture, UV+move);
-		 COLOR = new_color;
+		COLOR = texture(override_texture, UV+move);
+		
 	}
 	 if (distance(tex_color.rgb, clear_color.rgb) < tolerance) {
         COLOR = vec4(0.0, 1.0, 0.0, 0.0);
     }
+	
 }
 
