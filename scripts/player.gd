@@ -86,11 +86,15 @@ func move_player(delta: float):
 func handle_interaction_area():
 	# Moves the interaction area to point to where the player is looking.
 	interaction_area.position = position.direction_to(get_global_mouse_position()) * 128
-	$InteractionArea/SwordSprite.look_at(get_global_mouse_position())
+	$InteractionArea/ToolSprite.look_at(get_global_mouse_position())
 	# All of the interaction buttons in the game.
-	if Input.is_action_just_pressed("attack"): interact("attack")
+	if Input.is_action_just_pressed("attack"): 
+		$InteractionArea/ToolSprite.texture.region.position.x = 14
+		$InteractionArea/SwingAnimation.play("swing_right")
+		interact("attack")
 	if Input.is_action_just_pressed("interact"): interact("interact")
 	if Input.is_action_just_pressed("tool"): 
+		$InteractionArea/ToolSprite.texture.region.position.x = 7 * selected_tool
 		interact(tools[selected_tool])
 		$InteractionArea/SwingAnimation.play("swing_right")
 	

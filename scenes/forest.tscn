@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bpmfwekcpy1fv" path="res://assets/sprites/tiles/forestbackgroundtiles.png" id="4_so8hv"]
 [ext_resource type="Texture2D" uid="uid://8f0uskhevjkh" path="res://assets/sprites/tiles/grass_tiles.png" id="5_poksu"]
 [ext_resource type="PackedScene" uid="uid://basvai4ymr7f0" path="res://scenes/prefabs/harvest_points/harvest_point_tree.tscn" id="6_1ha2x"]
-[ext_resource type="PackedScene" path="res://scenes/prefabs/pickup.tscn" id="7_u2r5q"]
+[ext_resource type="PackedScene" uid="uid://dsurl7keocwk3" path="res://scenes/prefabs/pickup.tscn" id="7_u2r5q"]
 [ext_resource type="PackedScene" uid="uid://jb42wjtdh6m" path="res://scenes/prefabs/enemy.tscn" id="8_1vgp4"]
 [ext_resource type="PackedScene" uid="uid://btkrmd2yy1hov" path="res://scenes/prefabs/harvest_points/harvest_point_rock.tscn" id="9_nw2u8"]
 [ext_resource type="Texture2D" uid="uid://c7u3sixoapfwi" path="res://assets/sprites/harvest_points/ruby_pedestal.png" id="10_wvf33"]
@@ -81,6 +81,7 @@ exit_area = NodePath("Area2D")
 monster = "res://scenes/prefabs/south_star.tscn"
 exit_to = "res://scenes/forest.tscn"
 tilemap = NodePath("TileMapLayer")
+max_static = 0.5
 metadata/_edit_horizontal_guides_ = [-797.0, -2231.0, 929.0]
 metadata/_edit_vertical_guides_ = [6180.0]
 
