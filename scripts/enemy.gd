@@ -7,7 +7,7 @@ extends CharacterBody2D
 @export var detection_range: float
 @export var chase_range: float
 
-@onready var enemy_sprite: AnimatedSprite2D = $Sprite2D
+@export var enemy_sprite: Node2D
 
 var start_spot: Vector2
 var wander_spot: Vector2

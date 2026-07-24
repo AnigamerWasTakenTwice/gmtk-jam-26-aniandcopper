@@ -8,7 +8,7 @@ extends Node2D
 @export var monster_spawn_pos: Vector2
 @export_file("*.tscn") var exit_to: String
 
-@onready var player: CharacterBody2D = %Player
+@onready var player: CharacterBody2D = $Player
 var monster_inst: CharacterBody2D
 
 var is_it_present: bool = false

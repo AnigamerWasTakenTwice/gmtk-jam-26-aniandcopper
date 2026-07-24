@@ -66,7 +66,7 @@ quota = {
 "wood": 3
 }
 exit_area = NodePath("Area2D")
-monster = "res://scenes/prefabs/enemy.tscn"
+monster = "res://scenes/prefabs/south_star.tscn"
 exit_to = "res://scenes/forest.tscn"
 metadata/_edit_horizontal_guides_ = [-797.0]
 
@@ -96,7 +96,7 @@ position = Vector2(-176, -62)
 shape = SubResource("RectangleShape2D_k8uyb")
 
 [node name="GameTimer" type="Timer" parent="."]
-wait_time = 180.0
+wait_time = 3.0
 one_shot = true
 autostart = true
 
