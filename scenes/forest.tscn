@@ -81,7 +81,7 @@ quota = {
 }
 exit_area = NodePath("Area2D")
 monster = "res://scenes/prefabs/south_star.tscn"
-exit_to = "res://scenes/forest.tscn"
+exit_to = "res://scenes/desert.tscn"
 tilemap = NodePath("TileMapLayer")
 max_static = 0.5
 music = NodePath("music")
@@ -94,6 +94,12 @@ position = Vector2(439, -196)
 camera_bottom_threshhold = 935
 
 [node name="TutorialScreen" parent="." instance=ExtResource("3_g106x")]
+
+[node name="TextureRect" parent="TutorialScreen" index="1"]
+offset_left = 406.0
+offset_top = 108.0
+offset_right = 514.0
+offset_bottom = 236.0
 
 [node name="Label" parent="TutorialScreen/TextureRect" index="0"]
 text = "I always wanted to come

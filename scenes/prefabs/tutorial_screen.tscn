@@ -176,18 +176,19 @@ process_mode = 3
 layer = 2
 script = ExtResource("1_t3p7u")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="ColorRect" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0.0687983, 0.0687983, 0.0687983, 1)
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_left = 406.0
-offset_top = 108.0
-offset_right = 514.0
-offset_bottom = 236.0
+offset_left = 586.0
+offset_top = 322.0
+offset_right = 694.0
+offset_bottom = 450.0
 scale = Vector2(3, 3)
 texture = ExtResource("2_vy78p")
 expand_mode = 1

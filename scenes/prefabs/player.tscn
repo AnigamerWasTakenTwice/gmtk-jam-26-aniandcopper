@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bvln38xbur2mi"]
+[gd_scene load_steps=46 format=3 uid="uid://bvln38xbur2mi"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ov4t6"]
 [ext_resource type="Shader" path="res://assets/shaders/player.gdshader" id="2_afkim"]
@@ -16,6 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://bh5yntog6e2s4" path="res://assets/sfx/playerHit.wav" id="9_ve3ls"]
 [ext_resource type="AudioStream" uid="uid://74aucduw27c1" path="res://assets/sfx/step.wav" id="10_jye7n"]
 [ext_resource type="AudioStream" uid="uid://d06767xp73gje" path="res://assets/sfx/static.wav" id="12_xbmpe"]
+[ext_resource type="AudioStream" uid="uid://38sfyc723k1o" path="res://assets/sfx/flee.wav" id="17_64ov8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8nxmd"]
 shader = ExtResource("2_afkim")
@@ -267,6 +268,54 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(10, 64)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Noise:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Noise:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Noise/Label:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../SFX/flee:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_xlsy3"]
 resource_name = "jiggle_checklist"
@@ -300,9 +349,62 @@ tracks/0/keys = {
 "values": [Vector2(10, 64), Vector2(-222, 64)]
 }
 
+[sub_resource type="Animation" id="Animation_71pli"]
+resource_name = "exit"
+length = 2.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Noise:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Noise:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Noise/Label:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.2, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../SFX/flee:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jkben"]
 _data = {
 "RESET": SubResource("Animation_cin0f"),
+"exit": SubResource("Animation_71pli"),
 "jiggle_checklist": SubResource("Animation_xlsy3"),
 "slide_checklist": SubResource("Animation_7uprf")
 }
@@ -313,6 +415,9 @@ frequency = 1.0
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2n7um"]
 noise = SubResource("FastNoiseLite_71mit")
+
+[sub_resource type="LabelSettings" id="LabelSettings_afwm2"]
+font = ExtResource("4_hddma")
 
 [sub_resource type="Animation" id="Animation_fij8v"]
 length = 0.001
@@ -490,10 +595,28 @@ modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 12.0
+offset_right = 12.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("NoiseTexture2D_2n7um")
 expand_mode = 1
+
+[node name="Label" type="Label" parent="UI/Noise"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -11.5
+offset_right = 120.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Area Cleared..."
+label_settings = SubResource("LabelSettings_afwm2")
 
 [node name="Hitbox" parent="." instance=ExtResource("3_c8q2h")]
 position = Vector2(0, -2)
@@ -535,6 +658,9 @@ autostart = true
 [node name="static" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("12_xbmpe")
 volume_db = -45.0
+
+[node name="flee" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("17_64ov8")
 
 [connection signal="timeout" from="SFX/step_timer" to="." method="_on_step_timer_timeout"]
 [connection signal="timeout" from="SFX/run_timer" to="." method="_on_run_timer_timeout"]

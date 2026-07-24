@@ -34,6 +34,10 @@ func _ready() -> void:
 			if requirements_met:
 				for item in Global.inventory.keys():
 					Global.inventory[item] = 0
+				music.stop()
+				music_panic.stop()
+				player.get_node("UI/AnimationPlayer").play("exit")
+				await get_tree().create_timer(4).timeout
 				get_tree().change_scene_to_file(exit_to)
 			else: 
 				print("OUTTA HERE")

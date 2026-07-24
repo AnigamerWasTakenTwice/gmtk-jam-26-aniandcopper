@@ -4,22 +4,34 @@
 [ext_resource type="PackedScene" uid="uid://bvln38xbur2mi" path="res://scenes/prefabs/player.tscn" id="2_i4pfw"]
 [ext_resource type="PackedScene" uid="uid://bj1fdt5b11er3" path="res://scenes/prefabs/tutorial_screen.tscn" id="3_cpmmk"]
 
-[node name="Desert" type="Node2D" node_paths=PackedStringArray("timer", "timer_label")]
+[node name="Desert" type="Node2D" node_paths=PackedStringArray("timer", "timer_label", "exit_area")]
 script = ExtResource("1_7ner0")
 timer = NodePath("GameTimer")
 timer_label = NodePath("Player/UI/Countdown")
+exit_area = NodePath("Area2D")
 
 [node name="Player" parent="." instance=ExtResource("2_i4pfw")]
 
 [node name="GameTimer" type="Timer" parent="."]
+wait_time = 180.0
+one_shot = true
+autostart = true
 
 [node name="TutorialScreen" parent="." instance=ExtResource("3_cpmmk")]
+
+[node name="TextureRect" parent="TutorialScreen" index="1"]
+offset_left = 406.0
+offset_top = 108.0
+offset_right = 514.0
+offset_bottom = 236.0
 
 [node name="Label" parent="TutorialScreen/TextureRect" index="0"]
 text = "Good yield, but I should
 grab more. I just hope I
 can find everything in
 time..."
+
+[node name="Area2D" type="Area2D" parent="."]
 
 [editable path="Player"]
 [editable path="TutorialScreen"]
