@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bj1fdt5b11er3"]
+[gd_scene load_steps=11 format=3 uid="uid://bj1fdt5b11er3"]
 
 [ext_resource type="Script" path="res://scripts/tutorial_screen.gd" id="1_t3p7u"]
 [ext_resource type="Texture2D" uid="uid://cx4qf6rabhxf7" path="res://assets/sprites/ui/notepad.png" id="2_vy78p"]
 [ext_resource type="FontFile" uid="uid://j7b5iyyuwn6u" path="res://assets/fonts/alagard.ttf" id="3_tktox"]
+[ext_resource type="AudioStream" uid="uid://dr5rpgqggpe1p" path="res://assets/sfx/open.wav" id="4_gnma4"]
+[ext_resource type="AudioStream" uid="uid://biebdk3wochnl" path="res://assets/sfx/close.wav" id="5_ovbrq"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_d5tmj"]
 font = ExtResource("3_tktox")
@@ -46,6 +48,30 @@ tracks/2/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("open:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("close:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_bewga"]
 resource_name = "exit"
@@ -86,6 +112,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("close:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_j1hfw"]
 resource_name = "spawn"
@@ -113,6 +151,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(1e-05, 1e-05), Vector2(3, 3)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("open:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bunjt"]
 _data = {
@@ -134,10 +184,10 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_left = 586.0
-offset_top = 322.0
-offset_right = 694.0
-offset_bottom = 450.0
+offset_left = 406.0
+offset_top = 108.0
+offset_right = 514.0
+offset_bottom = 236.0
 scale = Vector2(3, 3)
 texture = ExtResource("2_vy78p")
 expand_mode = 1
@@ -163,3 +213,11 @@ libraries = {
 "": SubResource("AnimationLibrary_bunjt")
 }
 autoplay = "spawn"
+
+[node name="open" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_gnma4")
+volume_db = -15.0
+
+[node name="close" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_ovbrq")
+volume_db = -15.0
