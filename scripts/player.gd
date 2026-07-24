@@ -85,18 +85,20 @@ func move_player(delta: float):
 
 func handle_interaction_area():
 	# Moves the interaction area to point to where the player is looking.
-	interaction_area.position = position.direction_to(get_global_mouse_position()) * 128
-	$InteractionArea/ToolSprite.look_at(get_global_mouse_position())
+	var aim_direction = position.direction_to(get_global_mouse_position())
+	interaction_area.position = aim_direction * 128
 	# All of the interaction buttons in the game.
 	if Input.is_action_just_pressed("attack"): 
 		$InteractionArea/ToolSprite.texture.region.position.x = 14
-		$InteractionArea/SwingAnimation.play("swing_right")
+		if aim_direction.x > 0: $InteractionArea/SwingAnimation.play("swing_right")
+		else: $InteractionArea/SwingAnimation.play("swing_left")
 		interact("attack")
 	if Input.is_action_just_pressed("interact"): interact("interact")
 	if Input.is_action_just_pressed("tool"): 
 		$InteractionArea/ToolSprite.texture.region.position.x = 7 * selected_tool
 		interact(tools[selected_tool])
-		$InteractionArea/SwingAnimation.play("swing_right")
+		if aim_direction.x > 0: $InteractionArea/SwingAnimation.play("swing_right")
+		else: $InteractionArea/SwingAnimation.play("swing_left")
 	
 	# Cycles through tools to use for harvesting in the above line
 	if Input.is_action_just_pressed("cycle"):
