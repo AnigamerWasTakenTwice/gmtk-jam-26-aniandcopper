@@ -59,6 +59,7 @@ func _process(delta: float) -> void:
 		
 		player.camera.set_trauma(TRAUMA_AMOUNT)
 		player.get_node("Hitbox").parent_has_take_damage_function = false
-		player.get_node("UI/Noise").modulate = Color(1, 1, 1, clamp(remap(player.position.distance_to(monster_inst.position), 0, 1000, 1, 0), 0.0, max_static))
-		player.get_node("SFX/static").volume_db = remap(player.position.distance_to(monster_inst.position), 0, 1000, 0, -80)
+		player.get_node("UI/Noise").modulate = Color(1, 1, 1, remap(player.position.distance_to(monster_inst.position), 0, 1000, max_static, 0))
+		if player.health == 0: max_static = lerp(max_static, 1.0, 0.2)
+		player.get_node("SFX/static").volume_db = remap(player.position.distance_to(monster_inst.position), 0, 1000, -10, -80)
 	pass

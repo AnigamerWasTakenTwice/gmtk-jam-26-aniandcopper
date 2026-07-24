@@ -34,7 +34,6 @@ size = Vector2(96, 96)
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("enemy_sprite")]
 script = ExtResource("1_v48k1")
-drop = "wood"
 movement_speed = 300.0
 detection_range = 1000.0
 chase_range = 1000.0

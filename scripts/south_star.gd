@@ -8,6 +8,7 @@ extends CharacterBody2D
 @export var chase_range: float
 @export var tilemap:TileMapLayer
 @export var enemy_sprite: Node2D
+@onready var eye: Node2D = $Eye
 
 var start_spot: Vector2
 var wander_spot: Vector2
@@ -25,6 +26,11 @@ func _process(delta: float) -> void:
 	move_enemy()
 	flip_sprite()
 	destroy_tiles()
+	
+	if player:
+		const EYE_OFFSET = -90
+		eye.look_at(player.global_position)
+		eye.global_rotation_degrees += EYE_OFFSET
 	pass
 
 func destroy_tiles():

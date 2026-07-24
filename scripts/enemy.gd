@@ -1,9 +1,6 @@
 extends CharacterBody2D
 
-@onready var eye: Node2D = $Eye
-
 @export var health = 10
-@export var drop: String
 @export var player: CharacterBody2D
 @export var movement_speed: float
 @export var detection_range: float
@@ -28,18 +25,16 @@ func _process(delta: float) -> void:
 	move_enemy()
 	flip_sprite()
 
-	if move_eye and player:
-		const EYE_OFFSET = -90
-		eye.look_at(player.global_position)
-		eye.global_rotation_degrees += EYE_OFFSET
-
 	pass
 
 func handle_health():
 	# If the enemy's health runs out, give the drop and delete the enemy.
 
 	if health <= 0:
-		Global.inventory[drop] += 1 
+		var randitem = randi_range(0, 2)
+		if randitem == 0: Global.inventory["wood"] += 1
+		if randitem == 1: Global.inventory["stone"] += 1
+		if randitem == 2: Global.inventory["iron"] += 1 
 		queue_free()
 
 func move_enemy():
