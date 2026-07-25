@@ -1,12 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://basvai4ymr7f0"]
+[gd_scene load_steps=11 format=3 uid="uid://basvai4ymr7f0"]
 
 [ext_resource type="Script" path="res://scripts/harvest_point.gd" id="1_mjc6o"]
 [ext_resource type="Texture2D" uid="uid://8f0uskhevjkh" path="res://assets/sprites/tiles/grass_tiles.png" id="2_1sqii"]
 [ext_resource type="PackedScene" uid="uid://xicjh6l1ep0c" path="res://scenes/prefabs/hitbox.tscn" id="2_qr66p"]
+[ext_resource type="PackedScene" uid="uid://cqwfi3r3lnm5m" path="res://scenes/prefabs/items/wood.tscn" id="2_upsfj"]
 [ext_resource type="Texture2D" uid="uid://0xdnpeq7ewcj" path="res://assets/sprites/harvest_points/tree.png" id="4_kn8j5"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7fbjb"]
-load_path = "res://.godot/imported/grass_tiles.png-1e4a5984e54c5dff350b85446408c8e1.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m0cur"]
 atlas = SubResource("CompressedTexture2D_7fbjb")
@@ -26,7 +26,7 @@ size = Vector2(116, 600)
 [node name="HarvestPointTree" type="StaticBody2D"]
 script = ExtResource("1_mjc6o")
 health = 3
-drop = "wood"
+item = ExtResource("2_upsfj")
 type = "axe"
 
 [node name="Sprites" type="Node2D" parent="."]

@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqwfi3r3lnm5m"]
+
+[ext_resource type="Script" path="res://scripts/pickup.gd" id="1_ti22v"]
+[ext_resource type="Texture2D" uid="uid://cb4on343a8roh" path="res://assets/sprites/items/items.png" id="2_k8b7x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_67y6s"]
+size = Vector2(48, 48)
+
+[node name="Wood" type="Area2D"]
+script = ExtResource("1_ti22v")
+item = "wood"
+metadata/type = "interact"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_67y6s")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(10, 10)
+texture = ExtResource("2_k8b7x")
+region_enabled = true
+region_rect = Rect2(48, 0, 16, 16)
