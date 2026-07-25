@@ -14,15 +14,18 @@ script/source = "extends Node2D
 const FIRST_LEVEL = preload(\"res://scenes/forest.tscn\")
 
 func _on_play_button_button_down() -> void:
+	$PlayButton/Text.position.y += 30
 	$PlayButton.icon.region = Rect2(64, 0, 64, 20)
+	
 
+func _on_play_button_button_up() -> void:
 	get_tree().change_scene_to_packed(FIRST_LEVEL)
 
-
 func _on_quit_button_button_down() -> void:
+	$QuitButton/Text.position.y += 30
 	$QuitButton.icon.region = Rect2(64, 0, 64, 20)
 
-	get_tree().quit()
+func _on_quit_button_button_up() -> void: get_tree().quit()
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_noruw"]
@@ -139,4 +142,6 @@ scale_amount_max = 3.0
 color_ramp = SubResource("Gradient_mjt8x")
 
 [connection signal="button_down" from="PlayButton" to="." method="_on_play_button_button_down"]
+[connection signal="button_up" from="PlayButton" to="." method="_on_play_button_button_up"]
 [connection signal="button_down" from="QuitButton" to="." method="_on_quit_button_button_down"]
+[connection signal="button_up" from="QuitButton" to="." method="_on_quit_button_button_up"]
