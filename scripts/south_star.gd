@@ -26,6 +26,9 @@ var target_pos: Vector2
 var attack: int = 0
 
 var state : = ""
+var times_to_attack : = 0
+var times_to_cycle : = 0
+var selected_corner: Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -48,16 +51,47 @@ func _process(delta: float) -> void:
 	move_eye()
 
 	if attack == 0:
-		const ATTACK_AMOUNT = 1
+		const ATTACK_AMOUNT = 2
 		attack = randi_range(1, ATTACK_AMOUNT)
 		state = ""
 		
 		
 		if attack == 1: # Dash
+			const MIN_ATTACK_TIMES = 2
+			const MAX_ATTACK_TIMES = 4
+
+			times_to_attack = randi_range(MIN_ATTACK_TIMES, MAX_ATTACK_TIMES)
+
 			target_pos = south_star_orbit_path.curve.get_closest_point(global_position) + south_star_orbit_path.global_position
+
+		elif attack == 2: # spasm
+
+			const MIN_ATTACK_TIMES = 4
+			const MAX_ATTACK_TIMES = 9
+
+			const MIN_CYCLE_TIMES = 2
+			const MAX_CYCLE_TIMES = 5
+
+			times_to_attack = randi_range(MIN_ATTACK_TIMES, MAX_ATTACK_TIMES)
+			times_to_cycle = randi_range(MIN_CYCLE_TIMES, MAX_CYCLE_TIMES)
+
+			var target_corner = randi_range(1, 4)
+			
+			selected_corner = south_star_helper_points.get_child(target_corner)
+			target_pos = selected_corner.global_position
+
+			$ShootTimer.start()
 
 	if attack == 1:
 		dash(delta)
+	elif attack == 2:
+		spasm()
+
+
+	if times_to_attack <= 0:
+		state = ""
+		attack = 0
+		print(state	)
 
 	pass
 
@@ -76,8 +110,17 @@ func dash(delta: float):
 		if global_position.distance_to(target_pos) < DISTANCE_TO_TARGET_TOLERANCE:
 			state = ""
 			target_pos = south_star_orbit_path.curve.get_closest_point(global_position) + south_star_orbit_path.global_position
-		
+			times_to_attack -= 1
+			print(times_to_attack)
+
+
 	global_position = global_position.move_toward(target_pos, movement_speed * delta * dash_speed_multiplier)
+
+func spasm():
+	global_position = target_pos
+	target_pos = selected_corner.global_position
+
+
 
 
 func move_eye():
@@ -147,3 +190,37 @@ func _on_attack_timer_timeout() -> void:
 func _on_destruction_range_body_entered(body: Node2D) -> void:
 	if body != player and body.name != "SouthStar" and !(body is TileMapLayer): body.queue_free()
 	pass # Replace with function body.
+
+
+func _on_shoot_timer_timeout() -> void:
+	const SOUTH_STAR_PROJECTILE = preload("res://scenes/prefabs/south_star_projectile.tscn")
+	const ROTATION_OFFSET = 23
+
+	var projectile = SOUTH_STAR_PROJECTILE.instantiate()
+	add_child(projectile)
+	projectile.global_position = global_position
+	projectile.look_at(player.global_position)
+	projectile.global_rotation_degrees += randi_range(-ROTATION_OFFSET, ROTATION_OFFSET)
+	$ShootTimer.start()
+	
+	times_to_attack -= 1
+	if times_to_attack <= 0:
+			const MIN_ATTACK_TIMES = 4
+			const MAX_ATTACK_TIMES = 9
+
+			times_to_attack = randi_range(MIN_ATTACK_TIMES, MAX_ATTACK_TIMES)
+
+			times_to_cycle -= 1
+			
+			if times_to_cycle <= 0:
+				attack = 0
+				state = ""
+
+			var target_corner = randi_range(1, 4)
+			
+			selected_corner = south_star_helper_points.get_child(target_corner)
+			target_pos = selected_corner.global_position
+
+			$ShootTimer.start()
+
+	
