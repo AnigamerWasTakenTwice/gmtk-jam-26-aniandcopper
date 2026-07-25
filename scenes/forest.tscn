@@ -383,7 +383,7 @@ item = "steel"
 scale = Vector2(5, 5)
 texture = ExtResource("5_poksu")
 region_enabled = true
-region_rect = Rect2(-0.244156, 47.9991, 16.4859, 15.4049)
+region_rect = Rect2(32.0171, 47.3005, 15.7466, 17.3101)
 
 [node name="Pickup5" parent="Pickups" instance=ExtResource("7_u2r5q")]
 position = Vector2(5757, 6015)
@@ -394,7 +394,7 @@ item = "steel"
 scale = Vector2(5, 5)
 texture = ExtResource("5_poksu")
 region_enabled = true
-region_rect = Rect2(-0.244156, 47.9991, 16.4859, 15.4049)
+region_rect = Rect2(32.0171, 47.3005, 15.7466, 17.3101)
 
 [node name="Pickup6" parent="Pickups" instance=ExtResource("7_u2r5q")]
 position = Vector2(5843, 5245)
@@ -405,7 +405,7 @@ item = "steel"
 scale = Vector2(5, 5)
 texture = ExtResource("5_poksu")
 region_enabled = true
-region_rect = Rect2(-0.244156, 47.9991, 16.4859, 15.4049)
+region_rect = Rect2(32.0171, 47.3005, 15.7466, 17.3101)
 
 [node name="Pickup7" parent="Pickups" instance=ExtResource("7_u2r5q")]
 position = Vector2(3946, 5622)
@@ -416,7 +416,7 @@ item = "steel"
 scale = Vector2(5, 5)
 texture = ExtResource("5_poksu")
 region_enabled = true
-region_rect = Rect2(-0.244156, 47.9991, 16.4859, 15.4049)
+region_rect = Rect2(32.0171, 47.3005, 15.7466, 17.3101)
 
 [node name="Pickup8" parent="Pickups" instance=ExtResource("7_u2r5q")]
 position = Vector2(3805, 5851)
@@ -427,7 +427,7 @@ item = "steel"
 scale = Vector2(5, 5)
 texture = ExtResource("5_poksu")
 region_enabled = true
-region_rect = Rect2(-0.244156, 47.9991, 16.4859, 15.4049)
+region_rect = Rect2(32.0171, 47.3005, 15.7466, 17.3101)
 
 [node name="Pickup10" parent="Pickups" instance=ExtResource("7_u2r5q")]
 position = Vector2(4323, 5667)
