@@ -14,7 +14,7 @@ func _process(delta: float) -> void:
 	if health <= 0:
 		var drop = item.instantiate()
 		get_parent().add_child(drop)
-		drop.global_position = global_position
+		drop.global_position = $Hitbox.global_position
 
 		queue_free()
 	pass

@@ -15,6 +15,7 @@ item = ExtResource("2_5j5nb")
 type = "pickaxe"
 
 [node name="Hitbox" parent="." instance=ExtResource("2_vq6eu")]
+position = Vector2(0, -34)
 
 [node name="Rock" type="Sprite2D" parent="."]
 position = Vector2(2.84217e-14, -60)

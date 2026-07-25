@@ -1,0 +1,142 @@
+[gd_scene load_steps=16 format=3 uid="uid://bvro8i3m02ek2"]
+
+[ext_resource type="Shader" path="res://assets/shaders/title_material.gdshader" id="1_xk5tj"]
+[ext_resource type="Texture2D" uid="uid://il7fqv3262dw" path="res://assets/sprites/south_star/supernova2.png" id="2_pa6w6"]
+[ext_resource type="Texture2D" uid="uid://db0lf2xp1qip8" path="res://assets/sprites/south_star/supernova1.png" id="3_knds6"]
+[ext_resource type="Texture2D" uid="uid://beivxeqoyemb1" path="res://assets/sprites/ui/TitlePreGame.png" id="4_a2lu6"]
+[ext_resource type="FontFile" uid="uid://j7b5iyyuwn6u" path="res://assets/fonts/alagard.ttf" id="5_s1033"]
+[ext_resource type="FontFile" uid="uid://dpwkl74yrvhas" path="res://assets/fonts/Early GameBoy.ttf" id="7_pyp2d"]
+[ext_resource type="Texture2D" uid="uid://t0wpyf38iqm8" path="res://assets/sprites/ui/z_particle.png" id="8_ge6m1"]
+
+[sub_resource type="GDScript" id="GDScript_yh20n"]
+script/source = "extends Node2D
+
+const FIRST_LEVEL = preload(\"res://scenes/forest.tscn\")
+
+func _on_play_button_button_down() -> void:
+	$PlayButton.icon.region = Rect2(64, 0, 64, 20)
+
+	get_tree().change_scene_to_packed(FIRST_LEVEL)
+
+
+func _on_quit_button_button_down() -> void:
+	$QuitButton.icon.region = Rect2(64, 0, 64, 20)
+
+	get_tree().quit()
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_noruw"]
+shader = ExtResource("1_xk5tj")
+shader_parameter/sky_color = Color(0, 1, 0.745098, 1)
+shader_parameter/tentacle_color = Color(0.901961, 0.0627451, 0.0627451, 1)
+shader_parameter/tolerance = 0.05
+shader_parameter/direction_sky = Vector2(1, 1)
+shader_parameter/direction_tentacle = Vector2(-1, -1)
+shader_parameter/speed_sky = 1.0
+shader_parameter/speed_tentacle = 1.0
+shader_parameter/override_texture_sky = ExtResource("2_pa6w6")
+shader_parameter/override_texture_tentacle = ExtResource("3_knds6")
+
+[sub_resource type="LabelSettings" id="LabelSettings_6w2je"]
+font = ExtResource("5_s1033")
+font_size = 64
+font_color = Color(0.876047, 0, 0.0798016, 1)
+outline_size = 32
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 26
+shadow_color = Color(0, 0, 0, 0.34902)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_036ql"]
+load_path = "res://.godot/imported/button.png-69d1630111600aeecc9e62206492cb8d.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l27d7"]
+atlas = SubResource("CompressedTexture2D_036ql")
+region = Rect2(0, 0, 64, 20)
+
+[sub_resource type="LabelSettings" id="LabelSettings_y4mbm"]
+font = ExtResource("7_pyp2d")
+font_size = 32
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yi6rq"]
+atlas = SubResource("CompressedTexture2D_036ql")
+region = Rect2(0, 0, 64, 20)
+
+[sub_resource type="Gradient" id="Gradient_mjt8x"]
+offsets = PackedFloat32Array(0, 0.686667)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.301961)
+
+[node name="TitleScreen" type="Node2D"]
+script = SubResource("GDScript_yh20n")
+
+[node name="Texture" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_noruw")
+position = Vector2(579.778, 325.625)
+scale = Vector2(14.5056, 14.5056)
+texture = ExtResource("4_a2lu6")
+
+[node name="Title" type="Label" parent="."]
+offset_left = 359.0
+offset_top = 111.0
+offset_right = 727.0
+offset_bottom = 171.0
+theme_override_font_sizes/font_size = 32
+text = "SOUTH STAR"
+label_settings = SubResource("LabelSettings_6w2je")
+
+[node name="PlayButton" type="Button" parent="."]
+offset_left = 386.0
+offset_top = 337.0
+offset_right = 803.0
+offset_bottom = 470.0
+text = "
+"
+icon = SubResource("AtlasTexture_l27d7")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Text" type="Label" parent="PlayButton"]
+layout_mode = 0
+offset_top = 3.0
+offset_right = 409.0
+offset_bottom = 103.0
+text = "PLAY"
+label_settings = SubResource("LabelSettings_y4mbm")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuitButton" type="Button" parent="."]
+offset_left = 386.0
+offset_top = 476.0
+offset_right = 803.0
+offset_bottom = 609.0
+text = "
+"
+icon = SubResource("AtlasTexture_yi6rq")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Text" type="Label" parent="QuitButton"]
+layout_mode = 0
+offset_top = 3.0
+offset_right = 409.0
+offset_bottom = 103.0
+text = "QUIT"
+label_settings = SubResource("LabelSettings_y4mbm")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(978, 449)
+amount = 3
+lifetime = 3.0
+texture = ExtResource("8_ge6m1")
+gravity = Vector2(100, -100)
+angular_velocity_min = -8.68
+angular_velocity_max = -8.68
+scale_amount_min = 3.0
+scale_amount_max = 3.0
+color_ramp = SubResource("Gradient_mjt8x")
+
+[connection signal="button_down" from="PlayButton" to="." method="_on_play_button_button_down"]
+[connection signal="button_down" from="QuitButton" to="." method="_on_quit_button_button_down"]
