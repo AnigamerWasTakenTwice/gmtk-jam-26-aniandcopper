@@ -734,6 +734,14 @@ grow_vertical = 2
 text = "Area Cleared..."
 label_settings = SubResource("LabelSettings_afwm2")
 
+[node name="RedOverlay" type="ColorRect" parent="UI"]
+visible = false
+modulate = Color(0.847059, 0, 0.121569, 0.321569)
+offset_left = -715.0
+offset_top = -387.0
+offset_right = 1549.0
+offset_bottom = 895.0
+
 [node name="Hitbox" parent="." instance=ExtResource("3_c8q2h")]
 position = Vector2(0, -2)
 parent_has_take_damage_function = true

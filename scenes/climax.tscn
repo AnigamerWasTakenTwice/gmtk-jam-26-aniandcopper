@@ -1,0 +1,212 @@
+[gd_scene load_steps=25 format=3 uid="uid://bacvcqtcyjl0n"]
+
+[ext_resource type="Script" path="res://scripts/countdown.gd" id="1_jicd7"]
+[ext_resource type="PackedScene" uid="uid://bvln38xbur2mi" path="res://scenes/prefabs/player.tscn" id="2_bk6ew"]
+[ext_resource type="PackedScene" uid="uid://bj1fdt5b11er3" path="res://scenes/prefabs/tutorial_screen.tscn" id="3_85sm1"]
+[ext_resource type="Texture2D" uid="uid://bpmfwekcpy1fv" path="res://assets/sprites/tiles/forestbackgroundtiles.png" id="4_in7pb"]
+[ext_resource type="Texture2D" uid="uid://8f0uskhevjkh" path="res://assets/sprites/tiles/grass_tiles.png" id="5_ulc45"]
+[ext_resource type="Texture2D" uid="uid://cx508mnod88oe" path="res://assets/sprites/tiles/footprint.png" id="6_3p3j5"]
+[ext_resource type="Texture2D" uid="uid://csvjk2vl2lnb3" path="res://assets/sprites/weapons/pedestal.png" id="10_qvp5j"]
+[ext_resource type="Script" path="res://scripts/camera_limiter.gd" id="11_inos3"]
+[ext_resource type="Shader" path="res://assets/shaders/p_cannon.gdshader" id="11_kotie"]
+[ext_resource type="Texture2D" uid="uid://b3mkqyjfyod1j" path="res://assets/sprites/weapons/peril_canon.png" id="12_xtmq8"]
+[ext_resource type="Shader" path="res://assets/shaders/p_laser.gdshader" id="13_2qkf3"]
+[ext_resource type="AudioStream" uid="uid://cp6oou3lqkcgu" path="res://assets/music/forest-wanderer-final.mp3" id="13_xavjd"]
+[ext_resource type="AudioStream" uid="uid://bfyk7fcio8k5m" path="res://assets/music/ohfuck.mp3" id="14_dewf5"]
+[ext_resource type="Script" path="res://scripts/pedestal_interact.gd" id="14_pqqov"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k8uyb"]
+size = Vector2(1624, 104)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e7e1d"]
+texture = ExtResource("4_in7pb")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f7bli"]
+texture = ExtResource("5_ulc45")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:1/next_alternative_id = 2
+2:1/0 = 0
+2:1/1 = 1
+2:1/1/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+0:4/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hs216"]
+texture = ExtResource("6_3p3j5")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_hgdkh"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_e7e1d")
+sources/1 = SubResource("TileSetAtlasSource_f7bli")
+sources/3 = SubResource("TileSetAtlasSource_hs216")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1dc6p"]
+size = Vector2(1631, 1279)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cgamp"]
+size = Vector2(2311, 281)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k1b0b"]
+shader = ExtResource("11_kotie")
+shader_parameter/progress = 0.25
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sri58"]
+shader = ExtResource("13_2qkf3")
+shader_parameter/progress = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hwolq"]
+size = Vector2(56, 15.8947)
+
+[node name="Forest" type="Node2D" node_paths=PackedStringArray("timer", "timer_label", "exit_area", "tilemap", "music", "music_panic")]
+position = Vector2(-40, 161)
+script = ExtResource("1_jicd7")
+timer = NodePath("GameTimer")
+timer_label = NodePath("Player/UI/Countdown")
+quota = {
+"battery": 3,
+"glass": 5,
+"iron": 20,
+"ruby": 1,
+"steel": 5,
+"wood": 30
+}
+exit_area = NodePath("Area2D")
+monster = "res://scenes/prefabs/south_star.tscn"
+exit_to = "res://scenes/desert.tscn"
+tilemap = NodePath("TileMapLayer")
+max_static = 0.5
+music = NodePath("music")
+music_panic = NodePath("music_panic")
+metadata/_edit_horizontal_guides_ = [-797.0, -2231.0, 929.0]
+metadata/_edit_vertical_guides_ = [6180.0]
+
+[node name="Player" parent="." instance=ExtResource("2_bk6ew")]
+position = Vector2(439, -196)
+camera_bottom_threshhold = 935
+
+[node name="TutorialScreen" parent="." instance=ExtResource("3_85sm1")]
+
+[node name="TextureRect" parent="TutorialScreen" index="1"]
+offset_left = 406.0
+offset_top = 108.0
+offset_right = 514.0
+offset_bottom = 236.0
+
+[node name="Label" parent="TutorialScreen/TextureRect" index="0"]
+text = "South Star is
+programmed to follow
+its creator. The only
+thing I can do now is
+destroy it. Once the
+weapon is made, I will
+make sure to get it's
+attention, then blast.
+INTERACT with the
+ pedestal to build.
+Interact with the robot
+ to enter.
+ATTACK to blast"
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(660, 777)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-176, -62)
+shape = SubResource("RectangleShape2D_k8uyb")
+
+[node name="GameTimer" type="Timer" parent="."]
+wait_time = 210.0
+one_shot = true
+autostart = true
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+scale = Vector2(10, 10)
+tile_set = SubResource("TileSet_hgdkh")
+
+[node name="HarvestPoints" type="Node2D" parent="."]
+
+[node name="CameraLimiter" type="Area2D" parent="."]
+position = Vector2(498, 38)
+script = ExtResource("11_inos3")
+bottom = 925
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraLimiter"]
+position = Vector2(0, -40.5)
+shape = SubResource("RectangleShape2D_1dc6p")
+
+[node name="CameraLimiter2" type="Area2D" parent="."]
+position = Vector2(459, -1400)
+script = ExtResource("11_inos3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraLimiter2"]
+position = Vector2(-44.5, 613.5)
+shape = SubResource("RectangleShape2D_cgamp")
+
+[node name="Pickups" type="Node2D" parent="."]
+
+[node name="music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_xavjd")
+volume_db = -15.0
+autoplay = true
+
+[node name="music_panic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_dewf5")
+volume_db = -15.0
+
+[node name="Pedestal" type="Sprite2D" parent="."]
+position = Vector2(565, -1735)
+scale = Vector2(19, 19)
+texture = ExtResource("10_qvp5j")
+
+[node name="PCannon" type="Sprite2D" parent="Pedestal"]
+material = SubResource("ShaderMaterial_k1b0b")
+position = Vector2(0.210527, -34.5263)
+texture = ExtResource("12_xtmq8")
+region_enabled = true
+region_rect = Rect2(0, 0, 38, 66)
+
+[node name="Laser" type="Sprite2D" parent="Pedestal/PCannon"]
+material = SubResource("ShaderMaterial_sri58")
+position = Vector2(-66.5263, 2.78947)
+rotation = 1.5708
+texture = ExtResource("12_xtmq8")
+region_enabled = true
+region_rect = Rect2(56, 8, 36, 83)
+
+[node name="Interact" type="Area2D" parent="Pedestal"]
+script = ExtResource("14_pqqov")
+metadata/type = "interact"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pedestal/Interact"]
+shape = SubResource("RectangleShape2D_hwolq")
+
+[connection signal="body_entered" from="CameraLimiter" to="CameraLimiter" method="_on_body_entered"]
+[connection signal="body_entered" from="CameraLimiter2" to="CameraLimiter2" method="_on_body_entered"]
+
+[editable path="TutorialScreen"]
