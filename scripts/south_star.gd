@@ -80,7 +80,7 @@ func do_attack_moves(delta: float):
 		elif attack == 2: # spasm
 
 			const MIN_ATTACK_TIMES = 4
-			const MAX_ATTACK_TIMES = 9
+			const MAX_ATTACK_TIMES = 5
 
 			const MIN_CYCLE_TIMES = 2
 			const MAX_CYCLE_TIMES = 5

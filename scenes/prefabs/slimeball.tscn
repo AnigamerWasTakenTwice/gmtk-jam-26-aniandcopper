@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8wo78fkx305w"]
+[gd_scene load_steps=4 format=3 uid="uid://dw61d8gj3vfjn"]
 
 [ext_resource type="Script" path="res://scripts/projectile.gd" id="1_0oct8"]
 [ext_resource type="Texture2D" uid="uid://cmky6t8hxf554" path="res://assets/sprites/slimeball.png" id="2_nhs4h"]

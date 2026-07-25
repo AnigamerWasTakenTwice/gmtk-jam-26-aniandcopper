@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bvro8i3m02ek2"]
+[gd_scene load_steps=21 format=3 uid="uid://bvro8i3m02ek2"]
 
 [ext_resource type="Shader" path="res://assets/shaders/title_material.gdshader" id="1_xk5tj"]
 [ext_resource type="Texture2D" uid="uid://il7fqv3262dw" path="res://assets/sprites/south_star/supernova2.png" id="2_pa6w6"]
@@ -8,6 +8,7 @@
 [ext_resource type="FontFile" uid="uid://dpwkl74yrvhas" path="res://assets/fonts/Early GameBoy.ttf" id="7_pyp2d"]
 [ext_resource type="Texture2D" uid="uid://t0wpyf38iqm8" path="res://assets/sprites/ui/z_particle.png" id="8_ge6m1"]
 [ext_resource type="Texture2D" uid="uid://h4xim61h3g60" path="res://assets/sprites/ui/TitlePostGame.png" id="8_krn6v"]
+[ext_resource type="AudioStream" uid="uid://d06767xp73gje" path="res://assets/sfx/static.wav" id="9_4qxw0"]
 
 [sub_resource type="GDScript" id="GDScript_yh20n"]
 script/source = "extends Node2D
@@ -70,6 +71,33 @@ region = Rect2(0, 0, 64, 20)
 offsets = PackedFloat32Array(0, 0.686667)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.301961)
 
+[sub_resource type="Animation" id="Animation_cme2r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_a2lu6")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Zs:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="Animation" id="Animation_dfrsv"]
 resource_name = "flicker"
 length = 5.0
@@ -89,42 +117,34 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CPUParticles2D:visible")
+tracks/1/path = NodePath("Zs:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.633333, 0.933333, 3.2, 3.33333),
+"times": PackedFloat32Array(0, 0.633333, 0.9333, 3.2, 3.33333),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [true, false, true, false, true]
 }
-
-[sub_resource type="Animation" id="Animation_cme2r"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Texture:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("4_a2lu6")]
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("static")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 1.965,
+"start_offset": 0.0,
+"stream": ExtResource("9_4qxw0")
+}, {
+"end_offset": 2.1488,
+"start_offset": 0.0,
+"stream": ExtResource("9_4qxw0")
+}],
+"times": PackedFloat32Array(0.633333, 3.2)
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CPUParticles2D:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
+tracks/2/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3q8rm"]
 _data = {
@@ -192,7 +212,7 @@ label_settings = SubResource("LabelSettings_y4mbm")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="Zs" type="CPUParticles2D" parent="."]
 position = Vector2(978, 449)
 amount = 3
 lifetime = 3.0
@@ -209,6 +229,9 @@ libraries = {
 "": SubResource("AnimationLibrary_3q8rm")
 }
 autoplay = "flicker"
+
+[node name="static" type="AudioStreamPlayer" parent="."]
+volume_db = -17.434
 
 [connection signal="button_down" from="PlayButton" to="." method="_on_play_button_button_down"]
 [connection signal="button_up" from="PlayButton" to="." method="_on_play_button_button_up"]
