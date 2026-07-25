@@ -12,9 +12,10 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if health <= 0:
-		var drop = item.instantiate()
-		get_parent().add_child(drop)
-		drop.global_position = $Hitbox.global_position
+		if item:
+			var drop = item.instantiate()
+			get_parent().add_child(drop)
+			drop.global_position = $Hitbox.global_position
 
 		queue_free()
 	pass
