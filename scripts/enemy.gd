@@ -73,7 +73,7 @@ func _on_attack_timer_timeout() -> void:
 		if player.position.distance_to(position) < 750:
 			attacking = true
 			var slimeball = load("res://scenes/prefabs/slimeball.tscn").instantiate()
-			slimeball.global_position = global_position + position.direction_to(player.position) * 128
+			slimeball.global_position = global_position
 			slimeball.from_south_star = false
 			slimeball.look_at(player.position)
 			get_tree().current_scene.add_child(slimeball)
