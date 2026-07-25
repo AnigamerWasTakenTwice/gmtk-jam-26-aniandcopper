@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://pp64t6tukp3k"]
+[gd_scene load_steps=10 format=3 uid="uid://pp64t6tukp3k"]
 
 [ext_resource type="Script" path="res://scripts/death_screen.gd" id="1_5kee4"]
 [ext_resource type="Texture2D" uid="uid://cgfkcs42kdwng" path="res://assets/sprites/ui/shatter.png" id="1_q2517"]
 [ext_resource type="FontFile" uid="uid://smn1abrf2jg3" path="res://assets/fonts/PressStart2P.ttf" id="2_maky7"]
+[ext_resource type="Texture2D" uid="uid://ck6lbtpll0y5v" path="res://assets/sprites/ui/vhs_screen.webp" id="3_2jdp2"]
 [ext_resource type="AudioStream" uid="uid://b7s2i0a3pvd6e" path="res://assets/sfx/death.wav" id="4_1q7ot"]
 
 [sub_resource type="Animation" id="Animation_ix64o"]
@@ -153,6 +154,7 @@ grow_vertical = 2
 script = ExtResource("1_5kee4")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+z_index = -3
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -180,6 +182,11 @@ visible = false
 position = Vector2(391, 385)
 scale = Vector2(3, 3)
 texture = ExtResource("1_q2517")
+
+[node name="Screen" type="Sprite2D" parent="Shatter"]
+z_index = -1
+position = Vector2(47.6667, -27.3333)
+texture = ExtResource("3_2jdp2")
 
 [node name="Label" type="Label" parent="."]
 visible = false
