@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 const DISTANCE_TO_TARGET_TOLERANCE: = 50
 
+const ATTACKS_BEFORE_CHASE = 3
+const HEALTH_BEFORE_CHASE = 3
 
 @export var health = 10
 @export var drop: String
@@ -17,6 +19,7 @@ const DISTANCE_TO_TARGET_TOLERANCE: = 50
 @onready var south_star_helper_points: Node2D
 
 @onready var south_star_orbit_path: Path2D
+@onready var south_star_orbit_path_follow: PathFollow2D
 
 var start_spot: Vector2
 var wander_spot: Vector2
@@ -29,6 +32,7 @@ var state : = ""
 var times_to_attack : = 0
 var times_to_cycle : = 0
 var selected_corner: Node2D
+var times_attacked: = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -36,6 +40,7 @@ func _ready() -> void:
 
 	south_star_helper_points = player.south_star_helper_points
 	south_star_orbit_path = south_star_helper_points.get_child(0)
+	south_star_orbit_path_follow = south_star_orbit_path.get_child(0)
 
 
 
@@ -50,12 +55,20 @@ func _process(delta: float) -> void:
 	destroy_tiles()
 	move_eye()
 
+	if player.health <= HEALTH_BEFORE_CHASE and times_attacked >= ATTACKS_BEFORE_CHASE:
+		move_enemy()
+	else:
+		do_attack_moves(delta)
+
+	pass
+
+func do_attack_moves(delta: float):
 	if attack == 0:
-		const ATTACK_AMOUNT = 2
+		const ATTACK_AMOUNT = 3
 		attack = randi_range(1, ATTACK_AMOUNT)
 		state = ""
-		
-		
+		times_attacked += 1
+
 		if attack == 1: # Dash
 			const MIN_ATTACK_TIMES = 2
 			const MAX_ATTACK_TIMES = 4
@@ -75,25 +88,33 @@ func _process(delta: float) -> void:
 			times_to_attack = randi_range(MIN_ATTACK_TIMES, MAX_ATTACK_TIMES)
 			times_to_cycle = randi_range(MIN_CYCLE_TIMES, MAX_CYCLE_TIMES)
 
+
+
 			var target_corner = randi_range(1, 4)
 			
 			selected_corner = south_star_helper_points.get_child(target_corner)
 			target_pos = selected_corner.global_position
 
-			$ShootTimer.start()
+			$SpasmTimer.start()
+		elif attack == 3: # circle
+			state = "start_circle"
+			south_star_orbit_path_follow.progress = 0
+			times_to_attack = 1
+
+			$CircleShootTimer.start()
+
 
 	if attack == 1:
 		dash(delta)
 	elif attack == 2:
 		spasm()
+	elif  attack == 3:
+		circle(delta)
 
 
 	if times_to_attack <= 0:
 		state = ""
 		attack = 0
-		print(state	)
-
-	pass
 
 func dash(delta: float):
 	
@@ -119,8 +140,18 @@ func dash(delta: float):
 func spasm():
 	global_position = target_pos
 	target_pos = selected_corner.global_position
+	state = "spasm"
 
-
+func circle(delta: float):
+	south_star_orbit_path_follow.progress += movement_speed * delta
+	global_position = south_star_orbit_path_follow.global_position
+	
+	const MAX_PATH_PROGRESS = 6300
+	
+	if south_star_orbit_path_follow.progress >= MAX_PATH_PROGRESS:
+		attack == 0
+		state = ""
+		times_to_attack = 0
 
 
 func move_eye():
@@ -192,7 +223,7 @@ func _on_destruction_range_body_entered(body: Node2D) -> void:
 	pass # Replace with function body.
 
 
-func _on_shoot_timer_timeout() -> void:
+func _on_shoot_timer_timeout() -> void: # For Spasm
 	const SOUTH_STAR_PROJECTILE = preload("res://scenes/prefabs/south_star_projectile.tscn")
 	const ROTATION_OFFSET = 23
 
@@ -201,9 +232,11 @@ func _on_shoot_timer_timeout() -> void:
 	projectile.global_position = global_position
 	projectile.look_at(player.global_position)
 	projectile.global_rotation_degrees += randi_range(-ROTATION_OFFSET, ROTATION_OFFSET)
-	$ShootTimer.start()
 	
 	times_to_attack -= 1
+
+	print(times_to_attack)
+
 	if times_to_attack <= 0:
 			const MIN_ATTACK_TIMES = 4
 			const MAX_ATTACK_TIMES = 9
@@ -215,12 +248,22 @@ func _on_shoot_timer_timeout() -> void:
 			if times_to_cycle <= 0:
 				attack = 0
 				state = ""
+			else:
+				var target_corner = randi_range(1, 4)
+				
+				selected_corner = south_star_helper_points.get_child(target_corner)
+				target_pos = selected_corner.global_position
 
-			var target_corner = randi_range(1, 4)
-			
-			selected_corner = south_star_helper_points.get_child(target_corner)
-			target_pos = selected_corner.global_position
 
-			$ShootTimer.start()
+	$SpasmTimer.start()
 
-	
+
+func _on_circle_shoot_timer_timeout() -> void: # For Circle
+	const SOUTH_STAR_PROJECTILE = preload("res://scenes/prefabs/south_star_projectile.tscn")
+
+	var projectile = SOUTH_STAR_PROJECTILE.instantiate()
+	add_child(projectile)
+	projectile.global_position = global_position
+	projectile.look_at(player.global_position)
+
+	$CircleShootTimer.start()

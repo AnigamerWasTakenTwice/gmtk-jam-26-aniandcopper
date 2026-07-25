@@ -594,6 +594,12 @@ color = Color(0, 0, 0, 1)
 [node name="Path" type="Path2D" parent="Camera2D/SouthStarHelperPoints"]
 curve = SubResource("Curve2D_fef20")
 
+[node name="PathFollow2D" type="PathFollow2D" parent="Camera2D/SouthStarHelperPoints/Path"]
+position = Vector2(1250, 4.76837e-07)
+rotation = -1.5708
+progress = 6300.51
+loop = false
+
 [node name="TopRight" type="Marker2D" parent="Camera2D/SouthStarHelperPoints"]
 position = Vector2(1250, -750)
 
