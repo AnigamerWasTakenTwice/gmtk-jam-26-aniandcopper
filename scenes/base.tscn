@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://dixdhy7ocxa2y"]
+[gd_scene load_steps=28 format=4 uid="uid://dixdhy7ocxa2y"]
 
 [ext_resource type="Script" path="res://scripts/countdown.gd" id="1_a1d1w"]
 [ext_resource type="PackedScene" uid="uid://bvln38xbur2mi" path="res://scenes/prefabs/player.tscn" id="2_4uqao"]
@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://8f0uskhevjkh" path="res://assets/sprites/tiles/grass_tiles.png" id="5_stud7"]
 [ext_resource type="PackedScene" uid="uid://jb42wjtdh6m" path="res://scenes/prefabs/enemy.tscn" id="6_402sg"]
 [ext_resource type="Texture2D" uid="uid://b7bmcwu50xfw7" path="res://assets/sprites/tiles/base_plating.png" id="6_eh7el"]
-[ext_resource type="PackedScene" uid="uid://dqyatcm4n6ydp" path="res://scenes/prefabs/harvest_points/breakable_plating.tscn" id="7_ycap8"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/harvest_points/breakable_plating.tscn" id="7_ycap8"]
 [ext_resource type="PackedScene" uid="uid://basvai4ymr7f0" path="res://scenes/prefabs/harvest_points/harvest_point_tree.tscn" id="8_wrdwn"]
 [ext_resource type="PackedScene" uid="uid://sedspd7smqts" path="res://scenes/prefabs/harvest_points/harvest_point_snow_tree.tscn" id="9_o8jnh"]
 [ext_resource type="Texture2D" uid="uid://c7u3sixoapfwi" path="res://assets/sprites/harvest_points/ruby_pedestal.png" id="9_ovnd1"]
@@ -17,6 +17,8 @@
 [ext_resource type="AudioStream" uid="uid://cp6oou3lqkcgu" path="res://assets/music/forest-wanderer-final.mp3" id="12_w5oke"]
 [ext_resource type="PackedScene" uid="uid://b5dk311ep3prg" path="res://scenes/prefabs/lever.tscn" id="13_dkp8t"]
 [ext_resource type="AudioStream" uid="uid://bfyk7fcio8k5m" path="res://assets/music/ohfuck.mp3" id="13_ogf7i"]
+[ext_resource type="PackedScene" uid="uid://cqwfi3r3lnm5m" path="res://scenes/prefabs/items/wood.tscn" id="14_ke4fk"]
+[ext_resource type="PackedScene" uid="uid://b3vw2vfvrg567" path="res://scenes/prefabs/harvest_points/boulder.tscn" id="17_7fnt5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k8uyb"]
 size = Vector2(1624, 104)
@@ -80,18 +82,19 @@ size = Vector2(1631, 1279)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cgamp"]
 size = Vector2(2311, 281)
 
-[node name="Forest" type="Node2D" node_paths=PackedStringArray("timer", "timer_label", "exit_area", "tilemap", "music", "music_panic")]
+[node name="Base" type="Node2D" node_paths=PackedStringArray("timer", "timer_label", "exit_area", "tilemap", "music", "music_panic")]
 position = Vector2(-40, 161)
 script = ExtResource("1_a1d1w")
 timer = NodePath("GameTimer")
 timer_label = NodePath("Player/UI/Countdown")
 quota = {
-"battery": 3,
+"battery": 10,
+"copper": 5,
 "glass": 5,
-"iron": 20,
+"iron": 5,
 "ruby": 1,
-"steel": 5,
-"wood": 30
+"steel": 50,
+"wood": 5
 }
 exit_area = NodePath("Area2D")
 monster = "res://scenes/prefabs/south_star.tscn"
@@ -148,6 +151,27 @@ position = Vector2(-4924, -7674)
 
 [node name="HarvestPointTree2" parent="HarvestPoints" instance=ExtResource("9_o8jnh")]
 position = Vector2(-4157, -7669)
+
+[node name="Boulder" parent="HarvestPoints" instance=ExtResource("17_7fnt5")]
+position = Vector2(-1196, -10294)
+
+[node name="Boulder2" parent="HarvestPoints" instance=ExtResource("17_7fnt5")]
+position = Vector2(-1326, -10820)
+
+[node name="Boulder3" parent="HarvestPoints" instance=ExtResource("17_7fnt5")]
+position = Vector2(-4539, -11284)
+
+[node name="Boulder4" parent="HarvestPoints" instance=ExtResource("17_7fnt5")]
+position = Vector2(-4047, -11329)
+
+[node name="Boulder5" parent="HarvestPoints" instance=ExtResource("17_7fnt5")]
+position = Vector2(-3245, -14810)
+
+[node name="Boulder6" parent="HarvestPoints" instance=ExtResource("17_7fnt5")]
+position = Vector2(-3207, -14507)
+
+[node name="Boulder7" parent="HarvestPoints" instance=ExtResource("17_7fnt5")]
+position = Vector2(489, -14690)
 
 [node name="RubyPedestal" type="Sprite2D" parent="."]
 position = Vector2(459, -6342)
@@ -602,12 +626,166 @@ texture = ExtResource("5_stud7")
 region_enabled = true
 region_rect = Rect2(32, 48, 16, 16)
 
+[node name="Steel39" parent="Pickups" instance=ExtResource("11_gruxt")]
+position = Vector2(-5027, -14167)
+scale = Vector2(3, 3)
+item = "steel"
+
+[node name="Sprite2D" type="Sprite2D" parent="Pickups/Steel39"]
+scale = Vector2(3, 3)
+texture = ExtResource("5_stud7")
+region_enabled = true
+region_rect = Rect2(32, 48, 16, 16)
+
+[node name="Steel40" parent="Pickups" instance=ExtResource("11_gruxt")]
+position = Vector2(-5075, -14449)
+scale = Vector2(3, 3)
+item = "steel"
+
+[node name="Sprite2D" type="Sprite2D" parent="Pickups/Steel40"]
+scale = Vector2(3, 3)
+texture = ExtResource("5_stud7")
+region_enabled = true
+region_rect = Rect2(32, 48, 16, 16)
+
+[node name="Steel41" parent="Pickups" instance=ExtResource("11_gruxt")]
+position = Vector2(-5213, -14773)
+scale = Vector2(3, 3)
+item = "steel"
+
+[node name="Sprite2D" type="Sprite2D" parent="Pickups/Steel41"]
+scale = Vector2(3, 3)
+texture = ExtResource("5_stud7")
+region_enabled = true
+region_rect = Rect2(32, 48, 16, 16)
+
+[node name="Steel42" parent="Pickups" instance=ExtResource("11_gruxt")]
+position = Vector2(-5369, -14210)
+scale = Vector2(3, 3)
+item = "steel"
+
+[node name="Sprite2D" type="Sprite2D" parent="Pickups/Steel42"]
+scale = Vector2(3, 3)
+texture = ExtResource("5_stud7")
+region_enabled = true
+region_rect = Rect2(32, 48, 16, 16)
+
+[node name="Steel43" parent="Pickups" instance=ExtResource("11_gruxt")]
+position = Vector2(-4997, -15187)
+scale = Vector2(3, 3)
+item = "steel"
+
+[node name="Sprite2D" type="Sprite2D" parent="Pickups/Steel43"]
+scale = Vector2(3, 3)
+texture = ExtResource("5_stud7")
+region_enabled = true
+region_rect = Rect2(32, 48, 16, 16)
+
+[node name="Steel44" parent="Pickups" instance=ExtResource("11_gruxt")]
+position = Vector2(-5183, -15517)
+scale = Vector2(3, 3)
+item = "steel"
+
+[node name="Sprite2D" type="Sprite2D" parent="Pickups/Steel44"]
+scale = Vector2(3, 3)
+texture = ExtResource("5_stud7")
+region_enabled = true
+region_rect = Rect2(32, 48, 16, 16)
+
+[node name="Steel45" parent="Pickups" instance=ExtResource("11_gruxt")]
+position = Vector2(-5009, -15799)
+scale = Vector2(3, 3)
+item = "steel"
+
+[node name="Sprite2D" type="Sprite2D" parent="Pickups/Steel45"]
+scale = Vector2(3, 3)
+texture = ExtResource("5_stud7")
+region_enabled = true
+region_rect = Rect2(32, 48, 16, 16)
+
+[node name="Steel46" parent="Pickups" instance=ExtResource("11_gruxt")]
+position = Vector2(-4703, -15553)
+scale = Vector2(3, 3)
+item = "steel"
+
+[node name="Sprite2D" type="Sprite2D" parent="Pickups/Steel46"]
+scale = Vector2(3, 3)
+texture = ExtResource("5_stud7")
+region_enabled = true
+region_rect = Rect2(32, 48, 16, 16)
+
+[node name="Steel47" parent="Pickups" instance=ExtResource("11_gruxt")]
+position = Vector2(-4170, -15775)
+scale = Vector2(3, 3)
+item = "steel"
+
+[node name="Sprite2D" type="Sprite2D" parent="Pickups/Steel47"]
+scale = Vector2(3, 3)
+texture = ExtResource("5_stud7")
+region_enabled = true
+region_rect = Rect2(32, 48, 16, 16)
+
+[node name="Steel48" parent="Pickups" instance=ExtResource("11_gruxt")]
+position = Vector2(-3738, -15721)
+scale = Vector2(3, 3)
+item = "steel"
+
+[node name="Sprite2D" type="Sprite2D" parent="Pickups/Steel48"]
+scale = Vector2(3, 3)
+texture = ExtResource("5_stud7")
+region_enabled = true
+region_rect = Rect2(32, 48, 16, 16)
+
+[node name="Steel49" parent="Pickups" instance=ExtResource("11_gruxt")]
+position = Vector2(-3408, -15583)
+scale = Vector2(3, 3)
+item = "steel"
+
+[node name="Sprite2D" type="Sprite2D" parent="Pickups/Steel49"]
+scale = Vector2(3, 3)
+texture = ExtResource("5_stud7")
+region_enabled = true
+region_rect = Rect2(32, 48, 16, 16)
+
 [node name="Battery" parent="Pickups" instance=ExtResource("11_gruxt")]
 position = Vector2(-3963, -4743)
 scale = Vector2(3, 3)
 item = "battery"
 
 [node name="Sprite2D" type="Sprite2D" parent="Pickups/Battery"]
+scale = Vector2(3, 3)
+texture = ExtResource("5_stud7")
+region_enabled = true
+region_rect = Rect2(0, 64, 16, 16)
+
+[node name="Battery7" parent="Pickups" instance=ExtResource("11_gruxt")]
+position = Vector2(-5103, -9704)
+scale = Vector2(3, 3)
+item = "battery"
+
+[node name="Sprite2D" type="Sprite2D" parent="Pickups/Battery7"]
+scale = Vector2(3, 3)
+texture = ExtResource("5_stud7")
+region_enabled = true
+region_rect = Rect2(0, 64, 16, 16)
+
+[node name="Battery8" parent="Pickups" instance=ExtResource("11_gruxt")]
+position = Vector2(-5103, -10010)
+scale = Vector2(3, 3)
+item = "battery"
+
+[node name="Sprite2D" type="Sprite2D" parent="Pickups/Battery8"]
+scale = Vector2(3, 3)
+texture = ExtResource("5_stud7")
+region_enabled = true
+region_rect = Rect2(0, 64, 16, 16)
+
+[node name="Battery9" parent="Pickups" instance=ExtResource("11_gruxt")]
+position = Vector2(-4821, -9794)
+scale = Vector2(3, 3)
+item = "battery"
+
+[node name="Sprite2D" type="Sprite2D" parent="Pickups/Battery9"]
 scale = Vector2(3, 3)
 texture = ExtResource("5_stud7")
 region_enabled = true
@@ -755,6 +933,139 @@ scale = Vector2(3, 3)
 texture = ExtResource("5_stud7")
 region_enabled = true
 region_rect = Rect2(48, 32, 16, 16)
+
+[node name="Glass" parent="Pickups" instance=ExtResource("11_gruxt")]
+position = Vector2(1470, -9986)
+scale = Vector2(3, 3)
+item = "glass"
+
+[node name="Sprite2D" type="Sprite2D" parent="Pickups/Glass"]
+scale = Vector2(3, 3)
+texture = ExtResource("5_stud7")
+region_enabled = true
+region_rect = Rect2(16, 48, 16, 16)
+
+[node name="Glass2" parent="Pickups" instance=ExtResource("11_gruxt")]
+position = Vector2(1696, -10235)
+scale = Vector2(3, 3)
+item = "glass"
+
+[node name="Sprite2D" type="Sprite2D" parent="Pickups/Glass2"]
+scale = Vector2(3, 3)
+texture = ExtResource("5_stud7")
+region_enabled = true
+region_rect = Rect2(16, 48, 16, 16)
+
+[node name="Glass3" parent="Pickups" instance=ExtResource("11_gruxt")]
+position = Vector2(1939, -9901)
+scale = Vector2(3, 3)
+item = "glass"
+
+[node name="Sprite2D" type="Sprite2D" parent="Pickups/Glass3"]
+scale = Vector2(3, 3)
+texture = ExtResource("5_stud7")
+region_enabled = true
+region_rect = Rect2(16, 48, 16, 16)
+
+[node name="Glass4" parent="Pickups" instance=ExtResource("11_gruxt")]
+position = Vector2(2143, -10184)
+scale = Vector2(3, 3)
+item = "glass"
+
+[node name="Sprite2D" type="Sprite2D" parent="Pickups/Glass4"]
+scale = Vector2(3, 3)
+texture = ExtResource("5_stud7")
+region_enabled = true
+region_rect = Rect2(16, 48, 16, 16)
+
+[node name="Glass5" parent="Pickups" instance=ExtResource("11_gruxt")]
+position = Vector2(2030, -10439)
+scale = Vector2(3, 3)
+item = "glass"
+
+[node name="Sprite2D" type="Sprite2D" parent="Pickups/Glass5"]
+scale = Vector2(3, 3)
+texture = ExtResource("5_stud7")
+region_enabled = true
+region_rect = Rect2(16, 48, 16, 16)
+
+[node name="Glass6" parent="Pickups" instance=ExtResource("11_gruxt")]
+position = Vector2(1894, -10733)
+scale = Vector2(3, 3)
+item = "glass"
+
+[node name="Sprite2D" type="Sprite2D" parent="Pickups/Glass6"]
+scale = Vector2(3, 3)
+texture = ExtResource("5_stud7")
+region_enabled = true
+region_rect = Rect2(16, 48, 16, 16)
+
+[node name="Glass7" parent="Pickups" instance=ExtResource("11_gruxt")]
+position = Vector2(2307, -13723)
+scale = Vector2(3, 3)
+item = "glass"
+
+[node name="Sprite2D" type="Sprite2D" parent="Pickups/Glass7"]
+scale = Vector2(3, 3)
+texture = ExtResource("5_stud7")
+region_enabled = true
+region_rect = Rect2(16, 48, 16, 16)
+
+[node name="Glass8" parent="Pickups" instance=ExtResource("11_gruxt")]
+position = Vector2(2056, -13597)
+scale = Vector2(3, 3)
+item = "glass"
+
+[node name="Sprite2D" type="Sprite2D" parent="Pickups/Glass8"]
+scale = Vector2(3, 3)
+texture = ExtResource("5_stud7")
+region_enabled = true
+region_rect = Rect2(16, 48, 16, 16)
+
+[node name="Glass9" parent="Pickups" instance=ExtResource("11_gruxt")]
+position = Vector2(2272, -14091)
+scale = Vector2(3, 3)
+item = "glass"
+
+[node name="Sprite2D" type="Sprite2D" parent="Pickups/Glass9"]
+scale = Vector2(3, 3)
+texture = ExtResource("5_stud7")
+region_enabled = true
+region_rect = Rect2(16, 48, 16, 16)
+
+[node name="Glass10" parent="Pickups" instance=ExtResource("11_gruxt")]
+position = Vector2(1931, -13911)
+scale = Vector2(3, 3)
+item = "glass"
+
+[node name="Sprite2D" type="Sprite2D" parent="Pickups/Glass10"]
+scale = Vector2(3, 3)
+texture = ExtResource("5_stud7")
+region_enabled = true
+region_rect = Rect2(16, 48, 16, 16)
+
+[node name="Glass11" parent="Pickups" instance=ExtResource("11_gruxt")]
+position = Vector2(1572, -13624)
+scale = Vector2(3, 3)
+item = "glass"
+
+[node name="Sprite2D" type="Sprite2D" parent="Pickups/Glass11"]
+scale = Vector2(3, 3)
+texture = ExtResource("5_stud7")
+region_enabled = true
+region_rect = Rect2(16, 48, 16, 16)
+
+[node name="Wood" parent="Pickups" instance=ExtResource("14_ke4fk")]
+position = Vector2(2195, -11810)
+
+[node name="Wood2" parent="Pickups" instance=ExtResource("14_ke4fk")]
+position = Vector2(1748, -11869)
+
+[node name="Wood3" parent="Pickups" instance=ExtResource("14_ke4fk")]
+position = Vector2(2155, -11589)
+
+[node name="Wood4" parent="Pickups" instance=ExtResource("14_ke4fk")]
+position = Vector2(1841, -11682)
 
 [node name="Enemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_402sg")]
 position = Vector2(4803, -6135)

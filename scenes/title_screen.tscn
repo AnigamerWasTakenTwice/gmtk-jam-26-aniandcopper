@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bvro8i3m02ek2"]
+[gd_scene load_steps=20 format=3 uid="uid://bvro8i3m02ek2"]
 
 [ext_resource type="Shader" path="res://assets/shaders/title_material.gdshader" id="1_xk5tj"]
 [ext_resource type="Texture2D" uid="uid://il7fqv3262dw" path="res://assets/sprites/south_star/supernova2.png" id="2_pa6w6"]
@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://j7b5iyyuwn6u" path="res://assets/fonts/alagard.ttf" id="5_s1033"]
 [ext_resource type="FontFile" uid="uid://dpwkl74yrvhas" path="res://assets/fonts/Early GameBoy.ttf" id="7_pyp2d"]
 [ext_resource type="Texture2D" uid="uid://t0wpyf38iqm8" path="res://assets/sprites/ui/z_particle.png" id="8_ge6m1"]
+[ext_resource type="Texture2D" uid="uid://h4xim61h3g60" path="res://assets/sprites/ui/TitlePostGame.png" id="8_krn6v"]
 
 [sub_resource type="GDScript" id="GDScript_yh20n"]
 script/source = "extends Node2D
@@ -68,6 +69,68 @@ region = Rect2(0, 0, 64, 20)
 [sub_resource type="Gradient" id="Gradient_mjt8x"]
 offsets = PackedFloat32Array(0, 0.686667)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.301961)
+
+[sub_resource type="Animation" id="Animation_dfrsv"]
+resource_name = "flicker"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.633333, 0.933333, 3.2, 3.33333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("4_a2lu6"), ExtResource("8_krn6v"), ExtResource("4_a2lu6"), ExtResource("8_krn6v"), ExtResource("4_a2lu6")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CPUParticles2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.633333, 0.933333, 3.2, 3.33333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_cme2r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_a2lu6")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CPUParticles2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3q8rm"]
+_data = {
+"RESET": SubResource("Animation_cme2r"),
+"flicker": SubResource("Animation_dfrsv")
+}
 
 [node name="TitleScreen" type="Node2D"]
 script = SubResource("GDScript_yh20n")
@@ -140,6 +203,12 @@ angular_velocity_max = -8.68
 scale_amount_min = 3.0
 scale_amount_max = 3.0
 color_ramp = SubResource("Gradient_mjt8x")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_3q8rm")
+}
+autoplay = "flicker"
 
 [connection signal="button_down" from="PlayButton" to="." method="_on_play_button_button_down"]
 [connection signal="button_up" from="PlayButton" to="." method="_on_play_button_button_up"]

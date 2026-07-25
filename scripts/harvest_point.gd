@@ -22,4 +22,5 @@ func _process(delta: float) -> void:
 
 func take_damage(damage: float):
 	health -= damage
-	$AnimationPlayer.play("shake")
+	if $AnimationPlayer:
+		$AnimationPlayer.play("shake")

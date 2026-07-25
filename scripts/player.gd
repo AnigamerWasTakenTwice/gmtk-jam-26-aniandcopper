@@ -29,6 +29,7 @@ extends CharacterBody2D
 @onready var south_star_helper_points: Node2D = $Camera2D/SouthStarHelperPoints
 
 var movement_direction: Vector2
+var using_m_and_k: bool = true
 
 var quicksand = false
 
@@ -91,8 +92,16 @@ func move_player(delta: float):
 
 func handle_interaction_area():
 	# Moves the interaction area to point to where the player is looking.
-	var aim_direction = position.direction_to(get_global_mouse_position())
+	var aim_direction
+
+	if using_m_and_k:
+		aim_direction = position.direction_to(get_global_mouse_position())
+	else:
+		aim_direction = Input.get_vector("point_left", "point_right", "point_up", "point_down")
+
 	interaction_area.position = aim_direction * 128
+
+
 	# All of the interaction buttons in the game.
 	if Input.is_action_just_pressed("attack"): 
 		$InteractionArea/ToolSprite.texture.region.position.x = 14
@@ -190,4 +199,9 @@ func take_damage(damage: float):
 		health -= damage
 		damage_animation.play("take_damage")
 		can_take_damage = false
-	
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey or event is InputEventMouse:
+		using_m_and_k = true
+	elif event is InputEventJoypadButton or event is InputEventJoypadMotion:
+		using_m_and_k = false

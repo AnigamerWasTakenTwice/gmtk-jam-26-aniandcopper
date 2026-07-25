@@ -484,12 +484,12 @@ _data = {
 "slide_checklist": SubResource("Animation_7uprf")
 }
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_71mit"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rcrr0"]
 noise_type = 0
 frequency = 1.0
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2n7um"]
-noise = SubResource("FastNoiseLite_71mit")
+noise = SubResource("FastNoiseLite_rcrr0")
 
 [sub_resource type="LabelSettings" id="LabelSettings_afwm2"]
 font = ExtResource("4_hddma")
