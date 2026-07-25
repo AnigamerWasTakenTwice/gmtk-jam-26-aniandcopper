@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://basvai4ymr7f0"]
+[gd_scene load_steps=14 format=3 uid="uid://basvai4ymr7f0"]
 
 [ext_resource type="Script" path="res://scripts/harvest_point.gd" id="1_mjc6o"]
 [ext_resource type="Texture2D" uid="uid://8f0uskhevjkh" path="res://assets/sprites/tiles/grass_tiles.png" id="2_1sqii"]
@@ -22,6 +22,43 @@ region = Rect2(1, 33, 14, 15)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wqjon"]
 size = Vector2(116, 600)
+
+[sub_resource type="Animation" id="Animation_skcdv"]
+resource_name = "shake"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Tree:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(16, -152), Vector2(41, -152), Vector2(16, -152), Vector2(41, -152), Vector2(16, -152)]
+}
+
+[sub_resource type="Animation" id="Animation_flpv4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Tree:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(16, -152)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ltxrq"]
+_data = {
+"RESET": SubResource("Animation_flpv4"),
+"shake": SubResource("Animation_skcdv")
+}
 
 [node name="HarvestPointTree" type="StaticBody2D"]
 script = ExtResource("1_mjc6o")
@@ -47,6 +84,7 @@ texture = SubResource("AtlasTexture_175d5")
 
 [node name="Hitbox" parent="." instance=ExtResource("2_qr66p")]
 position = Vector2(-1, 182)
+parent_has_take_damage_function = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -147)
@@ -56,3 +94,8 @@ shape = SubResource("RectangleShape2D_wqjon")
 position = Vector2(16, -152)
 scale = Vector2(15, 15)
 texture = ExtResource("4_kn8j5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ltxrq")
+}

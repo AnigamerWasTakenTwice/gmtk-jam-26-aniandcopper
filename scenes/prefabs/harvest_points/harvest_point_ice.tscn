@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bc476vuj1b1fq"]
+[gd_scene load_steps=9 format=3 uid="uid://bc476vuj1b1fq"]
 
 [ext_resource type="Script" path="res://scripts/harvest_point.gd" id="1_f2nqn"]
 [ext_resource type="PackedScene" uid="uid://xicjh6l1ep0c" path="res://scenes/prefabs/hitbox.tscn" id="2_ajh07"]
@@ -8,6 +8,43 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2dybb"]
 size = Vector2(90, 60.5)
 
+[sub_resource type="Animation" id="Animation_tvmii"]
+resource_name = "shake"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ice:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(2.84217e-14, -60), Vector2(25, -60), Vector2(2.84217e-14, -60), Vector2(25, -60), Vector2(2.84217e-14, -60)]
+}
+
+[sub_resource type="Animation" id="Animation_vk537"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ice:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2.84217e-14, -60)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0sxl0"]
+_data = {
+"RESET": SubResource("Animation_vk537"),
+"shake": SubResource("Animation_tvmii")
+}
+
 [node name="HarvestPointIce" type="StaticBody2D"]
 script = ExtResource("1_f2nqn")
 health = 2
@@ -16,6 +53,7 @@ type = "pickaxe"
 
 [node name="Hitbox" parent="." instance=ExtResource("2_ajh07")]
 position = Vector2(29, -18)
+parent_has_take_damage_function = true
 
 [node name="Ice" type="Sprite2D" parent="."]
 position = Vector2(2.84217e-14, -60)
@@ -25,3 +63,8 @@ texture = ExtResource("3_4m33f")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(29, -9.75)
 shape = SubResource("RectangleShape2D_2dybb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0sxl0")
+}

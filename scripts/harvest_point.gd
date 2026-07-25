@@ -18,3 +18,7 @@ func _process(delta: float) -> void:
 
 		queue_free()
 	pass
+
+func take_damage(damage: float):
+	health -= damage
+	$AnimationPlayer.play("shake")
