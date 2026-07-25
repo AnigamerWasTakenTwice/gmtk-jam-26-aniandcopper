@@ -70,12 +70,13 @@ func _on_wander_timer_timeout() -> void:
 func _on_attack_timer_timeout() -> void:
 	#If the player is close enough, start attacking every 0.25 seconds
 	if player:
-		if player.position.distance_to(position) < 150:
-			for area in $InteractionArea.get_overlapping_areas():
-				if is_instance_valid(area):
-					if area.get_meta("type") == "attack":
-						attacking = true
-						area.call("interaction")
-						await get_tree().create_timer(0.5).timeout
-						attacking = false
+		if player.position.distance_to(position) < 750:
+			attacking = true
+			var slimeball = load("res://scenes/prefabs/slimeball.tscn").instantiate()
+			slimeball.global_position = global_position + position.direction_to(player.position) * 128
+			slimeball.from_south_star = false
+			slimeball.look_at(player.position)
+			get_tree().current_scene.add_child(slimeball)
+			await get_tree().create_timer(0.5).timeout
+			attacking = false
 	pass # Replace with function body.

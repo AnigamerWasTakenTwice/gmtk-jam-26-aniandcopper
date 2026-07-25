@@ -5,6 +5,7 @@ extends Area2D
 
 const DECAY_TIME = 10
 
+var from_south_star = true
 
 
 # Called when the node enters the scene tree for the first time.
@@ -24,9 +25,11 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.has_method("interaction"):
-		body.interaction()
+		if from_south_star: body.interaction()
+	if body.has_method("take_damage"):
+		body.take_damage(1)
 
 
 func _on_area_entered(area: Area2D) -> void:
 	if area.get_meta("type") == "attack":
-		area.call("interaction")
+		if from_south_star: area.call("interaction")
