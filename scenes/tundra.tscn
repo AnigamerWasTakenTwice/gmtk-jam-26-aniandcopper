@@ -16,8 +16,8 @@
 [ext_resource type="Script" path="res://scripts/camera_limiter.gd" id="10_253en"]
 [ext_resource type="PackedScene" uid="uid://dsurl7keocwk3" path="res://scenes/prefabs/pickup.tscn" id="11_fenxy"]
 [ext_resource type="PackedScene" uid="uid://sedspd7smqts" path="res://scenes/prefabs/harvest_points/harvest_point_snow_tree.tscn" id="12_87s2w"]
-[ext_resource type="AudioStream" uid="uid://cp6oou3lqkcgu" path="res://assets/music/forest-wanderer-final.mp3" id="12_wbibn"]
 [ext_resource type="AudioStream" uid="uid://bfyk7fcio8k5m" path="res://assets/music/ohfuck.mp3" id="13_ltbod"]
+[ext_resource type="AudioStream" uid="uid://c5esakjqy366b" path="res://assets/music/windswept-frost.mp3" id="17_50h22"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k8uyb"]
 size = Vector2(1624, 104)
@@ -708,7 +708,7 @@ position = Vector2(12723, -10789)
 player = NodePath("../Player")
 
 [node name="music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("12_wbibn")
+stream = ExtResource("17_50h22")
 volume_db = -15.0
 autoplay = true
 

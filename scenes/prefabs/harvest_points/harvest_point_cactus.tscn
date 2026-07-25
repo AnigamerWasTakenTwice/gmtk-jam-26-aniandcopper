@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/harvest_point.gd" id="1_02nd7"]
 [ext_resource type="Texture2D" uid="uid://8f0uskhevjkh" path="res://assets/sprites/tiles/grass_tiles.png" id="2_6ch1l"]
-[ext_resource type="PackedScene" path="res://scenes/prefabs/items/cactus.tscn" id="2_74d8k"]
+[ext_resource type="PackedScene" uid="uid://d0c2bx6i3duiv" path="res://scenes/prefabs/items/cactus.tscn" id="2_74d8k"]
 [ext_resource type="PackedScene" uid="uid://xicjh6l1ep0c" path="res://scenes/prefabs/hitbox.tscn" id="3_sp86l"]
 [ext_resource type="Texture2D" uid="uid://c187ol81ptwse" path="res://assets/sprites/harvest_points/cactus.png" id="4_ro2ea"]
 
@@ -23,6 +23,21 @@ region = Rect2(1, 33, 14, 15)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r4mdm"]
 size = Vector2(116, 362)
 
+[sub_resource type="Animation" id="Animation_oqgmr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cactus:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-5, -13)]
+}
+
 [sub_resource type="Animation" id="Animation_r5jby"]
 resource_name = "shake"
 length = 0.4
@@ -37,21 +52,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(-5, -13), Vector2(20, -13), Vector2(-5, -13), Vector2(20, -13), Vector2(-5, -13)]
-}
-
-[sub_resource type="Animation" id="Animation_oqgmr"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Cactus:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-5, -13)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_08rxd"]
