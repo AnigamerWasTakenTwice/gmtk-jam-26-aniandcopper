@@ -30,6 +30,8 @@ extends CharacterBody2D
 
 var movement_direction: Vector2
 
+var quicksand = false
+
 
 var tools = [
 	"axe",
@@ -62,12 +64,13 @@ func _physics_process(delta: float) -> void:
 func move_player(delta: float):
 	# Movement Code
 	movement_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	var quicksand_mult = 0.25 if quicksand else 1
 	if Input.is_action_pressed("run"):
-		velocity.x = clamp(velocity.x + movement_direction.normalized().x * movement_speed * 60 * delta * run_accel_multiplier, -movement_max_speed * run_max_speed_multiplier, movement_max_speed * run_max_speed_multiplier)
-		velocity.y = clamp(velocity.y + movement_direction.normalized().y * movement_speed * 60 * delta * run_accel_multiplier, -movement_max_speed * run_max_speed_multiplier, movement_max_speed * run_max_speed_multiplier)
+		velocity.x = clamp(velocity.x + movement_direction.normalized().x * movement_speed * 60 * delta * run_accel_multiplier, -movement_max_speed * run_max_speed_multiplier, movement_max_speed * run_max_speed_multiplier * quicksand_mult)
+		velocity.y = clamp(velocity.y + movement_direction.normalized().y * movement_speed * 60 * delta * run_accel_multiplier, -movement_max_speed * run_max_speed_multiplier, movement_max_speed * run_max_speed_multiplier * quicksand_mult)
 	else:
-		velocity.x = clamp(velocity.x + movement_direction.normalized().x * movement_speed * 60 * delta, -movement_max_speed, movement_max_speed)
-		velocity.y = clamp(velocity.y + movement_direction.normalized().y * movement_speed * 60 * delta, -movement_max_speed, movement_max_speed)
+		velocity.x = clamp(velocity.x + movement_direction.normalized().x * movement_speed * 60 * delta, -movement_max_speed, movement_max_speed * quicksand_mult)
+		velocity.y = clamp(velocity.y + movement_direction.normalized().y * movement_speed * 60 * delta, -movement_max_speed, movement_max_speed * quicksand_mult)
 
 
 	velocity = lerp(velocity, Vector2.ZERO, 0.2)

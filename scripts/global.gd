@@ -8,7 +8,8 @@ var inventory = {
 	"steel": 0,
 	"glass": 0,
 	"copper": 0,
-	"ice": 0
+	"ice": 0,
+	"cactus": 0
 }
 
 

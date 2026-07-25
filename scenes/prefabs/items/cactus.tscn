@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0c2bx6i3duiv"]
+
+[ext_resource type="Script" path="res://scripts/pickup.gd" id="1_35f4f"]
+[ext_resource type="Texture2D" uid="uid://cb4on343a8roh" path="res://assets/sprites/items/items.png" id="2_rgpjb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q1si3"]
+size = Vector2(141, 48)
+
+[node name="Pickup" type="Area2D"]
+script = ExtResource("1_35f4f")
+item = "cactus"
+metadata/type = "interact"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_q1si3")
+
+[node name="Items" type="Sprite2D" parent="."]
+scale = Vector2(10, 10)
+texture = ExtResource("2_rgpjb")
+region_enabled = true
+region_rect = Rect2(16, 0, 16, 16)
