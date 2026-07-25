@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dvwua2wbj43yh"]
+[gd_scene load_steps=10 format=3 uid="uid://dvwua2wbj43yh"]
 
 [ext_resource type="PackedScene" uid="uid://bvln38xbur2mi" path="res://scenes/prefabs/player.tscn" id="1_gnr22"]
 [ext_resource type="Script" path="res://scripts/countdown.gd" id="1_pwi64"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://dsurl7keocwk3" path="res://scenes/prefabs/pickup.tscn" id="4_1dsyo"]
 [ext_resource type="PackedScene" uid="uid://jb42wjtdh6m" path="res://scenes/prefabs/enemy.tscn" id="4_t4uas"]
 [ext_resource type="PackedScene" uid="uid://bj1fdt5b11er3" path="res://scenes/prefabs/tutorial_screen.tscn" id="6_ss5cc"]
+[ext_resource type="PackedScene" uid="uid://b5dk311ep3prg" path="res://scenes/prefabs/lever.tscn" id="7_htxyo"]
+[ext_resource type="PackedScene" uid="uid://bvnidurgxjds7" path="res://scenes/prefabs/door.tscn" id="8_0lirs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h7rd6"]
 size = Vector2(250, 500)
@@ -39,7 +41,7 @@ movement_speed = 200.0
 detection_range = 300.0
 
 [node name="GameTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 200.0
 one_shot = true
 autostart = true
 
@@ -50,3 +52,14 @@ position = Vector2(-188, 432)
 shape = SubResource("RectangleShape2D_h7rd6")
 
 [node name="TutorialScreen" parent="." instance=ExtResource("6_ss5cc")]
+
+[node name="Lever" parent="." node_paths=PackedStringArray("doors") instance=ExtResource("7_htxyo")]
+position = Vector2(272, -270)
+doors = [NodePath("../Door"), NodePath("../Door2")]
+
+[node name="Door" parent="." instance=ExtResource("8_0lirs")]
+position = Vector2(1687, -182)
+
+[node name="Door2" parent="." instance=ExtResource("8_0lirs")]
+position = Vector2(1687, -629)
+is_active = false

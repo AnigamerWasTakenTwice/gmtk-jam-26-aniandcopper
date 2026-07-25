@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://b5dk311ep3prg"]
+
+[ext_resource type="Script" path="res://scripts/lever.gd" id="1_0e1wp"]
+[ext_resource type="Texture2D" uid="uid://bu8bny4k7oraf" path="res://assets/sprites/tiles/lever.png" id="2_y4fw4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nrl2i"]
+size = Vector2(144, 71)
+
+[sub_resource type="GDScript" id="GDScript_aqbhc"]
+resource_name = "lever_interact"
+script/source = "extends Area2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+func interaction():
+	get_parent().interaction()
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7ge0a"]
+radius = 81.0247
+
+[node name="Lever" type="CharacterBody2D"]
+script = ExtResource("1_0e1wp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 33.5)
+shape = SubResource("RectangleShape2D_nrl2i")
+
+[node name="Lever" type="Sprite2D" parent="."]
+position = Vector2(0, 12)
+scale = Vector2(19, 19)
+texture = ExtResource("2_y4fw4")
+
+[node name="Interact" type="Area2D" parent="."]
+script = SubResource("GDScript_aqbhc")
+metadata/type = "interact"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interact"]
+shape = SubResource("CircleShape2D_7ge0a")
