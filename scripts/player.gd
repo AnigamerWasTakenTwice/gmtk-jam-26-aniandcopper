@@ -109,12 +109,8 @@ func handle_interaction_area():
 
 		if selected_tool == 0: $UI/ToolSelected.texture.region = Rect2(0, 0, ICON_PIXEL_SIZE, ICON_PIXEL_SIZE)
 		elif selected_tool == 1: $UI/ToolSelected.texture.region = Rect2(ICON_PIXEL_SIZE, 0, ICON_PIXEL_SIZE, ICON_PIXEL_SIZE)
-		
-		
-	if interaction_area.global_position.x > global_position.x:
-		interaction_area.global_scale.x = 1
-	else:
-		interaction_area.global_scale.x = -1
+
+
 
 func handle_health():
 		#HP and Death
