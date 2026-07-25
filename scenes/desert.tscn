@@ -76,7 +76,10 @@ offset_bottom = 236.0
 text = "Good yield, but I should
 grab more. I just hope I
 can find everything in
-time..."
+time... The machine still
+needs lubricant, maybe
+cactus juice would 
+work?   "
 
 [node name="Area2D" type="Area2D" parent="."]
 

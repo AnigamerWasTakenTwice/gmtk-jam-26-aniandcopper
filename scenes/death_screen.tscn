@@ -184,6 +184,7 @@ scale = Vector2(3, 3)
 texture = ExtResource("1_q2517")
 
 [node name="Screen" type="Sprite2D" parent="Shatter"]
+modulate = Color(1, 1, 1, 0.501961)
 z_index = -1
 position = Vector2(47.6667, -27.3333)
 texture = ExtResource("3_2jdp2")
