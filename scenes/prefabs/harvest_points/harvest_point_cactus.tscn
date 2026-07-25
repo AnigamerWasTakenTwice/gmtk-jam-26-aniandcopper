@@ -1,8 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://bff2cic6tik71"]
+[gd_scene load_steps=14 format=3 uid="uid://d33nphm4lo5xn"]
 
 [ext_resource type="Script" path="res://scripts/harvest_point.gd" id="1_02nd7"]
 [ext_resource type="Texture2D" uid="uid://8f0uskhevjkh" path="res://assets/sprites/tiles/grass_tiles.png" id="2_6ch1l"]
-[ext_resource type="PackedScene" uid="uid://d0c2bx6i3duiv" path="res://scenes/prefabs/items/cactus.tscn" id="2_74d8k"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/items/cactus.tscn" id="2_74d8k"]
 [ext_resource type="PackedScene" uid="uid://xicjh6l1ep0c" path="res://scenes/prefabs/hitbox.tscn" id="3_sp86l"]
 [ext_resource type="Texture2D" uid="uid://c187ol81ptwse" path="res://assets/sprites/harvest_points/cactus.png" id="4_ro2ea"]
 
@@ -22,6 +22,43 @@ region = Rect2(1, 33, 14, 15)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r4mdm"]
 size = Vector2(116, 362)
+
+[sub_resource type="Animation" id="Animation_r5jby"]
+resource_name = "shake"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cactus:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-5, -13), Vector2(20, -13), Vector2(-5, -13), Vector2(20, -13), Vector2(-5, -13)]
+}
+
+[sub_resource type="Animation" id="Animation_oqgmr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cactus:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-5, -13)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_08rxd"]
+_data = {
+"RESET": SubResource("Animation_oqgmr"),
+"shake": SubResource("Animation_r5jby")
+}
 
 [node name="HarvestPoint" type="StaticBody2D"]
 script = ExtResource("1_02nd7")
@@ -47,6 +84,7 @@ texture = SubResource("AtlasTexture_175d5")
 
 [node name="Hitbox" parent="." instance=ExtResource("3_sp86l")]
 position = Vector2(-1, 182)
+parent_has_take_damage_function = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -28)
@@ -56,3 +94,8 @@ shape = SubResource("RectangleShape2D_r4mdm")
 position = Vector2(-5, -13)
 scale = Vector2(12, 12)
 texture = ExtResource("4_ro2ea")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_08rxd")
+}

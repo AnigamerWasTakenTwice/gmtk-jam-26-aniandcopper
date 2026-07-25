@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://8f0uskhevjkh" path="res://assets/sprites/tiles/grass_tiles.png" id="4_n1nv6"]
 [ext_resource type="Texture2D" uid="uid://d0r8h6wdskl7j" path="res://assets/sprites/tiles/quicksand.png" id="5_q8i7e"]
 [ext_resource type="Texture2D" uid="uid://ds766q7cxtl0i" path="res://assets/sprites/tiles/Lumps.png" id="6_3l41e"]
-[ext_resource type="PackedScene" uid="uid://bff2cic6tik71" path="res://scenes/prefabs/harvest_points/harvest_point_cactus.tscn" id="7_at1na"]
+[ext_resource type="PackedScene" uid="uid://d33nphm4lo5xn" path="res://scenes/prefabs/harvest_points/harvest_point_cactus.tscn" id="7_at1na"]
 [ext_resource type="PackedScene" uid="uid://btkrmd2yy1hov" path="res://scenes/prefabs/harvest_points/harvest_point_rock.tscn" id="8_h10qt"]
 [ext_resource type="PackedScene" uid="uid://dsurl7keocwk3" path="res://scenes/prefabs/pickup.tscn" id="9_ut86i"]
 [ext_resource type="Texture2D" uid="uid://cb4on343a8roh" path="res://assets/sprites/items/items.png" id="10_a14wu"]
