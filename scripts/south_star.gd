@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 const DISTANCE_TO_TARGET_TOLERANCE: = 50
 
+const ATTACKS_BEFORE_CHASE = 3
+const HEALTH_BEFORE_CHASE = 3
 
 @export var health = 10
 @export var drop: String
@@ -30,8 +32,7 @@ var state : = ""
 var times_to_attack : = 0
 var times_to_cycle : = 0
 var selected_corner: Node2D
-var progress: = 0
-
+var times_attacked: = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -54,10 +55,19 @@ func _process(delta: float) -> void:
 	destroy_tiles()
 	move_eye()
 
+	if player.health <= HEALTH_BEFORE_CHASE and times_attacked >= ATTACKS_BEFORE_CHASE:
+		move_enemy()
+	else:
+		do_attack_moves(delta)
+
+	pass
+
+func do_attack_moves(delta: float):
 	if attack == 0:
 		const ATTACK_AMOUNT = 3
 		attack = randi_range(1, ATTACK_AMOUNT)
 		state = ""
+		times_attacked += 1
 
 		if attack == 1: # Dash
 			const MIN_ATTACK_TIMES = 2
@@ -105,8 +115,6 @@ func _process(delta: float) -> void:
 	if times_to_attack <= 0:
 		state = ""
 		attack = 0
-
-	pass
 
 func dash(delta: float):
 	
