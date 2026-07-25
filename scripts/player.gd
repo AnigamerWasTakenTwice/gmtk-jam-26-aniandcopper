@@ -26,6 +26,7 @@ extends CharacterBody2D
 @onready var animation_player: AnimationPlayer = $UI/AnimationPlayer
 @onready var damage_animation: AnimationPlayer = $DamageAnimation
 
+@onready var south_star_helper_points: Node2D = $Camera2D/SouthStarHelperPoints
 
 var movement_direction: Vector2
 
@@ -49,6 +50,8 @@ func _physics_process(delta: float) -> void:
 	camera.limit_left = camera_left_threshhold
 	camera.limit_right = camera_right_threshhold
 	camera.limit_top = camera_top_threshhold
+	south_star_helper_points.global_position = camera.global_position
+	
 	move_player(delta)
 	handle_interaction_area()
 	handle_health()

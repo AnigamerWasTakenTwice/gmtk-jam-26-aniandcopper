@@ -26,6 +26,7 @@ radius = 505.776
 script = ExtResource("1_hmu8y")
 health = 999
 movement_speed = 2240.0
+dash_speed_multiplier = 2.0
 detection_range = 99999.0
 chase_range = 1e+07
 enemy_sprite = NodePath("SouthStarShape")
@@ -63,6 +64,13 @@ shape = SubResource("RectangleShape2D_u2e18")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DestructionRange"]
 shape = SubResource("CircleShape2D_8l5q1")
+
+[node name="DashDirection" type="Line2D" parent="."]
+points = PackedVector2Array(2000, 0, 0, 0)
+width = 0.0
+
+[node name="Marker2D" type="Marker2D" parent="DashDirection"]
+position = Vector2(2000, 0)
 
 [connection signal="timeout" from="WanderTimer" to="." method="_on_wander_timer_timeout"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://dkfsxpoabeu63"]
+[gd_scene load_steps=20 format=4 uid="uid://dkfsxpoabeu63"]
 
 [ext_resource type="Script" path="res://scripts/countdown.gd" id="1_dquwi"]
 [ext_resource type="PackedScene" uid="uid://bvln38xbur2mi" path="res://scenes/prefabs/player.tscn" id="2_n0nag"]
@@ -13,12 +13,6 @@
 [ext_resource type="Script" path="res://scripts/camera_limiter.gd" id="11_ukeqe"]
 [ext_resource type="AudioStream" uid="uid://cp6oou3lqkcgu" path="res://assets/music/forest-wanderer-final.mp3" id="12_xquum"]
 [ext_resource type="AudioStream" uid="uid://bfyk7fcio8k5m" path="res://assets/music/ohfuck.mp3" id="13_0ntcd"]
-
-[sub_resource type="Curve2D" id="Curve2D_3xc3x"]
-_data = {
-"points": PackedVector2Array(1.5874, 413.299, 0, -300, 1250, 0, 750, 0, -750, 0, 0, -750, 0, -300, 0, 300, -1250, 0, -750, 0, 750, 0, 0, 750, 0, 300, 0, 0, 1250, 0)
-}
-point_count = 5
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k8uyb"]
 size = Vector2(1624, 104)
@@ -99,26 +93,7 @@ metadata/_edit_vertical_guides_ = [6180.0]
 position = Vector2(439, -196)
 camera_bottom_threshhold = 935
 
-[node name="SouthStarHelperPoints" type="Node2D" parent="Player"]
-unique_name_in_owner = true
-
-[node name="Path" type="Path2D" parent="Player/SouthStarHelperPoints"]
-curve = SubResource("Curve2D_3xc3x")
-
-[node name="TopRight" type="Marker2D" parent="Player/SouthStarHelperPoints"]
-position = Vector2(1250, -750)
-
-[node name="TopLeft" type="Marker2D" parent="Player/SouthStarHelperPoints"]
-position = Vector2(-1250, -750)
-
-[node name="BottomLeft" type="Marker2D" parent="Player/SouthStarHelperPoints"]
-position = Vector2(-1250, 750)
-
-[node name="BottomRight" type="Marker2D" parent="Player/SouthStarHelperPoints"]
-position = Vector2(1250, 750)
-
 [node name="TutorialScreen" parent="." instance=ExtResource("3_g106x")]
-visible = false
 
 [node name="TextureRect" parent="TutorialScreen" index="1"]
 offset_left = 406.0
@@ -148,7 +123,7 @@ position = Vector2(-176, -62)
 shape = SubResource("RectangleShape2D_k8uyb")
 
 [node name="GameTimer" type="Timer" parent="."]
-wait_time = 210.0
+wait_time = 0.25
 one_shot = true
 autostart = true
 

@@ -1,37 +1,91 @@
 extends CharacterBody2D
 
+const DISTANCE_TO_TARGET_TOLERANCE: = 50
+
+
 @export var health = 10
 @export var drop: String
 @export var player: CharacterBody2D
 @export var movement_speed: float
+@export var dash_speed_multiplier: float
 @export var detection_range: float
 @export var chase_range: float
-@export var tilemap:TileMapLayer
+@export var tilemap: TileMapLayer
 @export var enemy_sprite: Node2D
 @onready var eye: Node2D = $Eye
+
+@onready var south_star_helper_points: Node2D
+
+@onready var south_star_orbit_path: Path2D
 
 var start_spot: Vector2
 var wander_spot: Vector2
 var attacking: bool = false
 
+var target_pos: Vector2
+var attack: int = 0
+
+var state : = ""
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	start_spot = position
+
+	south_star_helper_points = player.south_star_helper_points
+	south_star_orbit_path = south_star_helper_points.get_child(0)
+
+
+
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	handle_health()
-	move_enemy()
+	#move_enemy()
 	flip_sprite()
 	destroy_tiles()
+	move_eye()
+
+	if attack == 0:
+		const ATTACK_AMOUNT = 1
+		attack = randi_range(1, ATTACK_AMOUNT)
+		state = ""
+		
+		
+		if attack == 1: # Dash
+			target_pos = south_star_orbit_path.curve.get_closest_point(global_position) + south_star_orbit_path.global_position
+
+	if attack == 1:
+		dash(delta)
+
+	pass
+
+func dash(delta: float):
 	
+	if state == "":
+
+		if global_position.distance_to(target_pos) < DISTANCE_TO_TARGET_TOLERANCE:
+			state = "dash"
+			$DashDirection.look_at(player.global_position)
+			target_pos = $DashDirection/Marker2D.global_position
+
+
+	elif state == "dash":
+		
+		if global_position.distance_to(target_pos) < DISTANCE_TO_TARGET_TOLERANCE:
+			state = ""
+			target_pos = south_star_orbit_path.curve.get_closest_point(global_position) + south_star_orbit_path.global_position
+		
+	global_position = global_position.move_toward(target_pos, movement_speed * delta * dash_speed_multiplier)
+
+
+func move_eye():
 	if player:
 		const EYE_OFFSET = -90
 		eye.look_at(player.global_position)
 		eye.global_rotation_degrees += EYE_OFFSET
-	pass
+
 
 func destroy_tiles():
 	if tilemap:
