@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://sedspd7smqts"]
+
+[ext_resource type="Script" path="res://scripts/harvest_point.gd" id="1_73fxq"]
+[ext_resource type="PackedScene" uid="uid://xicjh6l1ep0c" path="res://scenes/prefabs/hitbox.tscn" id="3_2ihn4"]
+[ext_resource type="Texture2D" uid="uid://d23kar2wu6at" path="res://assets/sprites/harvest_points/snow_tree.png" id="3_iss6j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wqjon"]
+size = Vector2(116, 600)
+
+[node name="HarvestPointTree" type="StaticBody2D"]
+script = ExtResource("1_73fxq")
+health = 3
+drop = "wood"
+type = "axe"
+
+[node name="Hitbox" parent="." instance=ExtResource("3_2ihn4")]
+position = Vector2(-1, 182)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -147)
+shape = SubResource("RectangleShape2D_wqjon")
+
+[node name="Tree" type="Sprite2D" parent="."]
+position = Vector2(16, -152)
+scale = Vector2(15, 15)
+texture = ExtResource("3_iss6j")
