@@ -15,7 +15,7 @@ extends CharacterBody2D
 @export var health = 10:
 	set(new_hp):
 		if health > new_hp: $SFX/damage.play()
-		health = new_hp
+		if $UI/AnimationPlayer.current_animation != "exit": health = new_hp
 
 @export var can_take_damage: bool = true
 
@@ -117,7 +117,7 @@ func handle_interaction_area():
 
 func handle_health():
 		#HP and Death
-	if health <= 0:
+	if health <= 0 and $UI/AnimationPlayer.current_animation != "exit":
 		movement_max_speed = 0
 		for item in Global.inventory.keys():
 			Global.inventory[item] = 0
