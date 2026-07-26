@@ -473,18 +473,6 @@ texture = ExtResource("4_n1nv6")
 region_enabled = true
 region_rect = Rect2(48.2633, 48.0711, 15.7367, 16.2337)
 
-[node name="Enemy" parent="Pickups" instance=ExtResource("11_fn44i")]
-position = Vector2(-890, 7022)
-
-[node name="Enemy2" parent="Pickups" instance=ExtResource("11_fn44i")]
-position = Vector2(932, 7693)
-
-[node name="Enemy3" parent="Pickups" instance=ExtResource("11_fn44i")]
-position = Vector2(-788, 7765)
-
-[node name="Enemy4" parent="Pickups" instance=ExtResource("11_fn44i")]
-position = Vector2(759, 6850)
-
 [node name="RubyPedestal" type="Sprite2D" parent="."]
 position = Vector2(9, 7457)
 scale = Vector2(12, 12)
@@ -538,6 +526,18 @@ autoplay = true
 [node name="mus_panic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_y8x64")
 volume_db = -15.0
+
+[node name="Enemy" parent="." instance=ExtResource("11_fn44i")]
+position = Vector2(565, 6887)
+
+[node name="Enemy2" parent="." instance=ExtResource("11_fn44i")]
+position = Vector2(-619, 7048)
+
+[node name="Enemy3" parent="." instance=ExtResource("11_fn44i")]
+position = Vector2(-610, 7838)
+
+[node name="Enemy4" parent="." instance=ExtResource("11_fn44i")]
+position = Vector2(955, 7928)
 
 [connection signal="body_entered" from="Quicksand" to="Quicksand" method="_on_body_entered"]
 [connection signal="body_exited" from="Quicksand" to="Quicksand" method="_on_body_exited"]
