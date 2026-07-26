@@ -20,8 +20,8 @@ region = Rect2(52, 16, 8, 16)
 atlas = ExtResource("2_6ch1l")
 region = Rect2(1, 33, 14, 15)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_r4mdm"]
-size = Vector2(116, 362)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s8jgy"]
+size = Vector2(116, 223)
 
 [sub_resource type="Animation" id="Animation_oqgmr"]
 length = 0.001
@@ -83,14 +83,15 @@ position = Vector2(0, -31)
 texture = SubResource("AtlasTexture_175d5")
 
 [node name="Hitbox" parent="." instance=ExtResource("3_sp86l")]
-position = Vector2(-1, 182)
+position = Vector2(1, 155)
 parent_has_take_damage_function = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -28)
-shape = SubResource("RectangleShape2D_r4mdm")
+position = Vector2(0, 41.5)
+shape = SubResource("RectangleShape2D_s8jgy")
 
 [node name="Cactus" type="Sprite2D" parent="."]
+z_index = 3
 position = Vector2(-5, -13)
 scale = Vector2(12, 12)
 texture = ExtResource("4_ro2ea")
