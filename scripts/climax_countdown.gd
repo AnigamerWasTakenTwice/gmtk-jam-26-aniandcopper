@@ -10,15 +10,18 @@ const ADDITIONAl_TIME = 10
 
 @export var max_static: = 0.25
 
+@export var music: AudioStreamPlayer
+@export var music_panic: AudioStreamPlayer
+
 @onready var player: CharacterBody2D = $Player
 @onready var robot: Area2D = $Pedestal/Interact
 
 var monster_inst: CharacterBody2D
 
 var is_monster_present: bool = false
+var has_monster_died: bool = false
 
-@export var music: AudioStreamPlayer
-@export var music_panic: AudioStreamPlayer
+var died_position: Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -33,7 +36,7 @@ func _ready() -> void:
 		timer_label.text = "KILLITKILLITKILLITKILLITKILLITKILLITKILLITKILLITKILLITKILLITKILLITKILLIT"
 		is_monster_present = true
 		monster_inst = load(monster).instantiate()
-		monster_inst.position = monster_spawn_pos
+		monster_inst.position = get_monster_position()
 		monster_inst.player = $Player
 		monster_inst.robot = robot
 		if tilemap: monster_inst.tilemap = tilemap
@@ -42,13 +45,22 @@ func _ready() -> void:
 		)
 	pass # Replace with function body.
 
+func get_monster_position():
+	var pos: Vector2
+	var south_star_points: Node2D = $Player/Camera2D/SouthStarHelperPoints
+	var current_farthest_point: Node2D
 
+	for child in south_star_points.get_children():
+		if child.name != "Path":
+			if current_farthest_point == null: current_farthest_point = child
+			elif robot.global_position.distance_to(child.global_position) > robot.global_position.distance_to(current_farthest_point.global_position):
+				current_farthest_point = child
+	
+	return current_farthest_point.global_position
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	# If the timer hasn't ran out, the timer label shows how much time is left.
-	print(timer)
-	print(timer_label)
 	if timer.time_left > 0: timer_label.text = var_to_str(int(timer.time_left - ADDITIONAl_TIME))
 	
 	if timer.time_left < ADDITIONAl_TIME: music.stop()
@@ -65,10 +77,22 @@ func _process(delta: float) -> void:
 		player.get_node("SFX/static").volume_db = remap(player.position.distance_to(monster_inst.position), 0, 1000, -10, -80)
 	pass
 
+
 func kill_monster():
 	is_monster_present = false
+	has_monster_died = true
+	died_position = monster_inst.global_position
 	monster_inst.queue_free()
 	music_panic.stop()
 	player.get_node("UI/RedOverlay").visible = false
 	timer_label.text = "Escape"
 	player.get_node("SFX/static").stop()
+	$Door.is_active = false
+
+
+func _on_respawn_area_body_entered(body: Node2D) -> void:
+	if has_monster_died:
+		monster_inst = preload("res://scenes/prefabs/south_star_final.tscn").instantiate()
+		monster_inst.position = died_position
+		monster_inst.player = $Player
+		add_child(monster_inst)

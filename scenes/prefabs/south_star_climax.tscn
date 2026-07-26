@@ -25,9 +25,11 @@ radius = 505.776
 
 [node name="SouthStar" type="CharacterBody2D"]
 scale = Vector2(2.46904, 2.46904)
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_5wgi8")
 movement_speed = 500.0
-knockback_speed = 2000.0
+knockback_speed = 500.0
 
 [node name="SouthStarShape" type="Sprite2D" parent="."]
 texture_repeat = 2
@@ -43,7 +45,6 @@ scale = Vector2(0.574074, 0.574074)
 texture = ExtResource("5_olvry")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("RectangleShape2D_l1g6v")
 
 [node name="WanderTimer" type="Timer" parent="."]

@@ -14,8 +14,8 @@ const HEALTH_BEFORE_CHASE = 3
 @export var chase_range: float
 @export var tilemap: TileMapLayer
 @export var enemy_sprite: Node2D
-@onready var eye: Node2D = $Eye
 
+@onready var eye: Node2D = $Eye
 @onready var south_star_helper_points: Node2D
 
 @onready var south_star_orbit_path: Path2D

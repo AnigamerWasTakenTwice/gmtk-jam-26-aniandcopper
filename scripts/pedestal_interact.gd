@@ -1,8 +1,9 @@
 extends Area2D
 
 const PROGRESS_AMOUNT = 0.05
-const P_LASER_DISTANCE = 32
-const P_LASER_ROTATION_OFFSET = 90
+const P_LASER_DISTANCE = 48
+const P_LASER_ROTATION_OFFSET_IDLE = 90
+const P_LASER_ROTATION_OFFSET_ATTACKING = -90
 
 const TIME_UNTIL_MONSTER_DEATH = 2.5
 const TIME_UNTIL_LASER_DEACTIVATES = 5
@@ -63,25 +64,31 @@ func exit_robot():
 func move_robot():
 	if !is_robot_active or is_laser_active: return
 	
-	if Input.is_action_just_pressed("interact"): exit_robot()
+	if Input.is_action_just_pressed("interact") and not is_laser_active: exit_robot()
 
 
 
 	if $"../..".is_monster_present:
-		var aim_direction = position.direction_to($"../..".monster_inst.global_position)
+		var aim_direction = position.direction_to($"../..".monster_inst.position)
 
-		p_laser.position = -aim_direction * P_LASER_DISTANCE
+		p_laser.position = aim_direction * P_LASER_DISTANCE
+		
+		p_laser.look_at($"../..".monster_inst.position)
+		p_laser.global_rotation_degrees += P_LASER_ROTATION_OFFSET_ATTACKING
+		
+		
 
 	else:
 		var aim_direction = position.direction_to(get_global_mouse_position())
 
 		p_laser.position = aim_direction * P_LASER_DISTANCE
 
-	p_laser.look_at(p_cannon.global_position)
-	p_laser.global_rotation_degrees += P_LASER_ROTATION_OFFSET
+		p_laser.look_at(p_cannon.global_position)
+		p_laser.global_rotation_degrees += P_LASER_ROTATION_OFFSET_IDLE
 
-	if Input.is_action_just_pressed("attack") and $"../..".is_monster_present:
-		$"../PCannon/Laser/SuperLaserPiss".visible = true
+
+	if Input.is_action_just_pressed("attack") and $"../..".is_monster_present and not is_laser_active:
+		$"../Animation".play("fire")
 		is_laser_active = true
 
 		await get_tree().create_timer(TIME_UNTIL_MONSTER_DEATH).timeout
@@ -90,3 +97,5 @@ func move_robot():
 		await get_tree().create_timer(TIME_UNTIL_LASER_DEACTIVATES).timeout
 		$"../PCannon/Laser/SuperLaserPiss".visible = false
 		is_laser_active = false
+		$"../Animation".stop()
+		

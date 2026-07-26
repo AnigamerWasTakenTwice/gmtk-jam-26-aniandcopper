@@ -69,9 +69,15 @@ func handle_health():
 func move_enemy(delta: float):
 	if player:
 		if robot.is_laser_active == true:
-			var direction: Vector2 = player.global_position.direction_to(global_position)
+			var direction: Vector2 = robot.global_position.direction_to(global_position)
 			
 			velocity = direction * knockback_speed
+			
+			var path: Path2D = robot.get_parent().get_child(0).get_child(0).get_child(0)
+			
+			path.get_child(0).progress += knockback_speed * delta
+			
+			global_position = path.get_child(0).global_position
 		else:
 			global_position = global_position.move_toward(player.global_position, movement_speed * delta)
 	move_and_slide()
