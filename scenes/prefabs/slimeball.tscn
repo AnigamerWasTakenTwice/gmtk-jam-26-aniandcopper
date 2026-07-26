@@ -9,7 +9,7 @@ radius = 1.65267
 [node name="Slimeball" type="Area2D"]
 scale = Vector2(19, 19)
 script = ExtResource("1_0oct8")
-speed = 700
+speed = 350
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_f66ps")
