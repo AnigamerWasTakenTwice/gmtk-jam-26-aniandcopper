@@ -1,0 +1,73 @@
+[gd_scene load_steps=11 format=3 uid="uid://dpbijrn5ptiuv"]
+
+[ext_resource type="Script" path="res://scripts/south_star_climax.gd" id="1_5wgi8"]
+[ext_resource type="Shader" path="res://assets/shaders/galaxyoverlay.gdshader" id="2_qe8ga"]
+[ext_resource type="Texture2D" uid="uid://il7fqv3262dw" path="res://assets/sprites/south_star/supernova2.png" id="3_yvdbg"]
+[ext_resource type="Texture2D" uid="uid://dmabv7pmsloc2" path="res://assets/sprites/south_star/south_star_shape.png" id="4_4hagj"]
+[ext_resource type="Texture2D" uid="uid://v5nudshrdig2" path="res://assets/sprites/south_star/south_star_eye.png" id="5_olvry"]
+[ext_resource type="AudioStream" uid="uid://4qsnnjdm3s1" path="res://assets/sfx/static_roar.wav" id="6_ftb88"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6u0j0"]
+shader = ExtResource("2_qe8ga")
+shader_parameter/clear_color = Color(0, 1, 0.701961, 1)
+shader_parameter/tolerance = 0.1
+shader_parameter/direction = Vector2(-1, 1)
+shader_parameter/speed = 1.0
+shader_parameter/override_texture = ExtResource("3_yvdbg")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l1g6v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u2e18"]
+size = Vector2(320, 320)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8l5q1"]
+radius = 505.776
+
+[node name="SouthStar" type="CharacterBody2D"]
+scale = Vector2(2.46904, 2.46904)
+script = ExtResource("1_5wgi8")
+movement_speed = 500.0
+knockback_speed = 2000.0
+
+[node name="SouthStarShape" type="Sprite2D" parent="."]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_6u0j0")
+position = Vector2(-1, 2)
+texture = ExtResource("4_4hagj")
+
+[node name="Eye" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite2D" parent="Eye"]
+position = Vector2(3, 51)
+scale = Vector2(0.574074, 0.574074)
+texture = ExtResource("5_olvry")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_l1g6v")
+
+[node name="WanderTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="InteractionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("RectangleShape2D_u2e18")
+
+[node name="DestructionRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DestructionRange"]
+shape = SubResource("CircleShape2D_8l5q1")
+
+[node name="static" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_ftb88")
+volume_db = -17.434
+autoplay = true
+
+[connection signal="timeout" from="WanderTimer" to="." method="_on_wander_timer_timeout"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="body_entered" from="DestructionRange" to="." method="_on_destruction_range_body_entered"]

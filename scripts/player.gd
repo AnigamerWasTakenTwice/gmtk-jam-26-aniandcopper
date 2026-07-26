@@ -28,6 +28,8 @@ extends CharacterBody2D
 
 @onready var south_star_helper_points: Node2D = $Camera2D/SouthStarHelperPoints
 
+var is_active: = true
+
 var movement_direction: Vector2
 var using_m_and_k: bool = true
 
@@ -41,9 +43,9 @@ var tools = [
 
 var selected_tool = 0
 var checklist_visible = true
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	
 	pass # Replace with function body.
 
 
@@ -61,8 +63,16 @@ func _physics_process(delta: float) -> void:
 	handle_checklist()
 	handle_static()
 
+	if !is_active: 
+		player_sprite.visible = false
+		interaction_area.visible = false
+	else:
+		player_sprite.visible = true
+		interaction_area.visible = true
 
 func move_player(delta: float):
+	if !is_active: return
+	
 	# Movement Code
 	movement_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var quicksand_mult = 0.25 if quicksand else 1
@@ -91,6 +101,7 @@ func move_player(delta: float):
 	move_and_slide()
 
 func handle_interaction_area():
+	
 	# Moves the interaction area to point to where the player is looking.
 	var aim_direction
 
@@ -98,6 +109,9 @@ func handle_interaction_area():
 		aim_direction = position.direction_to(get_global_mouse_position())
 	else:
 		aim_direction = Input.get_vector("point_left", "point_right", "point_up", "point_down")
+
+	if !is_active: return
+
 
 	interaction_area.position = aim_direction * 128
 
@@ -183,12 +197,17 @@ func interact(type: String):
 
 
 func _on_step_timer_timeout() -> void:
+	if !is_active: return
+	
 	if velocity.length() > 0.2 and !Input.is_action_pressed("run"):
 		$SFX/step.pitch_scale = randf_range(0.8, 1.2)
 		$SFX/step.play()
 	pass # Replace with function body.
 
 func _on_run_timer_timeout() -> void:
+	if !is_active: return
+	
+	
 	if velocity.length() > 0.2 and Input.is_action_pressed("run"):
 		$SFX/step.pitch_scale = randf_range(0.7, 1.3)
 		$SFX/step.play()

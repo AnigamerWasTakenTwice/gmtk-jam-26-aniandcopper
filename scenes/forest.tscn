@@ -72,7 +72,7 @@ size = Vector2(1631, 1279)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cgamp"]
 size = Vector2(2311, 281)
 
-[node name="Forest" type="Node2D" node_paths=PackedStringArray("timer", "timer_label", "exit_area", "tilemap", "music", "music_panic")]
+[node name="Forest" type="Node2D" node_paths=PackedStringArray("timer", "exit_area", "tilemap", "music", "music_panic")]
 position = Vector2(-40, 161)
 script = ExtResource("1_dquwi")
 timer = NodePath("GameTimer")
