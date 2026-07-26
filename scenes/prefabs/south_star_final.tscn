@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cfk7k23ew227v"]
+[gd_scene load_steps=9 format=3 uid="uid://cfk7k23ew227v"]
 
 [ext_resource type="Script" path="res://scripts/south_star_final.gd" id="1_ukcnl"]
 [ext_resource type="Shader" path="res://assets/shaders/galaxyoverlay.gdshader" id="2_xv7a6"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dmabv7pmsloc2" path="res://assets/sprites/south_star/south_star_shape.png" id="4_lng5l"]
 [ext_resource type="Texture2D" uid="uid://v5nudshrdig2" path="res://assets/sprites/south_star/south_star_eye.png" id="5_a3a7u"]
 [ext_resource type="AudioStream" uid="uid://d2s6dct5macdg" path="res://assets/sfx/monster_jumpscare.wav" id="6_3k7hx"]
+[ext_resource type="AudioStream" uid="uid://bh5yntog6e2s4" path="res://assets/sfx/playerHit.wav" id="7_1uu4j"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6u0j0"]
 shader = ExtResource("2_xv7a6")
@@ -36,3 +37,9 @@ texture = ExtResource("5_a3a7u")
 stream = ExtResource("6_3k7hx")
 volume_db = -17.434
 autoplay = true
+
+[node name="strike" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_1uu4j")
+volume_db = -15.0
+
+[connection signal="finished" from="strike" to="." method="_on_strike_finished"]

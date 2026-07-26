@@ -64,7 +64,8 @@ func _process(delta: float) -> void:
 	if robot.is_robot_active:
 		timer.paused = true
 		
-		if not robot.is_laser_active or not is_monster_present: timer_label.text = "CAN'T HIDE FOR LONG"
+		if has_monster_died: timer_label.text = "    Thank you for playing!\n    Exit from the door on the top!"
+		elif not robot.is_laser_active or not is_monster_present: timer_label.text = "CAN'T HIDE FOR LONG"
 
 	else:
 		if timer.time_left > 0: timer_label.text = var_to_str(int(timer.time_left - ADDITIONAl_TIME))

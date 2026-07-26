@@ -1,8 +1,9 @@
-[gd_scene load_steps=36 format=4 uid="uid://bacvcqtcyjl0n"]
+[gd_scene load_steps=38 format=4 uid="uid://bacvcqtcyjl0n"]
 
 [ext_resource type="Script" path="res://scripts/climax_countdown.gd" id="1_nwxnu"]
 [ext_resource type="PackedScene" uid="uid://bvln38xbur2mi" path="res://scenes/prefabs/player.tscn" id="2_bk6ew"]
 [ext_resource type="PackedScene" uid="uid://bj1fdt5b11er3" path="res://scenes/prefabs/tutorial_screen.tscn" id="3_85sm1"]
+[ext_resource type="FontFile" uid="uid://smn1abrf2jg3" path="res://assets/fonts/PressStart2P.ttf" id="3_yivfo"]
 [ext_resource type="Texture2D" uid="uid://bpmfwekcpy1fv" path="res://assets/sprites/tiles/forestbackgroundtiles.png" id="4_in7pb"]
 [ext_resource type="Texture2D" uid="uid://8f0uskhevjkh" path="res://assets/sprites/tiles/grass_tiles.png" id="5_ulc45"]
 [ext_resource type="Texture2D" uid="uid://cx508mnod88oe" path="res://assets/sprites/tiles/footprint.png" id="6_3p3j5"]
@@ -18,6 +19,9 @@
 [ext_resource type="AudioStream" uid="uid://b36de8lg08qke" path="res://assets/sfx/laser.wav" id="15_ejcvg"]
 [ext_resource type="PackedScene" uid="uid://btkrmd2yy1hov" path="res://scenes/prefabs/harvest_points/harvest_point_rock.tscn" id="17_46dhg"]
 [ext_resource type="PackedScene" uid="uid://basvai4ymr7f0" path="res://scenes/prefabs/harvest_points/harvest_point_tree.tscn" id="18_mojn6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2ukw8"]
+font = ExtResource("3_yivfo")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k8uyb"]
 size = Vector2(1624, 104)
@@ -96,33 +100,6 @@ size = Vector2(56, 15.8947)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_743ti"]
 size = Vector2(55.7895, 16)
 
-[sub_resource type="Animation" id="Animation_jnyje"]
-resource_name = "finish_building"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PCannon:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.133333, 0.266667, 0.433333),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1, 0.555), Vector2(0.379, 1), Vector2(1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PCannon:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.266667, 0.433333, 0.566667),
-"transitions": PackedFloat32Array(1, 2.63902, 1),
-"update": 0,
-"values": [Vector2(0.210527, -34.5263), Vector2(0.210527, -54.1579), Vector2(0.210527, -34.5263)]
-}
-
 [sub_resource type="Animation" id="Animation_h88pk"]
 length = 0.001
 tracks/0/type = "value"
@@ -160,6 +137,33 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_jnyje"]
+resource_name = "finish_building"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PCannon:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667, 0.433333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0.555), Vector2(0.379, 1), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PCannon:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.266667, 0.433333, 0.566667),
+"transitions": PackedFloat32Array(1, 2.63902, 1),
+"update": 0,
+"values": [Vector2(0.210527, -34.5263), Vector2(0.210527, -54.1579), Vector2(0.210527, -34.5263)]
 }
 
 [sub_resource type="Animation" id="Animation_umb6l"]
@@ -253,6 +257,22 @@ metadata/_edit_vertical_guides_ = [6180.0]
 [node name="Player" parent="." instance=ExtResource("2_bk6ew")]
 position = Vector2(439, -196)
 camera_bottom_threshhold = 935
+
+[node name="Label2" type="Label" parent="Player/UI/Noise" index="1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.0
+offset_top = -11.5
+offset_right = 144.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "An inevitable end."
+label_settings = SubResource("LabelSettings_2ukw8")
 
 [node name="TutorialScreen" parent="." instance=ExtResource("3_85sm1")]
 
@@ -488,4 +508,5 @@ position = Vector2(3265, -66)
 [connection signal="body_entered" from="CameraLimiter2" to="CameraLimiter2" method="_on_body_entered"]
 [connection signal="body_entered" from="RespawnArea" to="." method="_on_respawn_area_body_entered"]
 
+[editable path="Player"]
 [editable path="TutorialScreen"]
