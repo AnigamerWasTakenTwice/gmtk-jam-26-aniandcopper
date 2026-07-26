@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://dokaofciht03y"]
+[gd_scene load_steps=25 format=4 uid="uid://dokaofciht03y"]
 
 [ext_resource type="Script" path="res://scripts/countdown.gd" id="1_7ner0"]
 [ext_resource type="PackedScene" uid="uid://bvln38xbur2mi" path="res://scenes/prefabs/player.tscn" id="2_i4pfw"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://scripts/quicksand.gd" id="13_sbr7c"]
 [ext_resource type="AudioStream" uid="uid://cvpssu0unih2" path="res://assets/music/arid-wastes.mp3" id="14_tmoew"]
 [ext_resource type="AudioStream" uid="uid://bfyk7fcio8k5m" path="res://assets/music/ohfuck.mp3" id="15_y8x64"]
+[ext_resource type="PackedScene" uid="uid://cyyeqokqa0nox" path="res://scenes/prefabs/roar.tscn" id="16_ovoon"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l7aoq"]
 size = Vector2(999, 162)
@@ -538,6 +539,10 @@ position = Vector2(-610, 7838)
 
 [node name="Enemy4" parent="." instance=ExtResource("11_fn44i")]
 position = Vector2(955, 7928)
+
+[node name="Roar" parent="." instance=ExtResource("16_ovoon")]
+time_left_amounts = Array[int]([115, 80, 45])
+level = 2
 
 [connection signal="body_entered" from="Quicksand" to="Quicksand" method="_on_body_entered"]
 [connection signal="body_exited" from="Quicksand" to="Quicksand" method="_on_body_exited"]

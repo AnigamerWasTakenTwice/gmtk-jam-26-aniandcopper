@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://r56av40wk8ff"]
+[gd_scene load_steps=29 format=4 uid="uid://r56av40wk8ff"]
 
 [ext_resource type="Script" path="res://scripts/countdown.gd" id="1_resrc"]
 [ext_resource type="PackedScene" uid="uid://bvln38xbur2mi" path="res://scenes/prefabs/player.tscn" id="2_v5rcb"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://sedspd7smqts" path="res://scenes/prefabs/harvest_points/harvest_point_snow_tree.tscn" id="12_87s2w"]
 [ext_resource type="AudioStream" uid="uid://bfyk7fcio8k5m" path="res://assets/music/ohfuck.mp3" id="13_ltbod"]
 [ext_resource type="AudioStream" uid="uid://c5esakjqy366b" path="res://assets/music/windswept-frost.mp3" id="17_50h22"]
+[ext_resource type="PackedScene" uid="uid://cyyeqokqa0nox" path="res://scenes/prefabs/roar.tscn" id="19_h004h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k8uyb"]
 size = Vector2(1624, 104)
@@ -715,6 +716,10 @@ autoplay = true
 [node name="music_panic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_ltbod")
 volume_db = -15.0
+
+[node name="Roar" parent="." instance=ExtResource("19_h004h")]
+time_left_amounts = Array[int]([185, 140, 95, 50])
+level = 3
 
 [connection signal="body_entered" from="CameraLimiter" to="CameraLimiter" method="_on_body_entered"]
 [connection signal="body_entered" from="CameraLimiter2" to="CameraLimiter2" method="_on_body_entered"]
