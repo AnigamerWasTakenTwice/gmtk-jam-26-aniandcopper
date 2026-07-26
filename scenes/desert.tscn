@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://dokaofciht03y"]
+[gd_scene load_steps=24 format=4 uid="uid://dokaofciht03y"]
 
 [ext_resource type="Script" path="res://scripts/countdown.gd" id="1_7ner0"]
 [ext_resource type="PackedScene" uid="uid://bvln38xbur2mi" path="res://scenes/prefabs/player.tscn" id="2_i4pfw"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://d33nphm4lo5xn" path="res://scenes/prefabs/harvest_points/harvest_point_cactus.tscn" id="7_at1na"]
 [ext_resource type="PackedScene" uid="uid://btkrmd2yy1hov" path="res://scenes/prefabs/harvest_points/harvest_point_rock.tscn" id="8_h10qt"]
 [ext_resource type="PackedScene" uid="uid://dsurl7keocwk3" path="res://scenes/prefabs/pickup.tscn" id="9_ut86i"]
-[ext_resource type="Texture2D" uid="uid://cb4on343a8roh" path="res://assets/sprites/items/items.png" id="10_a14wu"]
 [ext_resource type="PackedScene" uid="uid://jb42wjtdh6m" path="res://scenes/prefabs/enemy.tscn" id="11_fn44i"]
 [ext_resource type="Texture2D" uid="uid://c7u3sixoapfwi" path="res://assets/sprites/harvest_points/ruby_pedestal.png" id="12_d8dub"]
 [ext_resource type="Script" path="res://scripts/quicksand.gd" id="13_sbr7c"]
@@ -360,9 +359,9 @@ item = "copper"
 
 [node name="Sprite2D" type="Sprite2D" parent="Pickups/Pickup12"]
 scale = Vector2(5, 5)
-texture = ExtResource("10_a14wu")
+texture = ExtResource("4_n1nv6")
 region_enabled = true
-region_rect = Rect2(64, 0, 16, 16)
+region_rect = Rect2(48, 32, 16, 16)
 
 [node name="Pickup13" parent="Pickups" instance=ExtResource("9_ut86i")]
 position = Vector2(-1232, 2819)
@@ -371,9 +370,9 @@ item = "copper"
 
 [node name="Sprite2D" type="Sprite2D" parent="Pickups/Pickup13"]
 scale = Vector2(5, 5)
-texture = ExtResource("10_a14wu")
+texture = ExtResource("4_n1nv6")
 region_enabled = true
-region_rect = Rect2(64, 0, 16, 16)
+region_rect = Rect2(48, 32, 16, 16)
 
 [node name="Pickup20" parent="Pickups" instance=ExtResource("9_ut86i")]
 position = Vector2(-1207, 2634)
@@ -382,9 +381,9 @@ item = "copper"
 
 [node name="Sprite2D" type="Sprite2D" parent="Pickups/Pickup20"]
 scale = Vector2(5, 5)
-texture = ExtResource("10_a14wu")
+texture = ExtResource("4_n1nv6")
 region_enabled = true
-region_rect = Rect2(64, 0, 16, 16)
+region_rect = Rect2(48, 32, 16, 16)
 
 [node name="Pickup21" parent="Pickups" instance=ExtResource("9_ut86i")]
 position = Vector2(-1429, 2784)
@@ -393,9 +392,9 @@ item = "copper"
 
 [node name="Sprite2D" type="Sprite2D" parent="Pickups/Pickup21"]
 scale = Vector2(5, 5)
-texture = ExtResource("10_a14wu")
+texture = ExtResource("4_n1nv6")
 region_enabled = true
-region_rect = Rect2(64, 0, 16, 16)
+region_rect = Rect2(48, 32, 16, 16)
 
 [node name="Pickup22" parent="Pickups" instance=ExtResource("9_ut86i")]
 position = Vector2(-1039, 2802)
@@ -404,9 +403,9 @@ item = "copper"
 
 [node name="Sprite2D" type="Sprite2D" parent="Pickups/Pickup22"]
 scale = Vector2(5, 5)
-texture = ExtResource("10_a14wu")
+texture = ExtResource("4_n1nv6")
 region_enabled = true
-region_rect = Rect2(64, 0, 16, 16)
+region_rect = Rect2(48, 32, 16, 16)
 
 [node name="Pickup23" parent="Pickups" instance=ExtResource("9_ut86i")]
 position = Vector2(2048, 2568)
@@ -415,9 +414,9 @@ item = "copper"
 
 [node name="Sprite2D" type="Sprite2D" parent="Pickups/Pickup23"]
 scale = Vector2(5, 5)
-texture = ExtResource("10_a14wu")
+texture = ExtResource("4_n1nv6")
 region_enabled = true
-region_rect = Rect2(64, 0, 16, 16)
+region_rect = Rect2(48, 32, 16, 16)
 
 [node name="Pickup24" parent="Pickups" instance=ExtResource("9_ut86i")]
 position = Vector2(1772, 2856)
@@ -426,9 +425,9 @@ item = "copper"
 
 [node name="Sprite2D" type="Sprite2D" parent="Pickups/Pickup24"]
 scale = Vector2(5, 5)
-texture = ExtResource("10_a14wu")
+texture = ExtResource("4_n1nv6")
 region_enabled = true
-region_rect = Rect2(64, 0, 16, 16)
+region_rect = Rect2(48, 32, 16, 16)
 
 [node name="Pickup25" parent="Pickups" instance=ExtResource("9_ut86i")]
 position = Vector2(1610, 3066)
@@ -437,9 +436,9 @@ item = "copper"
 
 [node name="Sprite2D" type="Sprite2D" parent="Pickups/Pickup25"]
 scale = Vector2(5, 5)
-texture = ExtResource("10_a14wu")
+texture = ExtResource("4_n1nv6")
 region_enabled = true
-region_rect = Rect2(64, 0, 16, 16)
+region_rect = Rect2(48, 32, 16, 16)
 
 [node name="Pickup26" parent="Pickups" instance=ExtResource("9_ut86i")]
 position = Vector2(2311, 3000)
@@ -448,9 +447,9 @@ item = "copper"
 
 [node name="Sprite2D" type="Sprite2D" parent="Pickups/Pickup26"]
 scale = Vector2(5, 5)
-texture = ExtResource("10_a14wu")
+texture = ExtResource("4_n1nv6")
 region_enabled = true
-region_rect = Rect2(64, 0, 16, 16)
+region_rect = Rect2(48, 32, 16, 16)
 
 [node name="Pickup27" parent="Pickups" instance=ExtResource("9_ut86i")]
 position = Vector2(2311, 2557)
@@ -459,9 +458,9 @@ item = "copper"
 
 [node name="Sprite2D" type="Sprite2D" parent="Pickups/Pickup27"]
 scale = Vector2(5, 5)
-texture = ExtResource("10_a14wu")
+texture = ExtResource("4_n1nv6")
 region_enabled = true
-region_rect = Rect2(64, 0, 16, 16)
+region_rect = Rect2(48, 32, 16, 16)
 
 [node name="Pickup3" parent="Pickups" instance=ExtResource("9_ut86i")]
 position = Vector2(10, 7456)
@@ -528,17 +527,21 @@ autoplay = true
 stream = ExtResource("15_y8x64")
 volume_db = -15.0
 
-[node name="Enemy" parent="." instance=ExtResource("11_fn44i")]
+[node name="Enemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("11_fn44i")]
 position = Vector2(565, 6887)
+player = NodePath("../Player")
 
-[node name="Enemy2" parent="." instance=ExtResource("11_fn44i")]
+[node name="Enemy2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("11_fn44i")]
 position = Vector2(-619, 7048)
+player = NodePath("../Player")
 
-[node name="Enemy3" parent="." instance=ExtResource("11_fn44i")]
+[node name="Enemy3" parent="." node_paths=PackedStringArray("player") instance=ExtResource("11_fn44i")]
 position = Vector2(-610, 7838)
+player = NodePath("../Player")
 
-[node name="Enemy4" parent="." instance=ExtResource("11_fn44i")]
+[node name="Enemy4" parent="." node_paths=PackedStringArray("player") instance=ExtResource("11_fn44i")]
 position = Vector2(955, 7928)
+player = NodePath("../Player")
 
 [node name="Roar" parent="." instance=ExtResource("16_ovoon")]
 time_left_amounts = Array[int]([115, 80, 45])
