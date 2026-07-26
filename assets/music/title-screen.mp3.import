@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/title-screen.mp3-79dd234d973c2dbfc835f73a6e3e
 [params]
 
 loop=true
-loop_offset=0
-bpm=0
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4

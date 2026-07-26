@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://dixdhy7ocxa2y"]
+[gd_scene load_steps=29 format=4 uid="uid://dixdhy7ocxa2y"]
 
 [ext_resource type="Script" path="res://scripts/countdown.gd" id="1_a1d1w"]
 [ext_resource type="PackedScene" uid="uid://bvln38xbur2mi" path="res://scenes/prefabs/player.tscn" id="2_4uqao"]
@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://8f0uskhevjkh" path="res://assets/sprites/tiles/grass_tiles.png" id="5_stud7"]
 [ext_resource type="PackedScene" uid="uid://jb42wjtdh6m" path="res://scenes/prefabs/enemy.tscn" id="6_402sg"]
 [ext_resource type="Texture2D" uid="uid://b7bmcwu50xfw7" path="res://assets/sprites/tiles/base_plating.png" id="6_eh7el"]
-[ext_resource type="PackedScene" uid="uid://dqyatcm4n6ydp" path="res://scenes/prefabs/harvest_points/breakable_plating.tscn" id="7_ycap8"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/harvest_points/breakable_plating.tscn" id="7_ycap8"]
 [ext_resource type="PackedScene" uid="uid://basvai4ymr7f0" path="res://scenes/prefabs/harvest_points/harvest_point_tree.tscn" id="8_wrdwn"]
 [ext_resource type="PackedScene" uid="uid://sedspd7smqts" path="res://scenes/prefabs/harvest_points/harvest_point_snow_tree.tscn" id="9_o8jnh"]
 [ext_resource type="Texture2D" uid="uid://c7u3sixoapfwi" path="res://assets/sprites/harvest_points/ruby_pedestal.png" id="9_ovnd1"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://cqwfi3r3lnm5m" path="res://scenes/prefabs/items/wood.tscn" id="14_ke4fk"]
 [ext_resource type="AudioStream" uid="uid://br8u7rc785ay8" path="res://assets/music/base.mp3" id="16_w8n46"]
 [ext_resource type="PackedScene" uid="uid://b3vw2vfvrg567" path="res://scenes/prefabs/harvest_points/boulder.tscn" id="17_7fnt5"]
+[ext_resource type="PackedScene" uid="uid://cyyeqokqa0nox" path="res://scenes/prefabs/roar.tscn" id="20_3858u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k8uyb"]
 size = Vector2(1624, 104)
@@ -1351,6 +1352,9 @@ doors = [NodePath("../../Doors/Door9"), NodePath("../../Doors/PrimDoor2")]
 [node name="PrimLever3" parent="Levers" node_paths=PackedStringArray("doors") instance=ExtResource("13_dkp8t")]
 position = Vector2(506, -14887)
 doors = [NodePath("../../Doors/PrimDoor3"), NodePath("../../Doors/Door10")]
+
+[node name="Roar" parent="." instance=ExtResource("20_3858u")]
+time_left_amounts = Array[int]([175, 140, 105, 70, 35])
 
 [connection signal="body_entered" from="CameraLimiter" to="CameraLimiter" method="_on_body_entered"]
 [connection signal="body_entered" from="CameraLimiter2" to="CameraLimiter2" method="_on_body_entered"]

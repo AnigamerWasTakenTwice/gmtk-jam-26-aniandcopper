@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://cyyeqokqa0nox"]
 
 [ext_resource type="Script" path="res://scripts/roar.gd" id="1_tr68s"]
-[ext_resource type="AudioStream" uid="uid://c6d4adbvd7tay" path="res://assets/sfx/placeholder_roar.mp3" id="2_vpukw"]
+[ext_resource type="AudioStream" uid="uid://bdnvmnxen6q75" path="res://assets/sfx/roar.wav" id="3_5l54k"]
 
 [node name="Roar" type="Node2D"]
 script = ExtResource("1_tr68s")
 
 [node name="RoarSFX" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_vpukw")
+stream = ExtResource("3_5l54k")
 volume_db = -17.434
 
 [connection signal="finished" from="RoarSFX" to="." method="_on_roar_sfx_finished"]
