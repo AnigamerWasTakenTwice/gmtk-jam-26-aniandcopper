@@ -85,9 +85,7 @@ func move_enemy(delta: float):
 
 
 
-func _on_destruction_range_body_entered(body: Node2D) -> void:
-	if body != player and body.name != "SouthStar" and !(body is TileMapLayer): body.queue_free()
-	pass # Replace with function body.
+
 
 
 func _on_attack_timer_timeout() -> void:

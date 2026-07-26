@@ -98,7 +98,7 @@ quota = {
 }
 exit_area = NodePath("Area2D")
 monster = "res://scenes/prefabs/south_star.tscn"
-exit_to = "res://scenes/desert.tscn"
+exit_to = "res://scenes/climax.tscn"
 tilemap = NodePath("TileMapLayer")
 max_static = 0.5
 music = NodePath("music")

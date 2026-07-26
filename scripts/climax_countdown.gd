@@ -1,6 +1,6 @@
 extends Node2D
 
-const ADDITIONAl_TIME = 10
+const ADDITIONAl_TIME = 13
 
 @export var timer: Timer
 @export var timer_label: Label
@@ -61,9 +61,18 @@ func get_monster_position():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	# If the timer hasn't ran out, the timer label shows how much time is left.
-	if timer.time_left > 0: timer_label.text = var_to_str(int(timer.time_left - ADDITIONAl_TIME))
+	if robot.is_robot_active:
+		timer.paused = true
+		
+		if not robot.is_laser_active or not is_monster_present: timer_label.text = "CAN'T HIDE FOR LONG"
+
+	else:
+		if timer.time_left > 0: timer_label.text = var_to_str(int(timer.time_left - ADDITIONAl_TIME))
+		if timer.paused: timer.paused = false
+
 	
 	if timer.time_left < ADDITIONAl_TIME: music.stop()
+
 	
 	
 	if is_monster_present:

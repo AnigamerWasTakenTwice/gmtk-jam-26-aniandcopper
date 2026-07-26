@@ -21,8 +21,8 @@ var is_laser_active: bool = false
 var previous_player_pos: Vector2
 
 func _ready() -> void:
-	p_cannon.material.set("shader_parameter/progress", 1)#0.25)
-	p_laser.material.set("shader_parameter/progress", 0)#1)
+	p_cannon.material.set("shader_parameter/progress", 0.25)
+	p_laser.material.set("shader_parameter/progress", 1)
 
 func _process(delta: float) -> void:
 	move_robot()
@@ -90,6 +90,7 @@ func move_robot():
 	if Input.is_action_just_pressed("attack") and $"../..".is_monster_present and not is_laser_active:
 		$"../Animation".play("fire")
 		is_laser_active = true
+		$"../PCannon/Laser/Path2D/PathFollow2D".global_position = $"../PCannon/Laser/Path2D".curve.get_closest_point($"../..".monster_inst.position)
 
 		await get_tree().create_timer(TIME_UNTIL_MONSTER_DEATH).timeout
 		$"../..".kill_monster()
