@@ -103,7 +103,7 @@ quota = {
 "wood": 10
 }
 exit_area = NodePath("Area2D")
-monster = "res://scenes/prefabs/south_star.tscn"
+monster = "res://scenes/prefabs/south_star_tundra.tscn"
 exit_to = "res://scenes/base.tscn"
 tilemap = NodePath("TileMapLayer")
 max_static = 0.5

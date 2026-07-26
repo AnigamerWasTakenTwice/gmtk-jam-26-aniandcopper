@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://8f0uskhevjkh" path="res://assets/sprites/tiles/grass_tiles.png" id="5_stud7"]
 [ext_resource type="PackedScene" uid="uid://jb42wjtdh6m" path="res://scenes/prefabs/enemy.tscn" id="6_402sg"]
 [ext_resource type="Texture2D" uid="uid://b7bmcwu50xfw7" path="res://assets/sprites/tiles/base_plating.png" id="6_eh7el"]
-[ext_resource type="PackedScene" uid="uid://dqyatcm4n6ydp" path="res://scenes/prefabs/harvest_points/breakable_plating.tscn" id="7_ycap8"]
+[ext_resource type="PackedScene" path="res://scenes/prefabs/harvest_points/breakable_plating.tscn" id="7_ycap8"]
 [ext_resource type="PackedScene" uid="uid://basvai4ymr7f0" path="res://scenes/prefabs/harvest_points/harvest_point_tree.tscn" id="8_wrdwn"]
 [ext_resource type="PackedScene" uid="uid://sedspd7smqts" path="res://scenes/prefabs/harvest_points/harvest_point_snow_tree.tscn" id="9_o8jnh"]
 [ext_resource type="Texture2D" uid="uid://c7u3sixoapfwi" path="res://assets/sprites/harvest_points/ruby_pedestal.png" id="9_ovnd1"]
@@ -98,7 +98,7 @@ quota = {
 "wood": 5
 }
 exit_area = NodePath("Area2D")
-monster = "res://scenes/prefabs/south_star.tscn"
+monster = "res://scenes/prefabs/south_star_base.tscn"
 exit_to = "res://scenes/climax.tscn"
 tilemap = NodePath("TileMapLayer")
 max_static = 0.5
