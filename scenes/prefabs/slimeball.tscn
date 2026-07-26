@@ -4,17 +4,17 @@
 [ext_resource type="Texture2D" uid="uid://cmky6t8hxf554" path="res://assets/sprites/slimeball.png" id="2_nhs4h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f66ps"]
-radius = 34.2345
+radius = 1.65267
 
 [node name="Slimeball" type="Area2D"]
+scale = Vector2(19, 19)
 script = ExtResource("1_0oct8")
-speed = 700
+speed = 350
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_f66ps")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(4, 4)
 texture = ExtResource("2_nhs4h")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
