@@ -8,6 +8,7 @@ const CAMERA_TRAUMA_AMOUNT = 0.5
 const TENTACLE_MIN_AMOUNT = 3
 const TENTACLE_MAX_AMOUNT = 9
 const TENTACLE_RANGE = 1000
+const MIN_TENTACLE_X_DISTANCE = 150
 
 @onready var game_timer: Timer = $"../GameTimer"
 @onready var roar_sfx: AudioStreamPlayer = $RoarSFX
@@ -46,10 +47,16 @@ func _process(delta: float) -> void:
 					var tentacle = TENTACLE.instantiate()
 					add_child(tentacle)
 					
-					var ran_x = $"../Player".global_position.x + randi_range(-TENTACLE_RANGE, TENTACLE_RANGE)
-					var ran_y = $"../Player".global_position.y + randi_range(-TENTACLE_RANGE, TENTACLE_RANGE)
+					var pos: Vector2 = $"../Player".global_position
 					
-					tentacle.global_position = Vector2(ran_x, ran_y)
+					
+					while abs(pos.x - $"../Player".global_position.x) <= MIN_TENTACLE_X_DISTANCE:
+						var ran_x = $"../Player".global_position.x + randi_range(-TENTACLE_RANGE, TENTACLE_RANGE)
+						var ran_y = $"../Player".global_position.y + randi_range(-TENTACLE_RANGE, TENTACLE_RANGE)
+						
+						pos = Vector2(ran_x, ran_y)
+					
+					tentacle.global_position = pos
 
 func _on_roar_sfx_finished() -> void:
 	if level >= 2:
