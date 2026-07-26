@@ -119,8 +119,20 @@ func handle_interaction_area():
 
 	if using_m_and_k:
 		aim_direction = position.direction_to(get_global_mouse_position())
+		
+		interaction_area.position = aim_direction * 128
+		
 	else:
 		aim_direction = Input.get_vector("point_left", "point_right", "point_up", "point_down")
+		
+
+
+
+		if aim_direction.length() >= 0.95:		# 0.95 is tolerance
+			interaction_area.position = aim_direction * 128
+		else:
+			return
+	
 
 	if !is_active: return
 
