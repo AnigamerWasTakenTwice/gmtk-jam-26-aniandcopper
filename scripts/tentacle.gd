@@ -12,3 +12,10 @@ func _ready() -> void:
 		$Tentacle.texture = TENTACLE_SPRITE_1
 	else:
 		$Tentacle.texture = TENTACLE_SPRITE_2
+
+
+
+
+func _on_area_entered(area: Area2D) -> void:
+	if area.get_meta("type") == "attack":
+		area.call("interaction")

@@ -1,7 +1,13 @@
 extends Node2D
 
+const TENTACLE = preload("res://scenes/prefabs/tentacle.tscn")
+
 const STATIC_AMOUNT = 0.25
 const CAMERA_TRAUMA_AMOUNT = 0.5
+
+const TENTACLE_MIN_AMOUNT = 3
+const TENTACLE_MAX_AMOUNT = 9
+const TENTACLE_RANGE = 1000
 
 @onready var game_timer: Timer = $"../GameTimer"
 @onready var roar_sfx: AudioStreamPlayer = $RoarSFX
@@ -13,7 +19,6 @@ const CAMERA_TRAUMA_AMOUNT = 0.5
 var is_rumbling: = false
 
 func _process(delta: float) -> void:
-	print()
 	
 	if is_rumbling:
 		$"../Player"/Camera2D.set_trauma(CAMERA_TRAUMA_AMOUNT)
@@ -32,7 +37,19 @@ func _process(delta: float) -> void:
 			if level >= 3: 
 				$"../Player"/UI/Noise.modulate = Color(1, 1, 1, STATIC_AMOUNT)
 				is_rumbling = true
+			
+			
+			if level >= 4:
 
+
+				for j in randi_range(TENTACLE_MIN_AMOUNT, TENTACLE_MAX_AMOUNT):
+					var tentacle = TENTACLE.instantiate()
+					add_child(tentacle)
+					
+					var ran_x = $"../Player".global_position.x + randi_range(-TENTACLE_RANGE, TENTACLE_RANGE)
+					var ran_y = $"../Player".global_position.y + randi_range(-TENTACLE_RANGE, TENTACLE_RANGE)
+					
+					tentacle.global_position = Vector2(ran_x, ran_y)
 
 func _on_roar_sfx_finished() -> void:
 	if level >= 2:

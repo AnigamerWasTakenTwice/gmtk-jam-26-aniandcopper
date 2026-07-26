@@ -1355,6 +1355,7 @@ doors = [NodePath("../../Doors/PrimDoor3"), NodePath("../../Doors/Door10")]
 
 [node name="Roar" parent="." instance=ExtResource("20_3858u")]
 time_left_amounts = Array[int]([175, 140, 105, 70, 35])
+level = 4
 
 [connection signal="body_entered" from="CameraLimiter" to="CameraLimiter" method="_on_body_entered"]
 [connection signal="body_entered" from="CameraLimiter2" to="CameraLimiter2" method="_on_body_entered"]
