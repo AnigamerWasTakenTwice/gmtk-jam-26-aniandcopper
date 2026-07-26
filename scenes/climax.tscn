@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://bacvcqtcyjl0n"]
+[gd_scene load_steps=39 format=4 uid="uid://bacvcqtcyjl0n"]
 
 [ext_resource type="Script" path="res://scripts/climax_countdown.gd" id="1_nwxnu"]
 [ext_resource type="PackedScene" uid="uid://bvln38xbur2mi" path="res://scenes/prefabs/player.tscn" id="2_bk6ew"]
@@ -7,18 +7,19 @@
 [ext_resource type="Texture2D" uid="uid://bpmfwekcpy1fv" path="res://assets/sprites/tiles/forestbackgroundtiles.png" id="4_in7pb"]
 [ext_resource type="Texture2D" uid="uid://8f0uskhevjkh" path="res://assets/sprites/tiles/grass_tiles.png" id="5_ulc45"]
 [ext_resource type="Texture2D" uid="uid://cx508mnod88oe" path="res://assets/sprites/tiles/footprint.png" id="6_3p3j5"]
+[ext_resource type="AudioStream" uid="uid://rnqypxlqlqm7" path="res://assets/music/hell-yeah.mp3" id="9_01eil"]
 [ext_resource type="Texture2D" uid="uid://csvjk2vl2lnb3" path="res://assets/sprites/weapons/pedestal.png" id="10_qvp5j"]
 [ext_resource type="Script" path="res://scripts/camera_limiter.gd" id="11_inos3"]
 [ext_resource type="Shader" path="res://assets/shaders/p_cannon.gdshader" id="11_kotie"]
 [ext_resource type="Texture2D" uid="uid://b3mkqyjfyod1j" path="res://assets/sprites/weapons/peril_canon.png" id="12_xtmq8"]
 [ext_resource type="Shader" path="res://assets/shaders/p_laser.gdshader" id="13_2qkf3"]
-[ext_resource type="AudioStream" uid="uid://cp6oou3lqkcgu" path="res://assets/music/forest-wanderer-final.mp3" id="13_xavjd"]
 [ext_resource type="AudioStream" uid="uid://bfyk7fcio8k5m" path="res://assets/music/ohfuck.mp3" id="14_dewf5"]
 [ext_resource type="Script" path="res://scripts/pedestal_interact.gd" id="14_pqqov"]
 [ext_resource type="PackedScene" uid="uid://bvnidurgxjds7" path="res://scenes/prefabs/door.tscn" id="15_afr65"]
 [ext_resource type="AudioStream" uid="uid://b36de8lg08qke" path="res://assets/sfx/laser.wav" id="15_ejcvg"]
 [ext_resource type="PackedScene" uid="uid://btkrmd2yy1hov" path="res://scenes/prefabs/harvest_points/harvest_point_rock.tscn" id="17_46dhg"]
 [ext_resource type="PackedScene" uid="uid://basvai4ymr7f0" path="res://scenes/prefabs/harvest_points/harvest_point_tree.tscn" id="18_mojn6"]
+[ext_resource type="AudioStream" uid="uid://b0qplto5ydsqr" path="res://assets/music/i-survived.mp3" id="20_cjwbw"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2ukw8"]
 font = ExtResource("3_yivfo")
@@ -334,7 +335,7 @@ shape = SubResource("RectangleShape2D_cgamp")
 [node name="Pickups" type="Node2D" parent="."]
 
 [node name="music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("13_xavjd")
+stream = ExtResource("9_01eil")
 volume_db = -15.0
 autoplay = true
 
@@ -503,6 +504,10 @@ position = Vector2(2865, -485)
 
 [node name="HarvestPoint19" parent="HarvestPoints" instance=ExtResource("18_mojn6")]
 position = Vector2(3265, -66)
+
+[node name="music_fakeout" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("20_cjwbw")
+volume_db = -15.0
 
 [connection signal="body_entered" from="CameraLimiter" to="CameraLimiter" method="_on_body_entered"]
 [connection signal="body_entered" from="CameraLimiter2" to="CameraLimiter2" method="_on_body_entered"]

@@ -64,7 +64,7 @@ func _process(delta: float) -> void:
 	if robot.is_robot_active:
 		timer.paused = true
 		
-		if has_monster_died: timer_label.text = "    Thank you for playing!\n    Exit from the door on the top!"
+		if has_monster_died: timer_label.text = "    Thank you for playing!\n    Exit from the door on the top \n   to return to the title screen!"
 		elif not robot.is_laser_active or not is_monster_present: timer_label.text = "CAN'T HIDE FOR LONG"
 
 	else:
@@ -73,8 +73,10 @@ func _process(delta: float) -> void:
 
 	
 	if timer.time_left < ADDITIONAl_TIME: music.stop()
-
 	
+	if is_instance_valid(monster_inst):
+		if "death_triggered" in monster_inst:
+			if monster_inst.death_triggered == true: $music_fakeout.stop()
 	
 	if is_monster_present:
 		const TRAUMA_AMOUNT = 0.5
@@ -97,6 +99,7 @@ func kill_monster():
 	player.get_node("UI/RedOverlay").visible = false
 	timer_label.text = "Escape"
 	player.get_node("SFX/static").stop()
+	$music_fakeout.play()
 	$Door.is_active = false
 
 

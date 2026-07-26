@@ -14,10 +14,10 @@
 [ext_resource type="Script" path="res://scripts/camera_limiter.gd" id="10_b3gg2"]
 [ext_resource type="PackedScene" uid="uid://dsurl7keocwk3" path="res://scenes/prefabs/pickup.tscn" id="11_gruxt"]
 [ext_resource type="PackedScene" uid="uid://bvnidurgxjds7" path="res://scenes/prefabs/door.tscn" id="12_djrv0"]
-[ext_resource type="AudioStream" uid="uid://cp6oou3lqkcgu" path="res://assets/music/forest-wanderer-final.mp3" id="12_w5oke"]
 [ext_resource type="PackedScene" uid="uid://b5dk311ep3prg" path="res://scenes/prefabs/lever.tscn" id="13_dkp8t"]
 [ext_resource type="AudioStream" uid="uid://bfyk7fcio8k5m" path="res://assets/music/ohfuck.mp3" id="13_ogf7i"]
 [ext_resource type="PackedScene" uid="uid://cqwfi3r3lnm5m" path="res://scenes/prefabs/items/wood.tscn" id="14_ke4fk"]
+[ext_resource type="AudioStream" uid="uid://br8u7rc785ay8" path="res://assets/music/base.mp3" id="16_w8n46"]
 [ext_resource type="PackedScene" uid="uid://b3vw2vfvrg567" path="res://scenes/prefabs/harvest_points/boulder.tscn" id="17_7fnt5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k8uyb"]
@@ -1277,7 +1277,7 @@ position = Vector2(-3650, -14778)
 player = NodePath("../Player")
 
 [node name="music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("12_w5oke")
+stream = ExtResource("16_w8n46")
 volume_db = -15.0
 autoplay = true
 
