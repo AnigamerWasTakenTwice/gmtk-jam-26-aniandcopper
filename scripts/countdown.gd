@@ -23,6 +23,9 @@ var is_monster_present: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
+	timer_label = $Player/UI/Countdown
+	
 	#Loops through each requirement in the quota to see if the player can leave.
 	#If they can, move them to the next area.
 	exit_area.connect("body_entered", func(body):

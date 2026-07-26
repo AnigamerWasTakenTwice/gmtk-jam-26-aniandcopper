@@ -75,8 +75,7 @@ func move_robot():
 		
 		p_laser.look_at($"../..".monster_inst.position)
 		p_laser.global_rotation_degrees += P_LASER_ROTATION_OFFSET_ATTACKING
-		
-		
+
 
 	else:
 		var aim_direction = position.direction_to(get_global_mouse_position())

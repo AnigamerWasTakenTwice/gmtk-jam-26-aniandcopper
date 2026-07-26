@@ -51,11 +51,11 @@ outline_color = Color(0, 0, 0, 1)
 shadow_size = 26
 shadow_color = Color(0, 0, 0, 0.34902)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_036ql"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eslwy"]
 load_path = "res://.godot/imported/button.png-69d1630111600aeecc9e62206492cb8d.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l27d7"]
-atlas = SubResource("CompressedTexture2D_036ql")
+atlas = SubResource("CompressedTexture2D_eslwy")
 region = Rect2(0, 0, 64, 20)
 
 [sub_resource type="LabelSettings" id="LabelSettings_y4mbm"]
@@ -64,7 +64,7 @@ font_size = 32
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yi6rq"]
-atlas = SubResource("CompressedTexture2D_036ql")
+atlas = SubResource("CompressedTexture2D_eslwy")
 region = Rect2(0, 0, 64, 20)
 
 [sub_resource type="Gradient" id="Gradient_mjt8x"]

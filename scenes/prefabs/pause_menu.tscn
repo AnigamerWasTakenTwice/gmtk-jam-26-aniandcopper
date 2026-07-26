@@ -1,0 +1,118 @@
+[gd_scene load_steps=8 format=3 uid="uid://bunfs254wehq5"]
+
+[ext_resource type="FontFile" uid="uid://dpwkl74yrvhas" path="res://assets/fonts/Early GameBoy.ttf" id="2_0fflr"]
+
+[sub_resource type="GDScript" id="GDScript_1kclf"]
+resource_name = "pause"
+script/source = "extends CanvasLayer
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	get_tree().paused = true
+	pass # Replace with function body.
+
+func _process(delta: float) -> void:
+	pass
+	#if Input.is_action_pressed(\"pause\"):
+	#	resume()
+
+func resume() -> void:
+	get_tree().paused = false
+	queue_free()
+
+func quit():
+	$QuitButton/Text.position.y += 30
+	$QuitButton.icon.region = Rect2(64, 0, 64, 20)
+
+	get_tree().quit()
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_mqk5p"]
+font = ExtResource("2_0fflr")
+font_size = 86
+shadow_size = 81
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_036ql"]
+load_path = "res://.godot/imported/button.png-69d1630111600aeecc9e62206492cb8d.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_exl6s"]
+atlas = SubResource("CompressedTexture2D_036ql")
+region = Rect2(0, 0, 64, 20)
+
+[sub_resource type="LabelSettings" id="LabelSettings_v3lp0"]
+font = ExtResource("2_0fflr")
+font_size = 32
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rnw8p"]
+atlas = SubResource("CompressedTexture2D_036ql")
+region = Rect2(0, 0, 64, 20)
+
+[node name="PausedScreen" type="CanvasLayer"]
+process_mode = 3
+layer = 2
+script = SubResource("GDScript_1kclf")
+
+[node name="Panel" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0705882, 0.0705882, 0.0705882, 0.454902)
+
+[node name="PausedLabel" type="Label" parent="."]
+offset_left = 268.0
+offset_top = 45.0
+offset_right = 884.0
+offset_bottom = 165.0
+text = "PAUSED"
+label_settings = SubResource("LabelSettings_mqk5p")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayButton" type="Button" parent="."]
+offset_left = 386.0
+offset_top = 337.0
+offset_right = 803.0
+offset_bottom = 470.0
+text = "
+"
+icon = SubResource("AtlasTexture_exl6s")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Text" type="Label" parent="PlayButton"]
+layout_mode = 0
+offset_top = 3.0
+offset_right = 409.0
+offset_bottom = 103.0
+text = "RESUME"
+label_settings = SubResource("LabelSettings_v3lp0")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuitButton" type="Button" parent="."]
+offset_left = 386.0
+offset_top = 476.0
+offset_right = 803.0
+offset_bottom = 609.0
+text = "
+"
+icon = SubResource("AtlasTexture_rnw8p")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Text" type="Label" parent="QuitButton"]
+layout_mode = 0
+offset_top = 3.0
+offset_right = 409.0
+offset_bottom = 103.0
+text = "QUIT"
+label_settings = SubResource("LabelSettings_v3lp0")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="button_up" from="PlayButton" to="." method="resume"]
+[connection signal="button_up" from="QuitButton" to="." method="quit"]

@@ -76,7 +76,6 @@ size = Vector2(2311, 281)
 position = Vector2(-40, 161)
 script = ExtResource("1_dquwi")
 timer = NodePath("GameTimer")
-timer_label = NodePath("Player/UI/Countdown")
 quota = {
 "battery": 3,
 "glass": 5,

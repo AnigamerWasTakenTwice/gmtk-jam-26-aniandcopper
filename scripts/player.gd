@@ -56,12 +56,16 @@ func _physics_process(delta: float) -> void:
 	camera.limit_right = camera_right_threshhold
 	camera.limit_top = camera_top_threshhold
 	south_star_helper_points.global_position = camera.global_position
-	
+
+	if Input.is_action_just_pressed("pause"):
+		const PAUSE_MENU = preload("res://scenes/prefabs/pause_menu.tscn")
+
 	move_player(delta)
 	handle_interaction_area()
 	handle_health()
 	handle_checklist()
 	handle_static()
+	pause()
 
 	if !is_active: 
 		player_sprite.visible = false
@@ -69,6 +73,14 @@ func _physics_process(delta: float) -> void:
 	else:
 		player_sprite.visible = true
 		interaction_area.visible = true
+
+func pause():
+	if Input.is_action_just_pressed("pause"):
+		print("Esc")
+		const PAUSE_MENU = preload("res://scenes/prefabs/pause_menu.tscn")
+		var pause_menu = PAUSE_MENU.instantiate()
+		get_tree().current_scene.add_child(pause_menu)
+		print(pause_menu.name)
 
 func move_player(delta: float):
 	if !is_active: return
