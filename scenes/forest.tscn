@@ -532,7 +532,8 @@ stream = ExtResource("13_0ntcd")
 volume_db = -15.0
 
 [node name="Roar" parent="." instance=ExtResource("15_wfv1s")]
-time_left_amounts = Array[int]([180, 90])
+time_left_amounts = Array[int]([205, 180, 90])
+level = 3
 
 [connection signal="body_entered" from="CameraLimiter" to="CameraLimiter" method="_on_body_entered"]
 [connection signal="body_entered" from="CameraLimiter2" to="CameraLimiter2" method="_on_body_entered"]

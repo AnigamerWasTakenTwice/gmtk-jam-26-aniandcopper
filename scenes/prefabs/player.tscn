@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://bvln38xbur2mi"]
+[gd_scene load_steps=54 format=3 uid="uid://bvln38xbur2mi"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ov4t6"]
 [ext_resource type="Shader" path="res://assets/shaders/player.gdshader" id="2_afkim"]
@@ -520,6 +520,96 @@ noise = SubResource("FastNoiseLite_rcrr0")
 [sub_resource type="LabelSettings" id="LabelSettings_afwm2"]
 font = ExtResource("4_hddma")
 
+[sub_resource type="Animation" id="Animation_j7lwm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ga6d2"]
+resource_name = "fade_in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.433333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_74rwd"]
+resource_name = "fade_out"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.9, 2.93333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vmwh4"]
+_data = {
+"RESET": SubResource("Animation_j7lwm"),
+"fade_in": SubResource("Animation_ga6d2"),
+"fade_out": SubResource("Animation_74rwd")
+}
+
 [sub_resource type="Animation" id="Animation_fij8v"]
 length = 0.001
 tracks/0/type = "value"
@@ -735,7 +825,6 @@ modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 12.0
 offset_right = 12.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -762,10 +851,15 @@ label_settings = SubResource("LabelSettings_afwm2")
 [node name="RedOverlay" type="ColorRect" parent="UI"]
 visible = false
 modulate = Color(0.847059, 0, 0.121569, 0.321569)
-offset_left = -715.0
-offset_top = -387.0
-offset_right = 1549.0
-offset_bottom = 895.0
+offset_left = -4706.0
+offset_top = -2647.0
+offset_right = 5540.0
+offset_bottom = 3155.0
+
+[node name="Fade" type="AnimationPlayer" parent="UI/RedOverlay"]
+libraries = {
+"": SubResource("AnimationLibrary_vmwh4")
+}
 
 [node name="Hitbox" parent="." instance=ExtResource("3_c8q2h")]
 position = Vector2(0, -2)

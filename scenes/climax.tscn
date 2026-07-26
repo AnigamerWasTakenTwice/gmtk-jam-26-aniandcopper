@@ -258,6 +258,9 @@ metadata/_edit_vertical_guides_ = [6180.0]
 position = Vector2(439, -196)
 camera_bottom_threshhold = 935
 
+[node name="PathFollow2D" parent="Player/Camera2D/SouthStarHelperPoints/Path" index="0"]
+position = Vector2(1250, 4.76837e-07)
+
 [node name="Label2" type="Label" parent="Player/UI/Noise" index="1"]
 layout_mode = 1
 anchors_preset = 8
