@@ -6,7 +6,22 @@
 [ext_resource type="Texture2D" uid="uid://d23kar2wu6at" path="res://assets/sprites/harvest_points/snow_tree.png" id="3_iss6j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wqjon"]
-size = Vector2(116, 600)
+size = Vector2(116, 322)
+
+[sub_resource type="Animation" id="Animation_sg881"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Tree:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(16, -152)]
+}
 
 [sub_resource type="Animation" id="Animation_867wb"]
 resource_name = "shake"
@@ -22,21 +37,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(16, -152), Vector2(41, -152), Vector2(16, -152), Vector2(41, -152), Vector2(16, -152)]
-}
-
-[sub_resource type="Animation" id="Animation_sg881"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Tree:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(16, -152)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qoxqm"]
@@ -56,10 +56,11 @@ position = Vector2(-1, 182)
 parent_has_take_damage_function = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -147)
+position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_wqjon")
 
 [node name="Tree" type="Sprite2D" parent="."]
+z_index = 3
 position = Vector2(16, -152)
 scale = Vector2(15, 15)
 texture = ExtResource("3_iss6j")

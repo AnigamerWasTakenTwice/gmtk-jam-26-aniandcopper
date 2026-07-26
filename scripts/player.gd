@@ -16,6 +16,7 @@ extends CharacterBody2D
 	set(new_hp):
 		if health > new_hp: $SFX/damage.play()
 		if $UI/AnimationPlayer.current_animation != "exit": health = new_hp
+@export var invincible: = false
 
 @export var can_take_damage: bool = true
 
@@ -33,6 +34,7 @@ var is_active: = true
 var movement_direction: Vector2
 var using_m_and_k: bool = true
 
+
 var quicksand = false
 
 
@@ -46,7 +48,8 @@ var checklist_visible = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN # Hides Mouse
+	player_sprite.material.set("shader_parameter/is_hurt", false)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -166,6 +169,8 @@ func handle_interaction_area():
 
 
 func handle_health():
+	if invincible == true: return
+	
 		#HP and Death
 	if health <= 0 and $UI/AnimationPlayer.current_animation != "exit":
 		movement_max_speed = 0
@@ -223,7 +228,7 @@ func interact(type: String):
 func _on_step_timer_timeout() -> void:
 	if !is_active: return
 	
-	if velocity.length() > 0.2 and !Input.is_action_pressed("run"):
+	if velocity.length() > 0.2 and !Input.is_action_pressed("run") and player_sprite.animation == "run":
 		$SFX/step.pitch_scale = randf_range(0.8, 1.2)
 		$SFX/step.play()
 	pass # Replace with function body.
@@ -232,7 +237,7 @@ func _on_run_timer_timeout() -> void:
 	if !is_active: return
 	
 	
-	if velocity.length() > 0.2 and Input.is_action_pressed("run"):
+	if velocity.length() > 0.2 and Input.is_action_pressed("run") and player_sprite.animation == "run":
 		$SFX/step.pitch_scale = randf_range(0.7, 1.3)
 		$SFX/step.play()
 	pass # Replace with function body.

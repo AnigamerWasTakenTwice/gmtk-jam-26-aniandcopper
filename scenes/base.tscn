@@ -956,6 +956,39 @@ texture = ExtResource("5_stud7")
 region_enabled = true
 region_rect = Rect2(0, 64, 16, 16)
 
+[node name="Battery10" parent="Pickups" instance=ExtResource("11_gruxt")]
+position = Vector2(158, -1945)
+scale = Vector2(3, 3)
+item = "battery"
+
+[node name="Sprite2D" type="Sprite2D" parent="Pickups/Battery10"]
+scale = Vector2(3, 3)
+texture = ExtResource("5_stud7")
+region_enabled = true
+region_rect = Rect2(0, 64, 16, 16)
+
+[node name="Battery11" parent="Pickups" instance=ExtResource("11_gruxt")]
+position = Vector2(-52, -1749)
+scale = Vector2(3, 3)
+item = "battery"
+
+[node name="Sprite2D" type="Sprite2D" parent="Pickups/Battery11"]
+scale = Vector2(3, 3)
+texture = ExtResource("5_stud7")
+region_enabled = true
+region_rect = Rect2(0, 64, 16, 16)
+
+[node name="Battery12" parent="Pickups" instance=ExtResource("11_gruxt")]
+position = Vector2(-77, -1966)
+scale = Vector2(3, 3)
+item = "battery"
+
+[node name="Sprite2D" type="Sprite2D" parent="Pickups/Battery12"]
+scale = Vector2(3, 3)
+texture = ExtResource("5_stud7")
+region_enabled = true
+region_rect = Rect2(0, 64, 16, 16)
+
 [node name="Copper" parent="Pickups" instance=ExtResource("11_gruxt")]
 position = Vector2(-6198, -4811)
 scale = Vector2(3, 3)

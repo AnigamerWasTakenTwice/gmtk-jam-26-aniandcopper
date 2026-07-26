@@ -15,17 +15,20 @@ script/source = "extends Node2D
 
 const FIRST_LEVEL = preload(\"res://scenes/forest.tscn\")
 
+func _ready() -> void:
+	$Buttons/PlayButton.grab_focus()
+
 func _on_play_button_button_down() -> void:
-	$PlayButton/Text.position.y += 30
-	$PlayButton.icon.region = Rect2(64, 0, 64, 20)
+	$Buttons/PlayButton/Text.position.y += 30
+	$Buttons/PlayButton.icon.region = Rect2(64, 0, 64, 20)
 	
 
 func _on_play_button_button_up() -> void:
 	get_tree().change_scene_to_packed(FIRST_LEVEL)
 
 func _on_quit_button_button_down() -> void:
-	$QuitButton/Text.position.y += 30
-	$QuitButton.icon.region = Rect2(64, 0, 64, 20)
+	$Buttons/QuitButton/Text.position.y += 30
+	$Buttons/QuitButton.icon.region = Rect2(64, 0, 64, 20)
 
 func _on_quit_button_button_up() -> void: get_tree().quit()
 "
@@ -170,42 +173,52 @@ theme_override_font_sizes/font_size = 32
 text = "SOUTH STAR"
 label_settings = SubResource("LabelSettings_6w2je")
 
-[node name="PlayButton" type="Button" parent="."]
-offset_left = 386.0
-offset_top = 337.0
-offset_right = 803.0
-offset_bottom = 470.0
+[node name="Buttons" type="VBoxContainer" parent="."]
+offset_left = 382.0
+offset_top = 338.0
+offset_right = 779.0
+offset_bottom = 597.0
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="PlayButton" type="Button" parent="Buttons"]
+layout_mode = 2
+size_flags_vertical = 3
 text = "
 "
 icon = SubResource("AtlasTexture_l27d7")
+flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="Text" type="Label" parent="PlayButton"]
+[node name="Text" type="Label" parent="Buttons/PlayButton"]
 layout_mode = 0
+offset_left = -6.0
 offset_top = 3.0
-offset_right = 409.0
+offset_right = 403.0
 offset_bottom = 103.0
 text = "PLAY"
 label_settings = SubResource("LabelSettings_y4mbm")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="QuitButton" type="Button" parent="."]
-offset_left = 386.0
-offset_top = 476.0
-offset_right = 803.0
-offset_bottom = 609.0
+[node name="QuitButton" type="Button" parent="Buttons"]
+layout_mode = 2
+size_flags_vertical = 3
 text = "
 "
 icon = SubResource("AtlasTexture_yi6rq")
+flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="Text" type="Label" parent="QuitButton"]
+[node name="Text" type="Label" parent="Buttons/QuitButton"]
 layout_mode = 0
+offset_left = -6.0
 offset_top = 3.0
-offset_right = 409.0
+offset_right = 403.0
 offset_bottom = 103.0
 text = "QUIT"
 label_settings = SubResource("LabelSettings_y4mbm")
@@ -233,7 +246,7 @@ autoplay = "flicker"
 [node name="static" type="AudioStreamPlayer" parent="."]
 volume_db = -17.434
 
-[connection signal="button_down" from="PlayButton" to="." method="_on_play_button_button_down"]
-[connection signal="button_up" from="PlayButton" to="." method="_on_play_button_button_up"]
-[connection signal="button_down" from="QuitButton" to="." method="_on_quit_button_button_down"]
-[connection signal="button_up" from="QuitButton" to="." method="_on_quit_button_button_up"]
+[connection signal="button_down" from="Buttons/PlayButton" to="." method="_on_play_button_button_down"]
+[connection signal="button_up" from="Buttons/PlayButton" to="." method="_on_play_button_button_up"]
+[connection signal="button_down" from="Buttons/QuitButton" to="." method="_on_quit_button_button_down"]
+[connection signal="button_up" from="Buttons/QuitButton" to="." method="_on_quit_button_button_up"]

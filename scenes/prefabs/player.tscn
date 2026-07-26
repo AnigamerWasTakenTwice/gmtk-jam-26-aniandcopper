@@ -80,8 +80,8 @@ _data = {
 }
 point_count = 5
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bbo88"]
-size = Vector2(64, 64)
+[sub_resource type="CircleShape2D" id="CircleShape2D_b7812"]
+radius = 76.3217
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pumnp"]
 atlas = ExtResource("5_0va8p")
@@ -381,6 +381,18 @@ tracks/5/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("..:invincible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_71pli"]
 resource_name = "exit"
@@ -440,6 +452,18 @@ tracks/4/path = NodePath("Noise/Label:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("..:invincible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -618,7 +642,7 @@ position = Vector2(1250, 750)
 position = Vector2(121, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
-shape = SubResource("RectangleShape2D_bbo88")
+shape = SubResource("CircleShape2D_b7812")
 
 [node name="ToolSprite" type="Sprite2D" parent="InteractionArea"]
 visible = false
